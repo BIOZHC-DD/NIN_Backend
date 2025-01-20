@@ -1,6 +1,6 @@
 import amqp from 'amqplib';
 
-async function startConsumer(sensorType: string) {
+export async function startConsumer(sensorType: string) {
   try {
     const connection = await amqp.connect('amqp://localhost');
     const channel = await connection.createChannel();
@@ -43,7 +43,4 @@ async function startConsumer(sensorType: string) {
   }
 }
 
-// Example usage: Start consumers for different sensor types
-startConsumer('bioSensor');
-startConsumer('temSensor');
-startConsumer('gluSensor');
+

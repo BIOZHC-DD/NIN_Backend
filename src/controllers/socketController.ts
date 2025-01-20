@@ -1,5 +1,6 @@
 import { connectRabbitMQ, sendToRabbitMQ } from '../services/PublisherServices'; 
-import { response, clientFormat } from '../types'; 
+import { response, clientFormat } from '../types';
+import { startConsumer } from '../services/ConsumersServices'; 
 
 export async function handleMessage(message: string) {
   let connection, channel, exchange;
@@ -23,6 +24,8 @@ export async function handleMessage(message: string) {
 
       // Send the data to the appropriate RabbitMQ queue based on sensorType
       await sendToRabbitMQ(channel, exchange, sensorType, { ...rest, data: item.data });
+      // Example usage: Start consumers for different sensor types
+startConsumer(`${sensorType}`);
     }
   } catch (error) {
     console.error('Error processing message:', error);

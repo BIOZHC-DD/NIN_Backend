@@ -1,55 +1,44 @@
-export interface bioSensor {
-  bioImpedance: number;
-  phaseAngle: number;
-  time: Date;
-}
+import { connectRabbitMQ, sendToRabbitMQ } from '../services/PublisherServices'; 
+import { response, clientFormat } from '../types'; 
 
-export interface temSensor {
-  temperature: number;
-  time: Date;
-}
+export async function handleMessage(message: string) {
+  let connection, channel, exchange;
+  try {
+    const parsedMessage: response = JSON.parse(message);
 
-export interface gluSensor {
-  glucose: number;
-  time: Date;
-}
+    const { type, table, offset, data } = parsedMessage;
 
-export interface gsrSensor {
-  gsr: number;
-  time: Date;
-}
+    if (!Array.isArray(data) || !table) {
+      throw new Error('Invalid data structure or missing sensorType.');
+    }
 
-export interface clientFormat {
-  sensorType: 'bioSensor' | 'temSensor' | 'gluSensor' | 'gsrSensor';
-  time: Date;
-  visit_id: string;
-  config: string;
-  frequency: number;
-  createdAt: Date;
-  data: bioSensor[] | temSensor[] | gluSensor[] | gsrSensor[];
-}
+    // Connect to RabbitMQ
+    ({ connection, channel, exchange } = await connectRabbitMQ());
 
-export interface response {
-  type: string;
-  table: string;
-  offset: number;
-  data: clientFormat[];
-}
+    // Iterate over the data array to handle each sensor type
+    for (const item of data) {
+      const { sensorType, ...rest } = item;
+      console.log(`Processing data for sensor type: ${sensorType}`);
+     
 
-export async function handleMessage(message:string){
+      // Send the data to the appropriate RabbitMQ queue based on sensorType
+      await sendToRabbitMQ(channel, exchange, sensorType, { ...rest, data: item.data });
+    }
+  } catch (error) {
+    console.error('Error processing message:', error);
+  } finally {
+    // Ensure the connection and channel are closed after processing, but after all messages are sent
     try {
-   
-        const row: response = JSON.parse(message);
-
-        const { type, table, offset, data } = row
-    
-        if (!Array.isArray(data) || !table) {
-            throw new Error('Invalid data structure or missing sensorType.');
-        }
-
-        console.log(data)
+      if (channel) {
+        await channel.close();
+        console.log('Channel closed successfully');
+      }
+      if (connection) {
+        await connection.close();
+        console.log('Connection closed successfully');
+      }
+    } catch (err) {
+      console.error('Error closing channel/connection:', err);
     }
-    catch (error) {
-        console.error(error);
-    }
+  }
 }

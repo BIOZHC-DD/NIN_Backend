@@ -1,5 +1,10 @@
 import amqp from 'amqplib';
+import { processBioSensorData } from '../models/BioSensoe';
+import { processTemperatureData } from '../models/TemperatureSensor';
+import { processGsrData } from '../models/GsrSensor';
+import { processGlucoseData } from '../models/GlucoseSensor';
 
+         
 export async function startConsumer(sensorType: string) {
   try {
     const connection = await amqp.connect('amqp://localhost');
@@ -22,15 +27,29 @@ export async function startConsumer(sensorType: string) {
 
     // Consume messages
     channel.consume(queue, (msg) => {
-      if (msg) {
+    if (msg) {
         const message = JSON.parse(msg.content.toString());
-          console.log(`nnnnnnnnnnnnnnnnnnnnnnnnnnnnReceived message for ${sensorType}:`, message);
-          
+        console.log(`Received message for ${sensorType}:`, message);
 
+        // Process data based on sensor type
+        switch (sensorType) {
+          case 'bioSensor':
+             processBioSensorData(message);
+            break;
+          case 'temSensor':
+             processTemperatureData(message);
+            break;
+          case 'gsrSensor':
+             processGsrData(message);
+            break;
+          case 'gluSensor':
+             processGlucoseData(message);
+            break;
+          default:
+            console.error(`Unknown sensor type: ${sensorType}`);
+        }
 
-          
-
-      //  Acknowledge the message
+        // Acknowledge the message
         channel.ack(msg);
       } else {
         console.log('No message received');

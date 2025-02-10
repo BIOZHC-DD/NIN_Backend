@@ -1,9 +1,11 @@
 
 import amqp from 'amqplib';
+import { startAllConsumers } from '../services/startallConsumerServices';
 
 // Function to connect to RabbitMQ
 export async function connectRabbitMQ() {
   const connection = await amqp.connect('amqp://localhost');
+  
   const channel = await connection.createChannel();
   const exchange = 'sensor_data_exchange';
 
@@ -11,6 +13,12 @@ export async function connectRabbitMQ() {
   await channel.assertExchange(exchange, 'direct', { durable: true });
 
   return { connection, channel, exchange };
+}
+
+async function main() {
+
+  await startAllConsumers();
+  console.log('Consumers started successfully');
 }
 
 // Function to send data to RabbitMQ

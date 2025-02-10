@@ -14,10 +14,10 @@ export async function startConsumer(sensorType: string) {
     const queue = `${sensorType}_queue`;
 
     // Assert exchange and queue
-    await channel.assertExchange(exchange, 'direct', { durable: true });
+    await channel.assertExchange(exchange, 'direct', { durable:true });
     console.log(`Exchange asserted: ${exchange}`);
     
-    await channel.assertQueue(queue, { durable: true });
+    await channel.assertQueue(queue, { durable: true});
     console.log(`Queue asserted: ${queue}`);
     
     // Bind queue to exchange with routing key

@@ -12,7 +12,7 @@ export async function connectRabbitMQ() {
   // Assert the exchange (direct)
   await channel.assertExchange(exchange, 'direct', { durable: true });
 
-  return { connection, channel, exchange };
+  return { connection, channel, exchange }
 }
 
 async function main() {

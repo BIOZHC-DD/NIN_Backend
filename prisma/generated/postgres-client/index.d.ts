@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model primeUser
+ * 
+ */
+export type primeUser = $Result.DefaultSelection<Prisma.$primeUserPayload>
+/**
  * Model Patient
  * 
  */
@@ -36,8 +41,8 @@ export type Clinic = $Result.DefaultSelection<Prisma.$ClinicPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Patients
- * const patients = await prisma.patient.findMany()
+ * // Fetch zero or more PrimeUsers
+ * const primeUsers = await prisma.primeUser.findMany()
  * ```
  *
  *
@@ -57,8 +62,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Patients
-   * const patients = await prisma.patient.findMany()
+   * // Fetch zero or more PrimeUsers
+   * const primeUsers = await prisma.primeUser.findMany()
    * ```
    *
    *
@@ -155,6 +160,16 @@ export class PrismaClient<
   }>, ClientOptions>
 
       /**
+   * `prisma.primeUser`: Exposes CRUD operations for the **primeUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PrimeUsers
+    * const primeUsers = await prisma.primeUser.findMany()
+    * ```
+    */
+  get primeUser(): Prisma.primeUserDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.patient`: Exposes CRUD operations for the **Patient** model.
     * Example usage:
     * ```ts
@@ -623,6 +638,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    primeUser: 'primeUser',
     Patient: 'Patient',
     Visit: 'Visit',
     Clinic: 'Clinic'
@@ -641,10 +657,84 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "patient" | "visit" | "clinic"
+      modelProps: "primeUser" | "patient" | "visit" | "clinic"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      primeUser: {
+        payload: Prisma.$primeUserPayload<ExtArgs>
+        fields: Prisma.primeUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.primeUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.primeUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          findFirst: {
+            args: Prisma.primeUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.primeUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          findMany: {
+            args: Prisma.primeUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>[]
+          }
+          create: {
+            args: Prisma.primeUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          createMany: {
+            args: Prisma.primeUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.primeUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>[]
+          }
+          delete: {
+            args: Prisma.primeUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          update: {
+            args: Prisma.primeUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.primeUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.primeUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.primeUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>[]
+          }
+          upsert: {
+            args: Prisma.primeUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$primeUserPayload>
+          }
+          aggregate: {
+            args: Prisma.PrimeUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrimeUser>
+          }
+          groupBy: {
+            args: Prisma.primeUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrimeUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.primeUserCountArgs<ExtArgs>
+            result: $Utils.Optional<PrimeUserCountAggregateOutputType> | number
+          }
+        }
+      }
       Patient: {
         payload: Prisma.$PatientPayload<ExtArgs>
         fields: Prisma.PatientFieldRefs
@@ -951,6 +1041,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    primeUser?: primeUserOmit
     patient?: PatientOmit
     visit?: VisitOmit
     clinic?: ClinicOmit
@@ -1077,6 +1168,950 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model primeUser
+   */
+
+  export type AggregatePrimeUser = {
+    _count: PrimeUserCountAggregateOutputType | null
+    _min: PrimeUserMinAggregateOutputType | null
+    _max: PrimeUserMaxAggregateOutputType | null
+  }
+
+  export type PrimeUserMinAggregateOutputType = {
+    email: string | null
+    password: string | null
+  }
+
+  export type PrimeUserMaxAggregateOutputType = {
+    email: string | null
+    password: string | null
+  }
+
+  export type PrimeUserCountAggregateOutputType = {
+    email: number
+    password: number
+    _all: number
+  }
+
+
+  export type PrimeUserMinAggregateInputType = {
+    email?: true
+    password?: true
+  }
+
+  export type PrimeUserMaxAggregateInputType = {
+    email?: true
+    password?: true
+  }
+
+  export type PrimeUserCountAggregateInputType = {
+    email?: true
+    password?: true
+    _all?: true
+  }
+
+  export type PrimeUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which primeUser to aggregate.
+     */
+    where?: primeUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of primeUsers to fetch.
+     */
+    orderBy?: primeUserOrderByWithRelationInput | primeUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: primeUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` primeUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` primeUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned primeUsers
+    **/
+    _count?: true | PrimeUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrimeUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrimeUserMaxAggregateInputType
+  }
+
+  export type GetPrimeUserAggregateType<T extends PrimeUserAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrimeUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrimeUser[P]>
+      : GetScalarType<T[P], AggregatePrimeUser[P]>
+  }
+
+
+
+
+  export type primeUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: primeUserWhereInput
+    orderBy?: primeUserOrderByWithAggregationInput | primeUserOrderByWithAggregationInput[]
+    by: PrimeUserScalarFieldEnum[] | PrimeUserScalarFieldEnum
+    having?: primeUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrimeUserCountAggregateInputType | true
+    _min?: PrimeUserMinAggregateInputType
+    _max?: PrimeUserMaxAggregateInputType
+  }
+
+  export type PrimeUserGroupByOutputType = {
+    email: string
+    password: string
+    _count: PrimeUserCountAggregateOutputType | null
+    _min: PrimeUserMinAggregateOutputType | null
+    _max: PrimeUserMaxAggregateOutputType | null
+  }
+
+  type GetPrimeUserGroupByPayload<T extends primeUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrimeUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrimeUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrimeUserGroupByOutputType[P]>
+            : GetScalarType<T[P], PrimeUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type primeUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    email?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["primeUser"]>
+
+  export type primeUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    email?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["primeUser"]>
+
+  export type primeUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    email?: boolean
+    password?: boolean
+  }, ExtArgs["result"]["primeUser"]>
+
+  export type primeUserSelectScalar = {
+    email?: boolean
+    password?: boolean
+  }
+
+  export type primeUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"email" | "password", ExtArgs["result"]["primeUser"]>
+
+  export type $primeUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "primeUser"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      email: string
+      password: string
+    }, ExtArgs["result"]["primeUser"]>
+    composites: {}
+  }
+
+  type primeUserGetPayload<S extends boolean | null | undefined | primeUserDefaultArgs> = $Result.GetResult<Prisma.$primeUserPayload, S>
+
+  type primeUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<primeUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrimeUserCountAggregateInputType | true
+    }
+
+  export interface primeUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['primeUser'], meta: { name: 'primeUser' } }
+    /**
+     * Find zero or one PrimeUser that matches the filter.
+     * @param {primeUserFindUniqueArgs} args - Arguments to find a PrimeUser
+     * @example
+     * // Get one PrimeUser
+     * const primeUser = await prisma.primeUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends primeUserFindUniqueArgs>(args: SelectSubset<T, primeUserFindUniqueArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one PrimeUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {primeUserFindUniqueOrThrowArgs} args - Arguments to find a PrimeUser
+     * @example
+     * // Get one PrimeUser
+     * const primeUser = await prisma.primeUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends primeUserFindUniqueOrThrowArgs>(args: SelectSubset<T, primeUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first PrimeUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserFindFirstArgs} args - Arguments to find a PrimeUser
+     * @example
+     * // Get one PrimeUser
+     * const primeUser = await prisma.primeUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends primeUserFindFirstArgs>(args?: SelectSubset<T, primeUserFindFirstArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first PrimeUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserFindFirstOrThrowArgs} args - Arguments to find a PrimeUser
+     * @example
+     * // Get one PrimeUser
+     * const primeUser = await prisma.primeUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends primeUserFindFirstOrThrowArgs>(args?: SelectSubset<T, primeUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more PrimeUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PrimeUsers
+     * const primeUsers = await prisma.primeUser.findMany()
+     * 
+     * // Get first 10 PrimeUsers
+     * const primeUsers = await prisma.primeUser.findMany({ take: 10 })
+     * 
+     * // Only select the `email`
+     * const primeUserWithEmailOnly = await prisma.primeUser.findMany({ select: { email: true } })
+     * 
+     */
+    findMany<T extends primeUserFindManyArgs>(args?: SelectSubset<T, primeUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a PrimeUser.
+     * @param {primeUserCreateArgs} args - Arguments to create a PrimeUser.
+     * @example
+     * // Create one PrimeUser
+     * const PrimeUser = await prisma.primeUser.create({
+     *   data: {
+     *     // ... data to create a PrimeUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends primeUserCreateArgs>(args: SelectSubset<T, primeUserCreateArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many PrimeUsers.
+     * @param {primeUserCreateManyArgs} args - Arguments to create many PrimeUsers.
+     * @example
+     * // Create many PrimeUsers
+     * const primeUser = await prisma.primeUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends primeUserCreateManyArgs>(args?: SelectSubset<T, primeUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PrimeUsers and returns the data saved in the database.
+     * @param {primeUserCreateManyAndReturnArgs} args - Arguments to create many PrimeUsers.
+     * @example
+     * // Create many PrimeUsers
+     * const primeUser = await prisma.primeUser.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PrimeUsers and only return the `email`
+     * const primeUserWithEmailOnly = await prisma.primeUser.createManyAndReturn({
+     *   select: { email: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends primeUserCreateManyAndReturnArgs>(args?: SelectSubset<T, primeUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a PrimeUser.
+     * @param {primeUserDeleteArgs} args - Arguments to delete one PrimeUser.
+     * @example
+     * // Delete one PrimeUser
+     * const PrimeUser = await prisma.primeUser.delete({
+     *   where: {
+     *     // ... filter to delete one PrimeUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends primeUserDeleteArgs>(args: SelectSubset<T, primeUserDeleteArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one PrimeUser.
+     * @param {primeUserUpdateArgs} args - Arguments to update one PrimeUser.
+     * @example
+     * // Update one PrimeUser
+     * const primeUser = await prisma.primeUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends primeUserUpdateArgs>(args: SelectSubset<T, primeUserUpdateArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more PrimeUsers.
+     * @param {primeUserDeleteManyArgs} args - Arguments to filter PrimeUsers to delete.
+     * @example
+     * // Delete a few PrimeUsers
+     * const { count } = await prisma.primeUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends primeUserDeleteManyArgs>(args?: SelectSubset<T, primeUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrimeUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PrimeUsers
+     * const primeUser = await prisma.primeUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends primeUserUpdateManyArgs>(args: SelectSubset<T, primeUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PrimeUsers and returns the data updated in the database.
+     * @param {primeUserUpdateManyAndReturnArgs} args - Arguments to update many PrimeUsers.
+     * @example
+     * // Update many PrimeUsers
+     * const primeUser = await prisma.primeUser.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PrimeUsers and only return the `email`
+     * const primeUserWithEmailOnly = await prisma.primeUser.updateManyAndReturn({
+     *   select: { email: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends primeUserUpdateManyAndReturnArgs>(args: SelectSubset<T, primeUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one PrimeUser.
+     * @param {primeUserUpsertArgs} args - Arguments to update or create a PrimeUser.
+     * @example
+     * // Update or create a PrimeUser
+     * const primeUser = await prisma.primeUser.upsert({
+     *   create: {
+     *     // ... data to create a PrimeUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PrimeUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends primeUserUpsertArgs>(args: SelectSubset<T, primeUserUpsertArgs<ExtArgs>>): Prisma__primeUserClient<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of PrimeUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserCountArgs} args - Arguments to filter PrimeUsers to count.
+     * @example
+     * // Count the number of PrimeUsers
+     * const count = await prisma.primeUser.count({
+     *   where: {
+     *     // ... the filter for the PrimeUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends primeUserCountArgs>(
+      args?: Subset<T, primeUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrimeUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PrimeUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrimeUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrimeUserAggregateArgs>(args: Subset<T, PrimeUserAggregateArgs>): Prisma.PrismaPromise<GetPrimeUserAggregateType<T>>
+
+    /**
+     * Group by PrimeUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {primeUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends primeUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: primeUserGroupByArgs['orderBy'] }
+        : { orderBy?: primeUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, primeUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrimeUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the primeUser model
+   */
+  readonly fields: primeUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for primeUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__primeUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the primeUser model
+   */ 
+  interface primeUserFieldRefs {
+    readonly email: FieldRef<"primeUser", 'String'>
+    readonly password: FieldRef<"primeUser", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * primeUser findUnique
+   */
+  export type primeUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter, which primeUser to fetch.
+     */
+    where: primeUserWhereUniqueInput
+  }
+
+  /**
+   * primeUser findUniqueOrThrow
+   */
+  export type primeUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter, which primeUser to fetch.
+     */
+    where: primeUserWhereUniqueInput
+  }
+
+  /**
+   * primeUser findFirst
+   */
+  export type primeUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter, which primeUser to fetch.
+     */
+    where?: primeUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of primeUsers to fetch.
+     */
+    orderBy?: primeUserOrderByWithRelationInput | primeUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for primeUsers.
+     */
+    cursor?: primeUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` primeUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` primeUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of primeUsers.
+     */
+    distinct?: PrimeUserScalarFieldEnum | PrimeUserScalarFieldEnum[]
+  }
+
+  /**
+   * primeUser findFirstOrThrow
+   */
+  export type primeUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter, which primeUser to fetch.
+     */
+    where?: primeUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of primeUsers to fetch.
+     */
+    orderBy?: primeUserOrderByWithRelationInput | primeUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for primeUsers.
+     */
+    cursor?: primeUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` primeUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` primeUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of primeUsers.
+     */
+    distinct?: PrimeUserScalarFieldEnum | PrimeUserScalarFieldEnum[]
+  }
+
+  /**
+   * primeUser findMany
+   */
+  export type primeUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter, which primeUsers to fetch.
+     */
+    where?: primeUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of primeUsers to fetch.
+     */
+    orderBy?: primeUserOrderByWithRelationInput | primeUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing primeUsers.
+     */
+    cursor?: primeUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` primeUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` primeUsers.
+     */
+    skip?: number
+    distinct?: PrimeUserScalarFieldEnum | PrimeUserScalarFieldEnum[]
+  }
+
+  /**
+   * primeUser create
+   */
+  export type primeUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * The data needed to create a primeUser.
+     */
+    data: XOR<primeUserCreateInput, primeUserUncheckedCreateInput>
+  }
+
+  /**
+   * primeUser createMany
+   */
+  export type primeUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many primeUsers.
+     */
+    data: primeUserCreateManyInput | primeUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * primeUser createManyAndReturn
+   */
+  export type primeUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * The data used to create many primeUsers.
+     */
+    data: primeUserCreateManyInput | primeUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * primeUser update
+   */
+  export type primeUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * The data needed to update a primeUser.
+     */
+    data: XOR<primeUserUpdateInput, primeUserUncheckedUpdateInput>
+    /**
+     * Choose, which primeUser to update.
+     */
+    where: primeUserWhereUniqueInput
+  }
+
+  /**
+   * primeUser updateMany
+   */
+  export type primeUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update primeUsers.
+     */
+    data: XOR<primeUserUpdateManyMutationInput, primeUserUncheckedUpdateManyInput>
+    /**
+     * Filter which primeUsers to update
+     */
+    where?: primeUserWhereInput
+  }
+
+  /**
+   * primeUser updateManyAndReturn
+   */
+  export type primeUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * The data used to update primeUsers.
+     */
+    data: XOR<primeUserUpdateManyMutationInput, primeUserUncheckedUpdateManyInput>
+    /**
+     * Filter which primeUsers to update
+     */
+    where?: primeUserWhereInput
+  }
+
+  /**
+   * primeUser upsert
+   */
+  export type primeUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * The filter to search for the primeUser to update in case it exists.
+     */
+    where: primeUserWhereUniqueInput
+    /**
+     * In case the primeUser found by the `where` argument doesn't exist, create a new primeUser with this data.
+     */
+    create: XOR<primeUserCreateInput, primeUserUncheckedCreateInput>
+    /**
+     * In case the primeUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<primeUserUpdateInput, primeUserUncheckedUpdateInput>
+  }
+
+  /**
+   * primeUser delete
+   */
+  export type primeUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+    /**
+     * Filter which primeUser to delete.
+     */
+    where: primeUserWhereUniqueInput
+  }
+
+  /**
+   * primeUser deleteMany
+   */
+  export type primeUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which primeUsers to delete
+     */
+    where?: primeUserWhereInput
+  }
+
+  /**
+   * primeUser without action
+   */
+  export type primeUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the primeUser
+     */
+    select?: primeUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the primeUser
+     */
+    omit?: primeUserOmit<ExtArgs> | null
+  }
+
 
   /**
    * Model Patient
@@ -4629,6 +5664,14 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const PrimeUserScalarFieldEnum: {
+    email: 'email',
+    password: 'password'
+  };
+
+  export type PrimeUserScalarFieldEnum = (typeof PrimeUserScalarFieldEnum)[keyof typeof PrimeUserScalarFieldEnum]
+
+
   export const PatientScalarFieldEnum: {
     pid: 'pid',
     name: 'name',
@@ -4778,6 +5821,43 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type primeUserWhereInput = {
+    AND?: primeUserWhereInput | primeUserWhereInput[]
+    OR?: primeUserWhereInput[]
+    NOT?: primeUserWhereInput | primeUserWhereInput[]
+    email?: StringFilter<"primeUser"> | string
+    password?: StringFilter<"primeUser"> | string
+  }
+
+  export type primeUserOrderByWithRelationInput = {
+    email?: SortOrder
+    password?: SortOrder
+  }
+
+  export type primeUserWhereUniqueInput = Prisma.AtLeast<{
+    email?: string
+    AND?: primeUserWhereInput | primeUserWhereInput[]
+    OR?: primeUserWhereInput[]
+    NOT?: primeUserWhereInput | primeUserWhereInput[]
+    password?: StringFilter<"primeUser"> | string
+  }, "email">
+
+  export type primeUserOrderByWithAggregationInput = {
+    email?: SortOrder
+    password?: SortOrder
+    _count?: primeUserCountOrderByAggregateInput
+    _max?: primeUserMaxOrderByAggregateInput
+    _min?: primeUserMinOrderByAggregateInput
+  }
+
+  export type primeUserScalarWhereWithAggregatesInput = {
+    AND?: primeUserScalarWhereWithAggregatesInput | primeUserScalarWhereWithAggregatesInput[]
+    OR?: primeUserScalarWhereWithAggregatesInput[]
+    NOT?: primeUserScalarWhereWithAggregatesInput | primeUserScalarWhereWithAggregatesInput[]
+    email?: StringWithAggregatesFilter<"primeUser"> | string
+    password?: StringWithAggregatesFilter<"primeUser"> | string
+  }
 
   export type PatientWhereInput = {
     AND?: PatientWhereInput | PatientWhereInput[]
@@ -5057,6 +6137,41 @@ export namespace Prisma {
     weight?: IntWithAggregatesFilter<"Clinic"> | number
     observationfhirid?: StringNullableWithAggregatesFilter<"Clinic"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Clinic"> | Date | string
+  }
+
+  export type primeUserCreateInput = {
+    email: string
+    password: string
+  }
+
+  export type primeUserUncheckedCreateInput = {
+    email: string
+    password: string
+  }
+
+  export type primeUserUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type primeUserUncheckedUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type primeUserCreateManyInput = {
+    email: string
+    password: string
+  }
+
+  export type primeUserUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type primeUserUncheckedUpdateManyInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type PatientCreateInput = {
@@ -5402,6 +6517,39 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type primeUserCountOrderByAggregateInput = {
+    email?: SortOrder
+    password?: SortOrder
+  }
+
+  export type primeUserMaxOrderByAggregateInput = {
+    email?: SortOrder
+    password?: SortOrder
+  }
+
+  export type primeUserMinOrderByAggregateInput = {
+    email?: SortOrder
+    password?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -5474,24 +6622,6 @@ export namespace Prisma {
     fhirId?: SortOrder
     abhaId?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -5716,6 +6846,10 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type VisitCreateNestedManyWithoutPatientInput = {
     create?: XOR<VisitCreateWithoutPatientInput, VisitUncheckedCreateWithoutPatientInput> | VisitCreateWithoutPatientInput[] | VisitUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: VisitCreateOrConnectWithoutPatientInput | VisitCreateOrConnectWithoutPatientInput[]
@@ -5728,10 +6862,6 @@ export namespace Prisma {
     connectOrCreate?: VisitCreateOrConnectWithoutPatientInput | VisitCreateOrConnectWithoutPatientInput[]
     createMany?: VisitCreateManyPatientInputEnvelope
     connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -5856,31 +6986,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5907,6 +7012,31 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {

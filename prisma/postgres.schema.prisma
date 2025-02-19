@@ -7,6 +7,10 @@ datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_DATABASE_URL")
 }
+model primeUser{
+  email            String @unique
+  password         String
+}
 
 model Patient {
   pid                String   @id 
@@ -23,7 +27,7 @@ model Patient {
 model Visit {
   vid                 String       @id
   pid                 String
-  isClinicalCollected Boolean?
+  isClinicalCollected Boolean? 
   isDataCollected     Boolean?
   visitNotes          String?
   clinics             Clinic?

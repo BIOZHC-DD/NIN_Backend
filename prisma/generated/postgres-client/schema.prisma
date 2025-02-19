@@ -8,6 +8,11 @@ datasource db {
   url      = env("POSTGRES_DATABASE_URL")
 }
 
+model primeUser {
+  email    String @unique
+  password String
+}
+
 model Patient {
   pid                String   @id
   name               String

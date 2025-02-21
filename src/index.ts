@@ -3,6 +3,12 @@ import cors from 'cors';
 import { server } from './config/websocket'; // Import WebSocket server
 import { startAllConsumers } from './services/startallConsumerServices'; // Start consumers at startup
 
+
+import dotenv from "dotenv";
+
+
+dotenv.config();
+
 const app = express();
 const port = 8081;
 
@@ -12,6 +18,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(express.json());
 
 // Start RabbitMQ consumers only once
 startAllConsumers().then(() => {

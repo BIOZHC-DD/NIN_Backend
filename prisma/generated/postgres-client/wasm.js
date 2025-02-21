@@ -118,35 +118,57 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.PrimeUserScalarFieldEnum = {
+  id: 'id',
   email: 'email',
   password: 'password'
 };
 
 exports.Prisma.PatientScalarFieldEnum = {
-  pid: 'pid',
-  name: 'name',
-  contactInformation: 'contactInformation',
+  id: 'id',
+  fullName: 'fullName',
+  email: 'email',
+  dateOfBirth: 'dateOfBirth',
   BirthDay: 'BirthDay',
+  contactInformation: 'contactInformation',
+  age: 'age',
   gender: 'gender',
+  height: 'height',
+  weight: 'weight',
   fhirId: 'fhirId',
   abhaId: 'abhaId',
-  createdAt: 'createdAt'
+  server_createdAt: 'server_createdAt',
+  server_updatedAt: 'server_updatedAt',
+  server_deletedAt: 'server_deletedAt'
 };
 
 exports.Prisma.VisitScalarFieldEnum = {
-  vid: 'vid',
-  pid: 'pid',
-  isClinicalCollected: 'isClinicalCollected',
-  isDataCollected: 'isDataCollected',
+  id: 'id',
+  patient_id: 'patient_id',
+  visitDate: 'visitDate',
   visitNotes: 'visitNotes',
+  visitType: 'visitType',
   encounterfhirid: 'encounterfhirid',
-  createdAt: 'createdAt'
+  server_createdAt: 'server_createdAt',
+  server_updatedAt: 'server_updatedAt',
+  server_deletedAt: 'server_deletedAt'
+};
+
+exports.Prisma.IntervalScalarFieldEnum = {
+  id: 'id',
+  visit_id: 'visit_id',
+  intervalType: 'intervalType',
+  interval_tag: 'interval_tag',
+  configuration: 'configuration',
+  frequencies: 'frequencies',
+  dataPoints: 'dataPoints',
+  server_createdAt: 'server_createdAt',
+  server_updatedAt: 'server_updatedAt',
+  server_deletedAt: 'server_deletedAt'
 };
 
 exports.Prisma.ClinicScalarFieldEnum = {
-  cid: 'cid',
-  vid: 'vid',
-  pid: 'pid',
+  id: 'id',
+  patient_id: 'patient_id',
   bloodGroup: 'bloodGroup',
   antigenStatus: 'antigenStatus',
   systolic: 'systolic',
@@ -162,10 +184,10 @@ exports.Prisma.ClinicScalarFieldEnum = {
   homoglobin: 'homoglobin',
   recentHealthIssue: 'recentHealthIssue',
   hereditaryHistory: 'hereditaryHistory',
-  height: 'height',
-  weight: 'weight',
   observationfhirid: 'observationfhirid',
-  createdAt: 'createdAt'
+  server_createdAt: 'server_createdAt',
+  server_updatedAt: 'server_updatedAt',
+  server_deletedAt: 'server_deletedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -188,6 +210,7 @@ exports.Prisma.ModelName = {
   primeUser: 'primeUser',
   Patient: 'Patient',
   Visit: 'Visit',
+  Interval: 'Interval',
   Clinic: 'Clinic'
 };
 

@@ -9,8 +9,10 @@ const prisma = postgresClient
 
 const syncService = new watermelonSync(prisma, [
   { name: 'Patient', model: prisma.patient, prismaName: 'patient' },
+    { name: 'Clinic', model: prisma.clinic, prismaName: 'clinic' },
   { name: 'Visit', model: prisma.visit, prismaName: 'visit' },
-  { name: 'Clinic', model: prisma.clinic, prismaName: 'clinic' },
+  {name:'Interval', model: prisma.interval, prismaName: 'interval'},
+
 ])
 
 const pushChanges = async (req: Request, res: Response) => {

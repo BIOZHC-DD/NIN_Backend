@@ -29,6 +29,11 @@ export type Patient = $Result.DefaultSelection<Prisma.$PatientPayload>
  */
 export type Visit = $Result.DefaultSelection<Prisma.$VisitPayload>
 /**
+ * Model Interval
+ * 
+ */
+export type Interval = $Result.DefaultSelection<Prisma.$IntervalPayload>
+/**
  * Model Clinic
  * 
  */
@@ -188,6 +193,16 @@ export class PrismaClient<
     * ```
     */
   get visit(): Prisma.VisitDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.interval`: Exposes CRUD operations for the **Interval** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Intervals
+    * const intervals = await prisma.interval.findMany()
+    * ```
+    */
+  get interval(): Prisma.IntervalDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.clinic`: Exposes CRUD operations for the **Clinic** model.
@@ -641,6 +656,7 @@ export namespace Prisma {
     primeUser: 'primeUser',
     Patient: 'Patient',
     Visit: 'Visit',
+    Interval: 'Interval',
     Clinic: 'Clinic'
   };
 
@@ -657,7 +673,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "primeUser" | "patient" | "visit" | "clinic"
+      modelProps: "primeUser" | "patient" | "visit" | "interval" | "clinic"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -883,6 +899,80 @@ export namespace Prisma {
           }
         }
       }
+      Interval: {
+        payload: Prisma.$IntervalPayload<ExtArgs>
+        fields: Prisma.IntervalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntervalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntervalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          findFirst: {
+            args: Prisma.IntervalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntervalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          findMany: {
+            args: Prisma.IntervalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>[]
+          }
+          create: {
+            args: Prisma.IntervalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          createMany: {
+            args: Prisma.IntervalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntervalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>[]
+          }
+          delete: {
+            args: Prisma.IntervalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          update: {
+            args: Prisma.IntervalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntervalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntervalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntervalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntervalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntervalPayload>
+          }
+          aggregate: {
+            args: Prisma.IntervalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInterval>
+          }
+          groupBy: {
+            args: Prisma.IntervalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntervalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntervalCountArgs<ExtArgs>
+            result: $Utils.Optional<IntervalCountAggregateOutputType> | number
+          }
+        }
+      }
       Clinic: {
         payload: Prisma.$ClinicPayload<ExtArgs>
         fields: Prisma.ClinicFieldRefs
@@ -1044,6 +1134,7 @@ export namespace Prisma {
     primeUser?: primeUserOmit
     patient?: PatientOmit
     visit?: VisitOmit
+    interval?: IntervalOmit
     clinic?: ClinicOmit
   }
 
@@ -1180,16 +1271,19 @@ export namespace Prisma {
   }
 
   export type PrimeUserMinAggregateOutputType = {
+    id: string | null
     email: string | null
     password: string | null
   }
 
   export type PrimeUserMaxAggregateOutputType = {
+    id: string | null
     email: string | null
     password: string | null
   }
 
   export type PrimeUserCountAggregateOutputType = {
+    id: number
     email: number
     password: number
     _all: number
@@ -1197,16 +1291,19 @@ export namespace Prisma {
 
 
   export type PrimeUserMinAggregateInputType = {
+    id?: true
     email?: true
     password?: true
   }
 
   export type PrimeUserMaxAggregateInputType = {
+    id?: true
     email?: true
     password?: true
   }
 
   export type PrimeUserCountAggregateInputType = {
+    id?: true
     email?: true
     password?: true
     _all?: true
@@ -1285,6 +1382,7 @@ export namespace Prisma {
   }
 
   export type PrimeUserGroupByOutputType = {
+    id: string
     email: string
     password: string
     _count: PrimeUserCountAggregateOutputType | null
@@ -1307,31 +1405,36 @@ export namespace Prisma {
 
 
   export type primeUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     password?: boolean
   }, ExtArgs["result"]["primeUser"]>
 
   export type primeUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     password?: boolean
   }, ExtArgs["result"]["primeUser"]>
 
   export type primeUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     password?: boolean
   }, ExtArgs["result"]["primeUser"]>
 
   export type primeUserSelectScalar = {
+    id?: boolean
     email?: boolean
     password?: boolean
   }
 
-  export type primeUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"email" | "password", ExtArgs["result"]["primeUser"]>
+  export type primeUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password", ExtArgs["result"]["primeUser"]>
 
   export type $primeUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "primeUser"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
+      id: string
       email: string
       password: string
     }, ExtArgs["result"]["primeUser"]>
@@ -1417,8 +1520,8 @@ export namespace Prisma {
      * // Get first 10 PrimeUsers
      * const primeUsers = await prisma.primeUser.findMany({ take: 10 })
      * 
-     * // Only select the `email`
-     * const primeUserWithEmailOnly = await prisma.primeUser.findMany({ select: { email: true } })
+     * // Only select the `id`
+     * const primeUserWithIdOnly = await prisma.primeUser.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends primeUserFindManyArgs>(args?: SelectSubset<T, primeUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$primeUserPayload<ExtArgs>, T, "findMany", ClientOptions>>
@@ -1462,9 +1565,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many PrimeUsers and only return the `email`
-     * const primeUserWithEmailOnly = await prisma.primeUser.createManyAndReturn({
-     *   select: { email: true },
+     * // Create many PrimeUsers and only return the `id`
+     * const primeUserWithIdOnly = await prisma.primeUser.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -1553,9 +1656,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more PrimeUsers and only return the `email`
-     * const primeUserWithEmailOnly = await prisma.primeUser.updateManyAndReturn({
-     *   select: { email: true },
+     * // Update zero or more PrimeUsers and only return the `id`
+     * const primeUserWithIdOnly = await prisma.primeUser.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1757,6 +1860,7 @@ export namespace Prisma {
    * Fields of the primeUser model
    */ 
   interface primeUserFieldRefs {
+    readonly id: FieldRef<"primeUser", 'String'>
     readonly email: FieldRef<"primeUser", 'String'>
     readonly password: FieldRef<"primeUser", 'String'>
   }
@@ -2119,76 +2223,144 @@ export namespace Prisma {
 
   export type AggregatePatient = {
     _count: PatientCountAggregateOutputType | null
+    _avg: PatientAvgAggregateOutputType | null
+    _sum: PatientSumAggregateOutputType | null
     _min: PatientMinAggregateOutputType | null
     _max: PatientMaxAggregateOutputType | null
   }
 
+  export type PatientAvgAggregateOutputType = {
+    age: number | null
+    height: number | null
+    weight: number | null
+  }
+
+  export type PatientSumAggregateOutputType = {
+    age: number | null
+    height: number | null
+    weight: number | null
+  }
+
   export type PatientMinAggregateOutputType = {
-    pid: string | null
-    name: string | null
-    contactInformation: string | null
+    id: string | null
+    fullName: string | null
+    email: string | null
+    dateOfBirth: string | null
     BirthDay: Date | null
+    contactInformation: string | null
+    age: number | null
     gender: string | null
+    height: number | null
+    weight: number | null
     fhirId: string | null
     abhaId: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type PatientMaxAggregateOutputType = {
-    pid: string | null
-    name: string | null
-    contactInformation: string | null
+    id: string | null
+    fullName: string | null
+    email: string | null
+    dateOfBirth: string | null
     BirthDay: Date | null
+    contactInformation: string | null
+    age: number | null
     gender: string | null
+    height: number | null
+    weight: number | null
     fhirId: string | null
     abhaId: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type PatientCountAggregateOutputType = {
-    pid: number
-    name: number
-    contactInformation: number
+    id: number
+    fullName: number
+    email: number
+    dateOfBirth: number
     BirthDay: number
+    contactInformation: number
+    age: number
     gender: number
+    height: number
+    weight: number
     fhirId: number
     abhaId: number
-    createdAt: number
+    server_createdAt: number
+    server_updatedAt: number
+    server_deletedAt: number
     _all: number
   }
 
 
+  export type PatientAvgAggregateInputType = {
+    age?: true
+    height?: true
+    weight?: true
+  }
+
+  export type PatientSumAggregateInputType = {
+    age?: true
+    height?: true
+    weight?: true
+  }
+
   export type PatientMinAggregateInputType = {
-    pid?: true
-    name?: true
-    contactInformation?: true
+    id?: true
+    fullName?: true
+    email?: true
+    dateOfBirth?: true
     BirthDay?: true
+    contactInformation?: true
+    age?: true
     gender?: true
+    height?: true
+    weight?: true
     fhirId?: true
     abhaId?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type PatientMaxAggregateInputType = {
-    pid?: true
-    name?: true
-    contactInformation?: true
+    id?: true
+    fullName?: true
+    email?: true
+    dateOfBirth?: true
     BirthDay?: true
+    contactInformation?: true
+    age?: true
     gender?: true
+    height?: true
+    weight?: true
     fhirId?: true
     abhaId?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type PatientCountAggregateInputType = {
-    pid?: true
-    name?: true
-    contactInformation?: true
+    id?: true
+    fullName?: true
+    email?: true
+    dateOfBirth?: true
     BirthDay?: true
+    contactInformation?: true
+    age?: true
     gender?: true
+    height?: true
+    weight?: true
     fhirId?: true
     abhaId?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
     _all?: true
   }
 
@@ -2230,6 +2402,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PatientAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PatientSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PatientMinAggregateInputType
@@ -2260,20 +2444,31 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PatientCountAggregateInputType | true
+    _avg?: PatientAvgAggregateInputType
+    _sum?: PatientSumAggregateInputType
     _min?: PatientMinAggregateInputType
     _max?: PatientMaxAggregateInputType
   }
 
   export type PatientGroupByOutputType = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId: string | null
     abhaId: string | null
-    createdAt: Date
+    server_createdAt: Date
+    server_updatedAt: Date
+    server_deletedAt: Date | null
     _count: PatientCountAggregateOutputType | null
+    _avg: PatientAvgAggregateOutputType | null
+    _sum: PatientSumAggregateOutputType | null
     _min: PatientMinAggregateOutputType | null
     _max: PatientMaxAggregateOutputType | null
   }
@@ -2293,54 +2488,84 @@ export namespace Prisma {
 
 
   export type PatientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    name?: boolean
-    contactInformation?: boolean
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    dateOfBirth?: boolean
     BirthDay?: boolean
+    contactInformation?: boolean
+    age?: boolean
     gender?: boolean
+    height?: boolean
+    weight?: boolean
     fhirId?: boolean
     abhaId?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
     visits?: boolean | Patient$visitsArgs<ExtArgs>
+    clinic?: boolean | Patient$clinicArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["patient"]>
 
   export type PatientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    name?: boolean
-    contactInformation?: boolean
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    dateOfBirth?: boolean
     BirthDay?: boolean
+    contactInformation?: boolean
+    age?: boolean
     gender?: boolean
+    height?: boolean
+    weight?: boolean
     fhirId?: boolean
     abhaId?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
   }, ExtArgs["result"]["patient"]>
 
   export type PatientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    pid?: boolean
-    name?: boolean
-    contactInformation?: boolean
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    dateOfBirth?: boolean
     BirthDay?: boolean
+    contactInformation?: boolean
+    age?: boolean
     gender?: boolean
+    height?: boolean
+    weight?: boolean
     fhirId?: boolean
     abhaId?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
   }, ExtArgs["result"]["patient"]>
 
   export type PatientSelectScalar = {
-    pid?: boolean
-    name?: boolean
-    contactInformation?: boolean
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    dateOfBirth?: boolean
     BirthDay?: boolean
+    contactInformation?: boolean
+    age?: boolean
     gender?: boolean
+    height?: boolean
+    weight?: boolean
     fhirId?: boolean
     abhaId?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
   }
 
-  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pid" | "name" | "contactInformation" | "BirthDay" | "gender" | "fhirId" | "abhaId" | "createdAt", ExtArgs["result"]["patient"]>
+  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "dateOfBirth" | "BirthDay" | "contactInformation" | "age" | "gender" | "height" | "weight" | "fhirId" | "abhaId" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["patient"]>
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     visits?: boolean | Patient$visitsArgs<ExtArgs>
+    clinic?: boolean | Patient$clinicArgs<ExtArgs>
     _count?: boolean | PatientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2350,16 +2575,24 @@ export namespace Prisma {
     name: "Patient"
     objects: {
       visits: Prisma.$VisitPayload<ExtArgs>[]
+      clinic: Prisma.$ClinicPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      pid: string
-      name: string
-      contactInformation: string
+      id: string
+      fullName: string
+      email: string
+      dateOfBirth: string
       BirthDay: Date
+      contactInformation: string
+      age: number
       gender: string
+      height: number
+      weight: number
       fhirId: string | null
       abhaId: string | null
-      createdAt: Date
+      server_createdAt: Date
+      server_updatedAt: Date
+      server_deletedAt: Date | null
     }, ExtArgs["result"]["patient"]>
     composites: {}
   }
@@ -2443,8 +2676,8 @@ export namespace Prisma {
      * // Get first 10 Patients
      * const patients = await prisma.patient.findMany({ take: 10 })
      * 
-     * // Only select the `pid`
-     * const patientWithPidOnly = await prisma.patient.findMany({ select: { pid: true } })
+     * // Only select the `id`
+     * const patientWithIdOnly = await prisma.patient.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends PatientFindManyArgs>(args?: SelectSubset<T, PatientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", ClientOptions>>
@@ -2488,9 +2721,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Patients and only return the `pid`
-     * const patientWithPidOnly = await prisma.patient.createManyAndReturn({
-     *   select: { pid: true },
+     * // Create many Patients and only return the `id`
+     * const patientWithIdOnly = await prisma.patient.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2579,9 +2812,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Patients and only return the `pid`
-     * const patientWithPidOnly = await prisma.patient.updateManyAndReturn({
-     *   select: { pid: true },
+     * // Update zero or more Patients and only return the `id`
+     * const patientWithIdOnly = await prisma.patient.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2755,6 +2988,7 @@ export namespace Prisma {
   export interface Prisma__PatientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     visits<T extends Patient$visitsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$visitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    clinic<T extends Patient$clinicArgs<ExtArgs> = {}>(args?: Subset<T, Patient$clinicArgs<ExtArgs>>): Prisma__ClinicClient<$Result.GetResult<Prisma.$ClinicPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2784,14 +3018,21 @@ export namespace Prisma {
    * Fields of the Patient model
    */ 
   interface PatientFieldRefs {
-    readonly pid: FieldRef<"Patient", 'String'>
-    readonly name: FieldRef<"Patient", 'String'>
-    readonly contactInformation: FieldRef<"Patient", 'String'>
+    readonly id: FieldRef<"Patient", 'String'>
+    readonly fullName: FieldRef<"Patient", 'String'>
+    readonly email: FieldRef<"Patient", 'String'>
+    readonly dateOfBirth: FieldRef<"Patient", 'String'>
     readonly BirthDay: FieldRef<"Patient", 'DateTime'>
+    readonly contactInformation: FieldRef<"Patient", 'String'>
+    readonly age: FieldRef<"Patient", 'Int'>
     readonly gender: FieldRef<"Patient", 'String'>
+    readonly height: FieldRef<"Patient", 'Float'>
+    readonly weight: FieldRef<"Patient", 'Float'>
     readonly fhirId: FieldRef<"Patient", 'String'>
     readonly abhaId: FieldRef<"Patient", 'String'>
-    readonly createdAt: FieldRef<"Patient", 'DateTime'>
+    readonly server_createdAt: FieldRef<"Patient", 'DateTime'>
+    readonly server_updatedAt: FieldRef<"Patient", 'DateTime'>
+    readonly server_deletedAt: FieldRef<"Patient", 'DateTime'>
   }
     
 
@@ -3192,6 +3433,25 @@ export namespace Prisma {
   }
 
   /**
+   * Patient.clinic
+   */
+  export type Patient$clinicArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Clinic
+     */
+    select?: ClinicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Clinic
+     */
+    omit?: ClinicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClinicInclude<ExtArgs> | null
+    where?: ClinicWhereInput
+  }
+
+  /**
    * Patient without action
    */
   export type PatientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3221,65 +3481,77 @@ export namespace Prisma {
   }
 
   export type VisitMinAggregateOutputType = {
-    vid: string | null
-    pid: string | null
-    isClinicalCollected: boolean | null
-    isDataCollected: boolean | null
+    id: string | null
+    patient_id: string | null
+    visitDate: string | null
     visitNotes: string | null
+    visitType: string | null
     encounterfhirid: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type VisitMaxAggregateOutputType = {
-    vid: string | null
-    pid: string | null
-    isClinicalCollected: boolean | null
-    isDataCollected: boolean | null
+    id: string | null
+    patient_id: string | null
+    visitDate: string | null
     visitNotes: string | null
+    visitType: string | null
     encounterfhirid: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type VisitCountAggregateOutputType = {
-    vid: number
-    pid: number
-    isClinicalCollected: number
-    isDataCollected: number
+    id: number
+    patient_id: number
+    visitDate: number
     visitNotes: number
+    visitType: number
     encounterfhirid: number
-    createdAt: number
+    server_createdAt: number
+    server_updatedAt: number
+    server_deletedAt: number
     _all: number
   }
 
 
   export type VisitMinAggregateInputType = {
-    vid?: true
-    pid?: true
-    isClinicalCollected?: true
-    isDataCollected?: true
+    id?: true
+    patient_id?: true
+    visitDate?: true
     visitNotes?: true
+    visitType?: true
     encounterfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type VisitMaxAggregateInputType = {
-    vid?: true
-    pid?: true
-    isClinicalCollected?: true
-    isDataCollected?: true
+    id?: true
+    patient_id?: true
+    visitDate?: true
     visitNotes?: true
+    visitType?: true
     encounterfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type VisitCountAggregateInputType = {
-    vid?: true
-    pid?: true
-    isClinicalCollected?: true
-    isDataCollected?: true
+    id?: true
+    patient_id?: true
+    visitDate?: true
     visitNotes?: true
+    visitType?: true
     encounterfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
     _all?: true
   }
 
@@ -3356,13 +3628,15 @@ export namespace Prisma {
   }
 
   export type VisitGroupByOutputType = {
-    vid: string
-    pid: string
-    isClinicalCollected: boolean | null
-    isDataCollected: boolean | null
+    id: string
+    patient_id: string
+    visitDate: string
     visitNotes: string | null
+    visitType: string
     encounterfhirid: string | null
-    createdAt: Date
+    server_createdAt: Date
+    server_updatedAt: Date
+    server_deletedAt: Date | null
     _count: VisitCountAggregateOutputType | null
     _min: VisitMinAggregateOutputType | null
     _max: VisitMaxAggregateOutputType | null
@@ -3383,52 +3657,58 @@ export namespace Prisma {
 
 
   export type VisitSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    vid?: boolean
-    pid?: boolean
-    isClinicalCollected?: boolean
-    isDataCollected?: boolean
+    id?: boolean
+    patient_id?: boolean
+    visitDate?: boolean
     visitNotes?: boolean
+    visitType?: boolean
     encounterfhirid?: boolean
-    createdAt?: boolean
-    clinics?: boolean | Visit$clinicsArgs<ExtArgs>
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["visit"]>
 
   export type VisitSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    vid?: boolean
-    pid?: boolean
-    isClinicalCollected?: boolean
-    isDataCollected?: boolean
+    id?: boolean
+    patient_id?: boolean
+    visitDate?: boolean
     visitNotes?: boolean
+    visitType?: boolean
     encounterfhirid?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["visit"]>
 
   export type VisitSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    vid?: boolean
-    pid?: boolean
-    isClinicalCollected?: boolean
-    isDataCollected?: boolean
+    id?: boolean
+    patient_id?: boolean
+    visitDate?: boolean
     visitNotes?: boolean
+    visitType?: boolean
     encounterfhirid?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["visit"]>
 
   export type VisitSelectScalar = {
-    vid?: boolean
-    pid?: boolean
-    isClinicalCollected?: boolean
-    isDataCollected?: boolean
+    id?: boolean
+    patient_id?: boolean
+    visitDate?: boolean
     visitNotes?: boolean
+    visitType?: boolean
     encounterfhirid?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
   }
 
-  export type VisitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"vid" | "pid" | "isClinicalCollected" | "isDataCollected" | "visitNotes" | "encounterfhirid" | "createdAt", ExtArgs["result"]["visit"]>
+  export type VisitOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patient_id" | "visitDate" | "visitNotes" | "visitType" | "encounterfhirid" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["visit"]>
   export type VisitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    clinics?: boolean | Visit$clinicsArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }
   export type VisitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3441,17 +3721,18 @@ export namespace Prisma {
   export type $VisitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Visit"
     objects: {
-      clinics: Prisma.$ClinicPayload<ExtArgs> | null
       patient: Prisma.$PatientPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      vid: string
-      pid: string
-      isClinicalCollected: boolean | null
-      isDataCollected: boolean | null
+      id: string
+      patient_id: string
+      visitDate: string
       visitNotes: string | null
+      visitType: string
       encounterfhirid: string | null
-      createdAt: Date
+      server_createdAt: Date
+      server_updatedAt: Date
+      server_deletedAt: Date | null
     }, ExtArgs["result"]["visit"]>
     composites: {}
   }
@@ -3535,8 +3816,8 @@ export namespace Prisma {
      * // Get first 10 Visits
      * const visits = await prisma.visit.findMany({ take: 10 })
      * 
-     * // Only select the `vid`
-     * const visitWithVidOnly = await prisma.visit.findMany({ select: { vid: true } })
+     * // Only select the `id`
+     * const visitWithIdOnly = await prisma.visit.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends VisitFindManyArgs>(args?: SelectSubset<T, VisitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findMany", ClientOptions>>
@@ -3580,9 +3861,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Visits and only return the `vid`
-     * const visitWithVidOnly = await prisma.visit.createManyAndReturn({
-     *   select: { vid: true },
+     * // Create many Visits and only return the `id`
+     * const visitWithIdOnly = await prisma.visit.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -3671,9 +3952,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Visits and only return the `vid`
-     * const visitWithVidOnly = await prisma.visit.updateManyAndReturn({
-     *   select: { vid: true },
+     * // Update zero or more Visits and only return the `id`
+     * const visitWithIdOnly = await prisma.visit.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3846,7 +4127,6 @@ export namespace Prisma {
    */
   export interface Prisma__VisitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    clinics<T extends Visit$clinicsArgs<ExtArgs> = {}>(args?: Subset<T, Visit$clinicsArgs<ExtArgs>>): Prisma__ClinicClient<$Result.GetResult<Prisma.$ClinicPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3877,13 +4157,15 @@ export namespace Prisma {
    * Fields of the Visit model
    */ 
   interface VisitFieldRefs {
-    readonly vid: FieldRef<"Visit", 'String'>
-    readonly pid: FieldRef<"Visit", 'String'>
-    readonly isClinicalCollected: FieldRef<"Visit", 'Boolean'>
-    readonly isDataCollected: FieldRef<"Visit", 'Boolean'>
+    readonly id: FieldRef<"Visit", 'String'>
+    readonly patient_id: FieldRef<"Visit", 'String'>
+    readonly visitDate: FieldRef<"Visit", 'String'>
     readonly visitNotes: FieldRef<"Visit", 'String'>
+    readonly visitType: FieldRef<"Visit", 'String'>
     readonly encounterfhirid: FieldRef<"Visit", 'String'>
-    readonly createdAt: FieldRef<"Visit", 'DateTime'>
+    readonly server_createdAt: FieldRef<"Visit", 'DateTime'>
+    readonly server_updatedAt: FieldRef<"Visit", 'DateTime'>
+    readonly server_deletedAt: FieldRef<"Visit", 'DateTime'>
   }
     
 
@@ -4268,25 +4550,6 @@ export namespace Prisma {
   }
 
   /**
-   * Visit.clinics
-   */
-  export type Visit$clinicsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Clinic
-     */
-    select?: ClinicSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Clinic
-     */
-    omit?: ClinicOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClinicInclude<ExtArgs> | null
-    where?: ClinicWhereInput
-  }
-
-  /**
    * Visit without action
    */
   export type VisitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4302,6 +4565,1088 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: VisitInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Interval
+   */
+
+  export type AggregateInterval = {
+    _count: IntervalCountAggregateOutputType | null
+    _avg: IntervalAvgAggregateOutputType | null
+    _sum: IntervalSumAggregateOutputType | null
+    _min: IntervalMinAggregateOutputType | null
+    _max: IntervalMaxAggregateOutputType | null
+  }
+
+  export type IntervalAvgAggregateOutputType = {
+    interval_tag: number | null
+  }
+
+  export type IntervalSumAggregateOutputType = {
+    interval_tag: number | null
+  }
+
+  export type IntervalMinAggregateOutputType = {
+    id: string | null
+    visit_id: string | null
+    intervalType: string | null
+    interval_tag: number | null
+    configuration: string | null
+    frequencies: string | null
+    dataPoints: string | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
+  }
+
+  export type IntervalMaxAggregateOutputType = {
+    id: string | null
+    visit_id: string | null
+    intervalType: string | null
+    interval_tag: number | null
+    configuration: string | null
+    frequencies: string | null
+    dataPoints: string | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
+  }
+
+  export type IntervalCountAggregateOutputType = {
+    id: number
+    visit_id: number
+    intervalType: number
+    interval_tag: number
+    configuration: number
+    frequencies: number
+    dataPoints: number
+    server_createdAt: number
+    server_updatedAt: number
+    server_deletedAt: number
+    _all: number
+  }
+
+
+  export type IntervalAvgAggregateInputType = {
+    interval_tag?: true
+  }
+
+  export type IntervalSumAggregateInputType = {
+    interval_tag?: true
+  }
+
+  export type IntervalMinAggregateInputType = {
+    id?: true
+    visit_id?: true
+    intervalType?: true
+    interval_tag?: true
+    configuration?: true
+    frequencies?: true
+    dataPoints?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
+  }
+
+  export type IntervalMaxAggregateInputType = {
+    id?: true
+    visit_id?: true
+    intervalType?: true
+    interval_tag?: true
+    configuration?: true
+    frequencies?: true
+    dataPoints?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
+  }
+
+  export type IntervalCountAggregateInputType = {
+    id?: true
+    visit_id?: true
+    intervalType?: true
+    interval_tag?: true
+    configuration?: true
+    frequencies?: true
+    dataPoints?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
+    _all?: true
+  }
+
+  export type IntervalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Interval to aggregate.
+     */
+    where?: IntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intervals to fetch.
+     */
+    orderBy?: IntervalOrderByWithRelationInput | IntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Intervals
+    **/
+    _count?: true | IntervalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntervalAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntervalSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntervalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntervalMaxAggregateInputType
+  }
+
+  export type GetIntervalAggregateType<T extends IntervalAggregateArgs> = {
+        [P in keyof T & keyof AggregateInterval]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInterval[P]>
+      : GetScalarType<T[P], AggregateInterval[P]>
+  }
+
+
+
+
+  export type IntervalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntervalWhereInput
+    orderBy?: IntervalOrderByWithAggregationInput | IntervalOrderByWithAggregationInput[]
+    by: IntervalScalarFieldEnum[] | IntervalScalarFieldEnum
+    having?: IntervalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntervalCountAggregateInputType | true
+    _avg?: IntervalAvgAggregateInputType
+    _sum?: IntervalSumAggregateInputType
+    _min?: IntervalMinAggregateInputType
+    _max?: IntervalMaxAggregateInputType
+  }
+
+  export type IntervalGroupByOutputType = {
+    id: string
+    visit_id: string
+    intervalType: string
+    interval_tag: number
+    configuration: string
+    frequencies: string
+    dataPoints: string
+    server_createdAt: Date
+    server_updatedAt: Date
+    server_deletedAt: Date | null
+    _count: IntervalCountAggregateOutputType | null
+    _avg: IntervalAvgAggregateOutputType | null
+    _sum: IntervalSumAggregateOutputType | null
+    _min: IntervalMinAggregateOutputType | null
+    _max: IntervalMaxAggregateOutputType | null
+  }
+
+  type GetIntervalGroupByPayload<T extends IntervalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntervalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntervalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntervalGroupByOutputType[P]>
+            : GetScalarType<T[P], IntervalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntervalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visit_id?: boolean
+    intervalType?: boolean
+    interval_tag?: boolean
+    configuration?: boolean
+    frequencies?: boolean
+    dataPoints?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+  }, ExtArgs["result"]["interval"]>
+
+  export type IntervalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visit_id?: boolean
+    intervalType?: boolean
+    interval_tag?: boolean
+    configuration?: boolean
+    frequencies?: boolean
+    dataPoints?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+  }, ExtArgs["result"]["interval"]>
+
+  export type IntervalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    visit_id?: boolean
+    intervalType?: boolean
+    interval_tag?: boolean
+    configuration?: boolean
+    frequencies?: boolean
+    dataPoints?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+  }, ExtArgs["result"]["interval"]>
+
+  export type IntervalSelectScalar = {
+    id?: boolean
+    visit_id?: boolean
+    intervalType?: boolean
+    interval_tag?: boolean
+    configuration?: boolean
+    frequencies?: boolean
+    dataPoints?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+  }
+
+  export type IntervalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "visit_id" | "intervalType" | "interval_tag" | "configuration" | "frequencies" | "dataPoints" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["interval"]>
+
+  export type $IntervalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Interval"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      visit_id: string
+      intervalType: string
+      interval_tag: number
+      configuration: string
+      frequencies: string
+      dataPoints: string
+      server_createdAt: Date
+      server_updatedAt: Date
+      server_deletedAt: Date | null
+    }, ExtArgs["result"]["interval"]>
+    composites: {}
+  }
+
+  type IntervalGetPayload<S extends boolean | null | undefined | IntervalDefaultArgs> = $Result.GetResult<Prisma.$IntervalPayload, S>
+
+  type IntervalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntervalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntervalCountAggregateInputType | true
+    }
+
+  export interface IntervalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Interval'], meta: { name: 'Interval' } }
+    /**
+     * Find zero or one Interval that matches the filter.
+     * @param {IntervalFindUniqueArgs} args - Arguments to find a Interval
+     * @example
+     * // Get one Interval
+     * const interval = await prisma.interval.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntervalFindUniqueArgs>(args: SelectSubset<T, IntervalFindUniqueArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Interval that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntervalFindUniqueOrThrowArgs} args - Arguments to find a Interval
+     * @example
+     * // Get one Interval
+     * const interval = await prisma.interval.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntervalFindUniqueOrThrowArgs>(args: SelectSubset<T, IntervalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Interval that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalFindFirstArgs} args - Arguments to find a Interval
+     * @example
+     * // Get one Interval
+     * const interval = await prisma.interval.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntervalFindFirstArgs>(args?: SelectSubset<T, IntervalFindFirstArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Interval that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalFindFirstOrThrowArgs} args - Arguments to find a Interval
+     * @example
+     * // Get one Interval
+     * const interval = await prisma.interval.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntervalFindFirstOrThrowArgs>(args?: SelectSubset<T, IntervalFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Intervals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Intervals
+     * const intervals = await prisma.interval.findMany()
+     * 
+     * // Get first 10 Intervals
+     * const intervals = await prisma.interval.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const intervalWithIdOnly = await prisma.interval.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntervalFindManyArgs>(args?: SelectSubset<T, IntervalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Interval.
+     * @param {IntervalCreateArgs} args - Arguments to create a Interval.
+     * @example
+     * // Create one Interval
+     * const Interval = await prisma.interval.create({
+     *   data: {
+     *     // ... data to create a Interval
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntervalCreateArgs>(args: SelectSubset<T, IntervalCreateArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Intervals.
+     * @param {IntervalCreateManyArgs} args - Arguments to create many Intervals.
+     * @example
+     * // Create many Intervals
+     * const interval = await prisma.interval.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntervalCreateManyArgs>(args?: SelectSubset<T, IntervalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Intervals and returns the data saved in the database.
+     * @param {IntervalCreateManyAndReturnArgs} args - Arguments to create many Intervals.
+     * @example
+     * // Create many Intervals
+     * const interval = await prisma.interval.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Intervals and only return the `id`
+     * const intervalWithIdOnly = await prisma.interval.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntervalCreateManyAndReturnArgs>(args?: SelectSubset<T, IntervalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Interval.
+     * @param {IntervalDeleteArgs} args - Arguments to delete one Interval.
+     * @example
+     * // Delete one Interval
+     * const Interval = await prisma.interval.delete({
+     *   where: {
+     *     // ... filter to delete one Interval
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntervalDeleteArgs>(args: SelectSubset<T, IntervalDeleteArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Interval.
+     * @param {IntervalUpdateArgs} args - Arguments to update one Interval.
+     * @example
+     * // Update one Interval
+     * const interval = await prisma.interval.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntervalUpdateArgs>(args: SelectSubset<T, IntervalUpdateArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Intervals.
+     * @param {IntervalDeleteManyArgs} args - Arguments to filter Intervals to delete.
+     * @example
+     * // Delete a few Intervals
+     * const { count } = await prisma.interval.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntervalDeleteManyArgs>(args?: SelectSubset<T, IntervalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Intervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Intervals
+     * const interval = await prisma.interval.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntervalUpdateManyArgs>(args: SelectSubset<T, IntervalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Intervals and returns the data updated in the database.
+     * @param {IntervalUpdateManyAndReturnArgs} args - Arguments to update many Intervals.
+     * @example
+     * // Update many Intervals
+     * const interval = await prisma.interval.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Intervals and only return the `id`
+     * const intervalWithIdOnly = await prisma.interval.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntervalUpdateManyAndReturnArgs>(args: SelectSubset<T, IntervalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Interval.
+     * @param {IntervalUpsertArgs} args - Arguments to update or create a Interval.
+     * @example
+     * // Update or create a Interval
+     * const interval = await prisma.interval.upsert({
+     *   create: {
+     *     // ... data to create a Interval
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Interval we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntervalUpsertArgs>(args: SelectSubset<T, IntervalUpsertArgs<ExtArgs>>): Prisma__IntervalClient<$Result.GetResult<Prisma.$IntervalPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Intervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalCountArgs} args - Arguments to filter Intervals to count.
+     * @example
+     * // Count the number of Intervals
+     * const count = await prisma.interval.count({
+     *   where: {
+     *     // ... the filter for the Intervals we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntervalCountArgs>(
+      args?: Subset<T, IntervalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntervalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Interval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntervalAggregateArgs>(args: Subset<T, IntervalAggregateArgs>): Prisma.PrismaPromise<GetIntervalAggregateType<T>>
+
+    /**
+     * Group by Interval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntervalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntervalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntervalGroupByArgs['orderBy'] }
+        : { orderBy?: IntervalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntervalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntervalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Interval model
+   */
+  readonly fields: IntervalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Interval.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntervalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Interval model
+   */ 
+  interface IntervalFieldRefs {
+    readonly id: FieldRef<"Interval", 'String'>
+    readonly visit_id: FieldRef<"Interval", 'String'>
+    readonly intervalType: FieldRef<"Interval", 'String'>
+    readonly interval_tag: FieldRef<"Interval", 'Int'>
+    readonly configuration: FieldRef<"Interval", 'String'>
+    readonly frequencies: FieldRef<"Interval", 'String'>
+    readonly dataPoints: FieldRef<"Interval", 'String'>
+    readonly server_createdAt: FieldRef<"Interval", 'DateTime'>
+    readonly server_updatedAt: FieldRef<"Interval", 'DateTime'>
+    readonly server_deletedAt: FieldRef<"Interval", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Interval findUnique
+   */
+  export type IntervalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter, which Interval to fetch.
+     */
+    where: IntervalWhereUniqueInput
+  }
+
+  /**
+   * Interval findUniqueOrThrow
+   */
+  export type IntervalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter, which Interval to fetch.
+     */
+    where: IntervalWhereUniqueInput
+  }
+
+  /**
+   * Interval findFirst
+   */
+  export type IntervalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter, which Interval to fetch.
+     */
+    where?: IntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intervals to fetch.
+     */
+    orderBy?: IntervalOrderByWithRelationInput | IntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Intervals.
+     */
+    cursor?: IntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Intervals.
+     */
+    distinct?: IntervalScalarFieldEnum | IntervalScalarFieldEnum[]
+  }
+
+  /**
+   * Interval findFirstOrThrow
+   */
+  export type IntervalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter, which Interval to fetch.
+     */
+    where?: IntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intervals to fetch.
+     */
+    orderBy?: IntervalOrderByWithRelationInput | IntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Intervals.
+     */
+    cursor?: IntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Intervals.
+     */
+    distinct?: IntervalScalarFieldEnum | IntervalScalarFieldEnum[]
+  }
+
+  /**
+   * Interval findMany
+   */
+  export type IntervalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter, which Intervals to fetch.
+     */
+    where?: IntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intervals to fetch.
+     */
+    orderBy?: IntervalOrderByWithRelationInput | IntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Intervals.
+     */
+    cursor?: IntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intervals.
+     */
+    skip?: number
+    distinct?: IntervalScalarFieldEnum | IntervalScalarFieldEnum[]
+  }
+
+  /**
+   * Interval create
+   */
+  export type IntervalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Interval.
+     */
+    data: XOR<IntervalCreateInput, IntervalUncheckedCreateInput>
+  }
+
+  /**
+   * Interval createMany
+   */
+  export type IntervalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Intervals.
+     */
+    data: IntervalCreateManyInput | IntervalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Interval createManyAndReturn
+   */
+  export type IntervalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * The data used to create many Intervals.
+     */
+    data: IntervalCreateManyInput | IntervalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Interval update
+   */
+  export type IntervalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Interval.
+     */
+    data: XOR<IntervalUpdateInput, IntervalUncheckedUpdateInput>
+    /**
+     * Choose, which Interval to update.
+     */
+    where: IntervalWhereUniqueInput
+  }
+
+  /**
+   * Interval updateMany
+   */
+  export type IntervalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Intervals.
+     */
+    data: XOR<IntervalUpdateManyMutationInput, IntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which Intervals to update
+     */
+    where?: IntervalWhereInput
+  }
+
+  /**
+   * Interval updateManyAndReturn
+   */
+  export type IntervalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * The data used to update Intervals.
+     */
+    data: XOR<IntervalUpdateManyMutationInput, IntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which Intervals to update
+     */
+    where?: IntervalWhereInput
+  }
+
+  /**
+   * Interval upsert
+   */
+  export type IntervalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Interval to update in case it exists.
+     */
+    where: IntervalWhereUniqueInput
+    /**
+     * In case the Interval found by the `where` argument doesn't exist, create a new Interval with this data.
+     */
+    create: XOR<IntervalCreateInput, IntervalUncheckedCreateInput>
+    /**
+     * In case the Interval was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntervalUpdateInput, IntervalUncheckedUpdateInput>
+  }
+
+  /**
+   * Interval delete
+   */
+  export type IntervalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
+    /**
+     * Filter which Interval to delete.
+     */
+    where: IntervalWhereUniqueInput
+  }
+
+  /**
+   * Interval deleteMany
+   */
+  export type IntervalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Intervals to delete
+     */
+    where?: IntervalWhereInput
+  }
+
+  /**
+   * Interval without action
+   */
+  export type IntervalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interval
+     */
+    select?: IntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interval
+     */
+    omit?: IntervalOmit<ExtArgs> | null
   }
 
 
@@ -4325,11 +5670,8 @@ export namespace Prisma {
     dailyConsumption: number | null
     smokingIndex: number | null
     alcoholFreeDays: number | null
-    alcoholType: number | null
     alcoholConsumption: number | null
     homoglobin: number | null
-    height: number | null
-    weight: number | null
   }
 
   export type ClinicSumAggregateOutputType = {
@@ -4340,17 +5682,13 @@ export namespace Prisma {
     dailyConsumption: number | null
     smokingIndex: number | null
     alcoholFreeDays: number | null
-    alcoholType: number | null
     alcoholConsumption: number | null
     homoglobin: number | null
-    height: number | null
-    weight: number | null
   }
 
   export type ClinicMinAggregateOutputType = {
-    cid: string | null
-    vid: string | null
-    pid: string | null
+    id: string | null
+    patient_id: string | null
     bloodGroup: string | null
     antigenStatus: string | null
     systolic: number | null
@@ -4361,21 +5699,20 @@ export namespace Prisma {
     dailyConsumption: number | null
     smokingIndex: number | null
     alcoholFreeDays: number | null
-    alcoholType: number | null
+    alcoholType: string | null
     alcoholConsumption: number | null
     homoglobin: number | null
     recentHealthIssue: string | null
     hereditaryHistory: string | null
-    height: number | null
-    weight: number | null
     observationfhirid: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type ClinicMaxAggregateOutputType = {
-    cid: string | null
-    vid: string | null
-    pid: string | null
+    id: string | null
+    patient_id: string | null
     bloodGroup: string | null
     antigenStatus: string | null
     systolic: number | null
@@ -4386,21 +5723,20 @@ export namespace Prisma {
     dailyConsumption: number | null
     smokingIndex: number | null
     alcoholFreeDays: number | null
-    alcoholType: number | null
+    alcoholType: string | null
     alcoholConsumption: number | null
     homoglobin: number | null
     recentHealthIssue: string | null
     hereditaryHistory: string | null
-    height: number | null
-    weight: number | null
     observationfhirid: string | null
-    createdAt: Date | null
+    server_createdAt: Date | null
+    server_updatedAt: Date | null
+    server_deletedAt: Date | null
   }
 
   export type ClinicCountAggregateOutputType = {
-    cid: number
-    vid: number
-    pid: number
+    id: number
+    patient_id: number
     bloodGroup: number
     antigenStatus: number
     systolic: number
@@ -4416,10 +5752,10 @@ export namespace Prisma {
     homoglobin: number
     recentHealthIssue: number
     hereditaryHistory: number
-    height: number
-    weight: number
     observationfhirid: number
-    createdAt: number
+    server_createdAt: number
+    server_updatedAt: number
+    server_deletedAt: number
     _all: number
   }
 
@@ -4432,11 +5768,8 @@ export namespace Prisma {
     dailyConsumption?: true
     smokingIndex?: true
     alcoholFreeDays?: true
-    alcoholType?: true
     alcoholConsumption?: true
     homoglobin?: true
-    height?: true
-    weight?: true
   }
 
   export type ClinicSumAggregateInputType = {
@@ -4447,17 +5780,13 @@ export namespace Prisma {
     dailyConsumption?: true
     smokingIndex?: true
     alcoholFreeDays?: true
-    alcoholType?: true
     alcoholConsumption?: true
     homoglobin?: true
-    height?: true
-    weight?: true
   }
 
   export type ClinicMinAggregateInputType = {
-    cid?: true
-    vid?: true
-    pid?: true
+    id?: true
+    patient_id?: true
     bloodGroup?: true
     antigenStatus?: true
     systolic?: true
@@ -4473,16 +5802,15 @@ export namespace Prisma {
     homoglobin?: true
     recentHealthIssue?: true
     hereditaryHistory?: true
-    height?: true
-    weight?: true
     observationfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type ClinicMaxAggregateInputType = {
-    cid?: true
-    vid?: true
-    pid?: true
+    id?: true
+    patient_id?: true
     bloodGroup?: true
     antigenStatus?: true
     systolic?: true
@@ -4498,16 +5826,15 @@ export namespace Prisma {
     homoglobin?: true
     recentHealthIssue?: true
     hereditaryHistory?: true
-    height?: true
-    weight?: true
     observationfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
   }
 
   export type ClinicCountAggregateInputType = {
-    cid?: true
-    vid?: true
-    pid?: true
+    id?: true
+    patient_id?: true
     bloodGroup?: true
     antigenStatus?: true
     systolic?: true
@@ -4523,10 +5850,10 @@ export namespace Prisma {
     homoglobin?: true
     recentHealthIssue?: true
     hereditaryHistory?: true
-    height?: true
-    weight?: true
     observationfhirid?: true
-    createdAt?: true
+    server_createdAt?: true
+    server_updatedAt?: true
+    server_deletedAt?: true
     _all?: true
   }
 
@@ -4617,9 +5944,8 @@ export namespace Prisma {
   }
 
   export type ClinicGroupByOutputType = {
-    cid: string
-    vid: string
-    pid: string | null
+    id: string
+    patient_id: string | null
     bloodGroup: string
     antigenStatus: string
     systolic: number
@@ -4630,15 +5956,15 @@ export namespace Prisma {
     dailyConsumption: number
     smokingIndex: number
     alcoholFreeDays: number
-    alcoholType: number
+    alcoholType: string
     alcoholConsumption: number
     homoglobin: number
     recentHealthIssue: string
     hereditaryHistory: string
-    height: number
-    weight: number
     observationfhirid: string | null
-    createdAt: Date
+    server_createdAt: Date
+    server_updatedAt: Date
+    server_deletedAt: Date | null
     _count: ClinicCountAggregateOutputType | null
     _avg: ClinicAvgAggregateOutputType | null
     _sum: ClinicSumAggregateOutputType | null
@@ -4661,9 +5987,8 @@ export namespace Prisma {
 
 
   export type ClinicSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
-    vid?: boolean
-    pid?: boolean
+    id?: boolean
+    patient_id?: boolean
     bloodGroup?: boolean
     antigenStatus?: boolean
     systolic?: boolean
@@ -4679,17 +6004,16 @@ export namespace Prisma {
     homoglobin?: boolean
     recentHealthIssue?: boolean
     hereditaryHistory?: boolean
-    height?: boolean
-    weight?: boolean
     observationfhirid?: boolean
-    createdAt?: boolean
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }, ExtArgs["result"]["clinic"]>
 
   export type ClinicSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
-    vid?: boolean
-    pid?: boolean
+    id?: boolean
+    patient_id?: boolean
     bloodGroup?: boolean
     antigenStatus?: boolean
     systolic?: boolean
@@ -4705,17 +6029,16 @@ export namespace Prisma {
     homoglobin?: boolean
     recentHealthIssue?: boolean
     hereditaryHistory?: boolean
-    height?: boolean
-    weight?: boolean
     observationfhirid?: boolean
-    createdAt?: boolean
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }, ExtArgs["result"]["clinic"]>
 
   export type ClinicSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    cid?: boolean
-    vid?: boolean
-    pid?: boolean
+    id?: boolean
+    patient_id?: boolean
     bloodGroup?: boolean
     antigenStatus?: boolean
     systolic?: boolean
@@ -4731,17 +6054,16 @@ export namespace Prisma {
     homoglobin?: boolean
     recentHealthIssue?: boolean
     hereditaryHistory?: boolean
-    height?: boolean
-    weight?: boolean
     observationfhirid?: boolean
-    createdAt?: boolean
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }, ExtArgs["result"]["clinic"]>
 
   export type ClinicSelectScalar = {
-    cid?: boolean
-    vid?: boolean
-    pid?: boolean
+    id?: boolean
+    patient_id?: boolean
     bloodGroup?: boolean
     antigenStatus?: boolean
     systolic?: boolean
@@ -4757,32 +6079,31 @@ export namespace Prisma {
     homoglobin?: boolean
     recentHealthIssue?: boolean
     hereditaryHistory?: boolean
-    height?: boolean
-    weight?: boolean
     observationfhirid?: boolean
-    createdAt?: boolean
+    server_createdAt?: boolean
+    server_updatedAt?: boolean
+    server_deletedAt?: boolean
   }
 
-  export type ClinicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cid" | "vid" | "pid" | "bloodGroup" | "antigenStatus" | "systolic" | "diastolic" | "temperature" | "smokingType" | "overAllYearOfSmoking" | "dailyConsumption" | "smokingIndex" | "alcoholFreeDays" | "alcoholType" | "alcoholConsumption" | "homoglobin" | "recentHealthIssue" | "hereditaryHistory" | "height" | "weight" | "observationfhirid" | "createdAt", ExtArgs["result"]["clinic"]>
+  export type ClinicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patient_id" | "bloodGroup" | "antigenStatus" | "systolic" | "diastolic" | "temperature" | "smokingType" | "overAllYearOfSmoking" | "dailyConsumption" | "smokingIndex" | "alcoholFreeDays" | "alcoholType" | "alcoholConsumption" | "homoglobin" | "recentHealthIssue" | "hereditaryHistory" | "observationfhirid" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["clinic"]>
   export type ClinicInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }
   export type ClinicIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }
   export type ClinicIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    visit?: boolean | VisitDefaultArgs<ExtArgs>
+    patient?: boolean | Clinic$patientArgs<ExtArgs>
   }
 
   export type $ClinicPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Clinic"
     objects: {
-      visit: Prisma.$VisitPayload<ExtArgs>
+      patient: Prisma.$PatientPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      cid: string
-      vid: string
-      pid: string | null
+      id: string
+      patient_id: string | null
       bloodGroup: string
       antigenStatus: string
       systolic: number
@@ -4793,15 +6114,15 @@ export namespace Prisma {
       dailyConsumption: number
       smokingIndex: number
       alcoholFreeDays: number
-      alcoholType: number
+      alcoholType: string
       alcoholConsumption: number
       homoglobin: number
       recentHealthIssue: string
       hereditaryHistory: string
-      height: number
-      weight: number
       observationfhirid: string | null
-      createdAt: Date
+      server_createdAt: Date
+      server_updatedAt: Date
+      server_deletedAt: Date | null
     }, ExtArgs["result"]["clinic"]>
     composites: {}
   }
@@ -4885,8 +6206,8 @@ export namespace Prisma {
      * // Get first 10 Clinics
      * const clinics = await prisma.clinic.findMany({ take: 10 })
      * 
-     * // Only select the `cid`
-     * const clinicWithCidOnly = await prisma.clinic.findMany({ select: { cid: true } })
+     * // Only select the `id`
+     * const clinicWithIdOnly = await prisma.clinic.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends ClinicFindManyArgs>(args?: SelectSubset<T, ClinicFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClinicPayload<ExtArgs>, T, "findMany", ClientOptions>>
@@ -4930,9 +6251,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Clinics and only return the `cid`
-     * const clinicWithCidOnly = await prisma.clinic.createManyAndReturn({
-     *   select: { cid: true },
+     * // Create many Clinics and only return the `id`
+     * const clinicWithIdOnly = await prisma.clinic.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5021,9 +6342,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Clinics and only return the `cid`
-     * const clinicWithCidOnly = await prisma.clinic.updateManyAndReturn({
-     *   select: { cid: true },
+     * // Update zero or more Clinics and only return the `id`
+     * const clinicWithIdOnly = await prisma.clinic.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5196,7 +6517,7 @@ export namespace Prisma {
    */
   export interface Prisma__ClinicClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    visit<T extends VisitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VisitDefaultArgs<ExtArgs>>): Prisma__VisitClient<$Result.GetResult<Prisma.$VisitPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    patient<T extends Clinic$patientArgs<ExtArgs> = {}>(args?: Subset<T, Clinic$patientArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5226,28 +6547,27 @@ export namespace Prisma {
    * Fields of the Clinic model
    */ 
   interface ClinicFieldRefs {
-    readonly cid: FieldRef<"Clinic", 'String'>
-    readonly vid: FieldRef<"Clinic", 'String'>
-    readonly pid: FieldRef<"Clinic", 'String'>
+    readonly id: FieldRef<"Clinic", 'String'>
+    readonly patient_id: FieldRef<"Clinic", 'String'>
     readonly bloodGroup: FieldRef<"Clinic", 'String'>
     readonly antigenStatus: FieldRef<"Clinic", 'String'>
     readonly systolic: FieldRef<"Clinic", 'Int'>
     readonly diastolic: FieldRef<"Clinic", 'Int'>
-    readonly temperature: FieldRef<"Clinic", 'Int'>
+    readonly temperature: FieldRef<"Clinic", 'Float'>
     readonly smokingType: FieldRef<"Clinic", 'String'>
     readonly overAllYearOfSmoking: FieldRef<"Clinic", 'Int'>
     readonly dailyConsumption: FieldRef<"Clinic", 'Int'>
     readonly smokingIndex: FieldRef<"Clinic", 'Int'>
     readonly alcoholFreeDays: FieldRef<"Clinic", 'Int'>
-    readonly alcoholType: FieldRef<"Clinic", 'Int'>
+    readonly alcoholType: FieldRef<"Clinic", 'String'>
     readonly alcoholConsumption: FieldRef<"Clinic", 'Int'>
     readonly homoglobin: FieldRef<"Clinic", 'Int'>
     readonly recentHealthIssue: FieldRef<"Clinic", 'String'>
     readonly hereditaryHistory: FieldRef<"Clinic", 'String'>
-    readonly height: FieldRef<"Clinic", 'Int'>
-    readonly weight: FieldRef<"Clinic", 'Int'>
     readonly observationfhirid: FieldRef<"Clinic", 'String'>
-    readonly createdAt: FieldRef<"Clinic", 'DateTime'>
+    readonly server_createdAt: FieldRef<"Clinic", 'DateTime'>
+    readonly server_updatedAt: FieldRef<"Clinic", 'DateTime'>
+    readonly server_deletedAt: FieldRef<"Clinic", 'DateTime'>
   }
     
 
@@ -5632,6 +6952,25 @@ export namespace Prisma {
   }
 
   /**
+   * Clinic.patient
+   */
+  export type Clinic$patientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Patient
+     */
+    select?: PatientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Patient
+     */
+    omit?: PatientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PatientInclude<ExtArgs> | null
+    where?: PatientWhereInput
+  }
+
+  /**
    * Clinic without action
    */
   export type ClinicDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5665,6 +7004,7 @@ export namespace Prisma {
 
 
   export const PrimeUserScalarFieldEnum: {
+    id: 'id',
     email: 'email',
     password: 'password'
   };
@@ -5673,36 +7013,60 @@ export namespace Prisma {
 
 
   export const PatientScalarFieldEnum: {
-    pid: 'pid',
-    name: 'name',
-    contactInformation: 'contactInformation',
+    id: 'id',
+    fullName: 'fullName',
+    email: 'email',
+    dateOfBirth: 'dateOfBirth',
     BirthDay: 'BirthDay',
+    contactInformation: 'contactInformation',
+    age: 'age',
     gender: 'gender',
+    height: 'height',
+    weight: 'weight',
     fhirId: 'fhirId',
     abhaId: 'abhaId',
-    createdAt: 'createdAt'
+    server_createdAt: 'server_createdAt',
+    server_updatedAt: 'server_updatedAt',
+    server_deletedAt: 'server_deletedAt'
   };
 
   export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
 
 
   export const VisitScalarFieldEnum: {
-    vid: 'vid',
-    pid: 'pid',
-    isClinicalCollected: 'isClinicalCollected',
-    isDataCollected: 'isDataCollected',
+    id: 'id',
+    patient_id: 'patient_id',
+    visitDate: 'visitDate',
     visitNotes: 'visitNotes',
+    visitType: 'visitType',
     encounterfhirid: 'encounterfhirid',
-    createdAt: 'createdAt'
+    server_createdAt: 'server_createdAt',
+    server_updatedAt: 'server_updatedAt',
+    server_deletedAt: 'server_deletedAt'
   };
 
   export type VisitScalarFieldEnum = (typeof VisitScalarFieldEnum)[keyof typeof VisitScalarFieldEnum]
 
 
+  export const IntervalScalarFieldEnum: {
+    id: 'id',
+    visit_id: 'visit_id',
+    intervalType: 'intervalType',
+    interval_tag: 'interval_tag',
+    configuration: 'configuration',
+    frequencies: 'frequencies',
+    dataPoints: 'dataPoints',
+    server_createdAt: 'server_createdAt',
+    server_updatedAt: 'server_updatedAt',
+    server_deletedAt: 'server_deletedAt'
+  };
+
+  export type IntervalScalarFieldEnum = (typeof IntervalScalarFieldEnum)[keyof typeof IntervalScalarFieldEnum]
+
+
   export const ClinicScalarFieldEnum: {
-    cid: 'cid',
-    vid: 'vid',
-    pid: 'pid',
+    id: 'id',
+    patient_id: 'patient_id',
     bloodGroup: 'bloodGroup',
     antigenStatus: 'antigenStatus',
     systolic: 'systolic',
@@ -5718,10 +7082,10 @@ export namespace Prisma {
     homoglobin: 'homoglobin',
     recentHealthIssue: 'recentHealthIssue',
     hereditaryHistory: 'hereditaryHistory',
-    height: 'height',
-    weight: 'weight',
     observationfhirid: 'observationfhirid',
-    createdAt: 'createdAt'
+    server_createdAt: 'server_createdAt',
+    server_updatedAt: 'server_updatedAt',
+    server_deletedAt: 'server_deletedAt'
   };
 
   export type ClinicScalarFieldEnum = (typeof ClinicScalarFieldEnum)[keyof typeof ClinicScalarFieldEnum]
@@ -5785,13 +7149,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -5826,24 +7183,28 @@ export namespace Prisma {
     AND?: primeUserWhereInput | primeUserWhereInput[]
     OR?: primeUserWhereInput[]
     NOT?: primeUserWhereInput | primeUserWhereInput[]
+    id?: StringFilter<"primeUser"> | string
     email?: StringFilter<"primeUser"> | string
     password?: StringFilter<"primeUser"> | string
   }
 
   export type primeUserOrderByWithRelationInput = {
+    id?: SortOrder
     email?: SortOrder
     password?: SortOrder
   }
 
   export type primeUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
     email?: string
     AND?: primeUserWhereInput | primeUserWhereInput[]
     OR?: primeUserWhereInput[]
     NOT?: primeUserWhereInput | primeUserWhereInput[]
     password?: StringFilter<"primeUser"> | string
-  }, "email">
+  }, "id" | "email">
 
   export type primeUserOrderByWithAggregationInput = {
+    id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     _count?: primeUserCountOrderByAggregateInput
@@ -5855,6 +7216,7 @@ export namespace Prisma {
     AND?: primeUserScalarWhereWithAggregatesInput | primeUserScalarWhereWithAggregatesInput[]
     OR?: primeUserScalarWhereWithAggregatesInput[]
     NOT?: primeUserScalarWhereWithAggregatesInput | primeUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"primeUser"> | string
     email?: StringWithAggregatesFilter<"primeUser"> | string
     password?: StringWithAggregatesFilter<"primeUser"> | string
   }
@@ -5863,122 +7225,167 @@ export namespace Prisma {
     AND?: PatientWhereInput | PatientWhereInput[]
     OR?: PatientWhereInput[]
     NOT?: PatientWhereInput | PatientWhereInput[]
-    pid?: StringFilter<"Patient"> | string
-    name?: StringFilter<"Patient"> | string
-    contactInformation?: StringFilter<"Patient"> | string
+    id?: StringFilter<"Patient"> | string
+    fullName?: StringFilter<"Patient"> | string
+    email?: StringFilter<"Patient"> | string
+    dateOfBirth?: StringFilter<"Patient"> | string
     BirthDay?: DateTimeFilter<"Patient"> | Date | string
+    contactInformation?: StringFilter<"Patient"> | string
+    age?: IntFilter<"Patient"> | number
     gender?: StringFilter<"Patient"> | string
+    height?: FloatFilter<"Patient"> | number
+    weight?: FloatFilter<"Patient"> | number
     fhirId?: StringNullableFilter<"Patient"> | string | null
     abhaId?: StringNullableFilter<"Patient"> | string | null
-    createdAt?: DateTimeFilter<"Patient"> | Date | string
+    server_createdAt?: DateTimeFilter<"Patient"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Patient"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     visits?: VisitListRelationFilter
+    clinic?: XOR<ClinicNullableScalarRelationFilter, ClinicWhereInput> | null
   }
 
   export type PatientOrderByWithRelationInput = {
-    pid?: SortOrder
-    name?: SortOrder
-    contactInformation?: SortOrder
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    dateOfBirth?: SortOrder
     BirthDay?: SortOrder
+    contactInformation?: SortOrder
+    age?: SortOrder
     gender?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
     fhirId?: SortOrderInput | SortOrder
     abhaId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
     visits?: VisitOrderByRelationAggregateInput
+    clinic?: ClinicOrderByWithRelationInput
   }
 
   export type PatientWhereUniqueInput = Prisma.AtLeast<{
-    pid?: string
+    id?: string
+    email?: string
     AND?: PatientWhereInput | PatientWhereInput[]
     OR?: PatientWhereInput[]
     NOT?: PatientWhereInput | PatientWhereInput[]
-    name?: StringFilter<"Patient"> | string
-    contactInformation?: StringFilter<"Patient"> | string
+    fullName?: StringFilter<"Patient"> | string
+    dateOfBirth?: StringFilter<"Patient"> | string
     BirthDay?: DateTimeFilter<"Patient"> | Date | string
+    contactInformation?: StringFilter<"Patient"> | string
+    age?: IntFilter<"Patient"> | number
     gender?: StringFilter<"Patient"> | string
+    height?: FloatFilter<"Patient"> | number
+    weight?: FloatFilter<"Patient"> | number
     fhirId?: StringNullableFilter<"Patient"> | string | null
     abhaId?: StringNullableFilter<"Patient"> | string | null
-    createdAt?: DateTimeFilter<"Patient"> | Date | string
+    server_createdAt?: DateTimeFilter<"Patient"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Patient"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Patient"> | Date | string | null
     visits?: VisitListRelationFilter
-  }, "pid">
+    clinic?: XOR<ClinicNullableScalarRelationFilter, ClinicWhereInput> | null
+  }, "id" | "email">
 
   export type PatientOrderByWithAggregationInput = {
-    pid?: SortOrder
-    name?: SortOrder
-    contactInformation?: SortOrder
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    dateOfBirth?: SortOrder
     BirthDay?: SortOrder
+    contactInformation?: SortOrder
+    age?: SortOrder
     gender?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
     fhirId?: SortOrderInput | SortOrder
     abhaId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
     _count?: PatientCountOrderByAggregateInput
+    _avg?: PatientAvgOrderByAggregateInput
     _max?: PatientMaxOrderByAggregateInput
     _min?: PatientMinOrderByAggregateInput
+    _sum?: PatientSumOrderByAggregateInput
   }
 
   export type PatientScalarWhereWithAggregatesInput = {
     AND?: PatientScalarWhereWithAggregatesInput | PatientScalarWhereWithAggregatesInput[]
     OR?: PatientScalarWhereWithAggregatesInput[]
     NOT?: PatientScalarWhereWithAggregatesInput | PatientScalarWhereWithAggregatesInput[]
-    pid?: StringWithAggregatesFilter<"Patient"> | string
-    name?: StringWithAggregatesFilter<"Patient"> | string
-    contactInformation?: StringWithAggregatesFilter<"Patient"> | string
+    id?: StringWithAggregatesFilter<"Patient"> | string
+    fullName?: StringWithAggregatesFilter<"Patient"> | string
+    email?: StringWithAggregatesFilter<"Patient"> | string
+    dateOfBirth?: StringWithAggregatesFilter<"Patient"> | string
     BirthDay?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
+    contactInformation?: StringWithAggregatesFilter<"Patient"> | string
+    age?: IntWithAggregatesFilter<"Patient"> | number
     gender?: StringWithAggregatesFilter<"Patient"> | string
+    height?: FloatWithAggregatesFilter<"Patient"> | number
+    weight?: FloatWithAggregatesFilter<"Patient"> | number
     fhirId?: StringNullableWithAggregatesFilter<"Patient"> | string | null
     abhaId?: StringNullableWithAggregatesFilter<"Patient"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
+    server_createdAt?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
+    server_updatedAt?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
+    server_deletedAt?: DateTimeNullableWithAggregatesFilter<"Patient"> | Date | string | null
   }
 
   export type VisitWhereInput = {
     AND?: VisitWhereInput | VisitWhereInput[]
     OR?: VisitWhereInput[]
     NOT?: VisitWhereInput | VisitWhereInput[]
-    vid?: StringFilter<"Visit"> | string
-    pid?: StringFilter<"Visit"> | string
-    isClinicalCollected?: BoolNullableFilter<"Visit"> | boolean | null
-    isDataCollected?: BoolNullableFilter<"Visit"> | boolean | null
+    id?: StringFilter<"Visit"> | string
+    patient_id?: StringFilter<"Visit"> | string
+    visitDate?: StringFilter<"Visit"> | string
     visitNotes?: StringNullableFilter<"Visit"> | string | null
+    visitType?: StringFilter<"Visit"> | string
     encounterfhirid?: StringNullableFilter<"Visit"> | string | null
-    createdAt?: DateTimeFilter<"Visit"> | Date | string
-    clinics?: XOR<ClinicNullableScalarRelationFilter, ClinicWhereInput> | null
+    server_createdAt?: DateTimeFilter<"Visit"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Visit"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
   }
 
   export type VisitOrderByWithRelationInput = {
-    vid?: SortOrder
-    pid?: SortOrder
-    isClinicalCollected?: SortOrderInput | SortOrder
-    isDataCollected?: SortOrderInput | SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
+    visitDate?: SortOrder
     visitNotes?: SortOrderInput | SortOrder
+    visitType?: SortOrder
     encounterfhirid?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    clinics?: ClinicOrderByWithRelationInput
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
     patient?: PatientOrderByWithRelationInput
   }
 
   export type VisitWhereUniqueInput = Prisma.AtLeast<{
-    vid?: string
+    id?: string
     AND?: VisitWhereInput | VisitWhereInput[]
     OR?: VisitWhereInput[]
     NOT?: VisitWhereInput | VisitWhereInput[]
-    pid?: StringFilter<"Visit"> | string
-    isClinicalCollected?: BoolNullableFilter<"Visit"> | boolean | null
-    isDataCollected?: BoolNullableFilter<"Visit"> | boolean | null
+    patient_id?: StringFilter<"Visit"> | string
+    visitDate?: StringFilter<"Visit"> | string
     visitNotes?: StringNullableFilter<"Visit"> | string | null
+    visitType?: StringFilter<"Visit"> | string
     encounterfhirid?: StringNullableFilter<"Visit"> | string | null
-    createdAt?: DateTimeFilter<"Visit"> | Date | string
-    clinics?: XOR<ClinicNullableScalarRelationFilter, ClinicWhereInput> | null
+    server_createdAt?: DateTimeFilter<"Visit"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Visit"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
-  }, "vid">
+  }, "id">
 
   export type VisitOrderByWithAggregationInput = {
-    vid?: SortOrder
-    pid?: SortOrder
-    isClinicalCollected?: SortOrderInput | SortOrder
-    isDataCollected?: SortOrderInput | SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
+    visitDate?: SortOrder
     visitNotes?: SortOrderInput | SortOrder
+    visitType?: SortOrder
     encounterfhirid?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
     _count?: VisitCountOrderByAggregateInput
     _max?: VisitMaxOrderByAggregateInput
     _min?: VisitMinOrderByAggregateInput
@@ -5988,48 +7395,127 @@ export namespace Prisma {
     AND?: VisitScalarWhereWithAggregatesInput | VisitScalarWhereWithAggregatesInput[]
     OR?: VisitScalarWhereWithAggregatesInput[]
     NOT?: VisitScalarWhereWithAggregatesInput | VisitScalarWhereWithAggregatesInput[]
-    vid?: StringWithAggregatesFilter<"Visit"> | string
-    pid?: StringWithAggregatesFilter<"Visit"> | string
-    isClinicalCollected?: BoolNullableWithAggregatesFilter<"Visit"> | boolean | null
-    isDataCollected?: BoolNullableWithAggregatesFilter<"Visit"> | boolean | null
+    id?: StringWithAggregatesFilter<"Visit"> | string
+    patient_id?: StringWithAggregatesFilter<"Visit"> | string
+    visitDate?: StringWithAggregatesFilter<"Visit"> | string
     visitNotes?: StringNullableWithAggregatesFilter<"Visit"> | string | null
+    visitType?: StringWithAggregatesFilter<"Visit"> | string
     encounterfhirid?: StringNullableWithAggregatesFilter<"Visit"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Visit"> | Date | string
+    server_createdAt?: DateTimeWithAggregatesFilter<"Visit"> | Date | string
+    server_updatedAt?: DateTimeWithAggregatesFilter<"Visit"> | Date | string
+    server_deletedAt?: DateTimeNullableWithAggregatesFilter<"Visit"> | Date | string | null
+  }
+
+  export type IntervalWhereInput = {
+    AND?: IntervalWhereInput | IntervalWhereInput[]
+    OR?: IntervalWhereInput[]
+    NOT?: IntervalWhereInput | IntervalWhereInput[]
+    id?: StringFilter<"Interval"> | string
+    visit_id?: StringFilter<"Interval"> | string
+    intervalType?: StringFilter<"Interval"> | string
+    interval_tag?: IntFilter<"Interval"> | number
+    configuration?: StringFilter<"Interval"> | string
+    frequencies?: StringFilter<"Interval"> | string
+    dataPoints?: StringFilter<"Interval"> | string
+    server_createdAt?: DateTimeFilter<"Interval"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Interval"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Interval"> | Date | string | null
+  }
+
+  export type IntervalOrderByWithRelationInput = {
+    id?: SortOrder
+    visit_id?: SortOrder
+    intervalType?: SortOrder
+    interval_tag?: SortOrder
+    configuration?: SortOrder
+    frequencies?: SortOrder
+    dataPoints?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
+  }
+
+  export type IntervalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IntervalWhereInput | IntervalWhereInput[]
+    OR?: IntervalWhereInput[]
+    NOT?: IntervalWhereInput | IntervalWhereInput[]
+    visit_id?: StringFilter<"Interval"> | string
+    intervalType?: StringFilter<"Interval"> | string
+    interval_tag?: IntFilter<"Interval"> | number
+    configuration?: StringFilter<"Interval"> | string
+    frequencies?: StringFilter<"Interval"> | string
+    dataPoints?: StringFilter<"Interval"> | string
+    server_createdAt?: DateTimeFilter<"Interval"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Interval"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Interval"> | Date | string | null
+  }, "id">
+
+  export type IntervalOrderByWithAggregationInput = {
+    id?: SortOrder
+    visit_id?: SortOrder
+    intervalType?: SortOrder
+    interval_tag?: SortOrder
+    configuration?: SortOrder
+    frequencies?: SortOrder
+    dataPoints?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
+    _count?: IntervalCountOrderByAggregateInput
+    _avg?: IntervalAvgOrderByAggregateInput
+    _max?: IntervalMaxOrderByAggregateInput
+    _min?: IntervalMinOrderByAggregateInput
+    _sum?: IntervalSumOrderByAggregateInput
+  }
+
+  export type IntervalScalarWhereWithAggregatesInput = {
+    AND?: IntervalScalarWhereWithAggregatesInput | IntervalScalarWhereWithAggregatesInput[]
+    OR?: IntervalScalarWhereWithAggregatesInput[]
+    NOT?: IntervalScalarWhereWithAggregatesInput | IntervalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Interval"> | string
+    visit_id?: StringWithAggregatesFilter<"Interval"> | string
+    intervalType?: StringWithAggregatesFilter<"Interval"> | string
+    interval_tag?: IntWithAggregatesFilter<"Interval"> | number
+    configuration?: StringWithAggregatesFilter<"Interval"> | string
+    frequencies?: StringWithAggregatesFilter<"Interval"> | string
+    dataPoints?: StringWithAggregatesFilter<"Interval"> | string
+    server_createdAt?: DateTimeWithAggregatesFilter<"Interval"> | Date | string
+    server_updatedAt?: DateTimeWithAggregatesFilter<"Interval"> | Date | string
+    server_deletedAt?: DateTimeNullableWithAggregatesFilter<"Interval"> | Date | string | null
   }
 
   export type ClinicWhereInput = {
     AND?: ClinicWhereInput | ClinicWhereInput[]
     OR?: ClinicWhereInput[]
     NOT?: ClinicWhereInput | ClinicWhereInput[]
-    cid?: StringFilter<"Clinic"> | string
-    vid?: StringFilter<"Clinic"> | string
-    pid?: StringNullableFilter<"Clinic"> | string | null
+    id?: StringFilter<"Clinic"> | string
+    patient_id?: StringNullableFilter<"Clinic"> | string | null
     bloodGroup?: StringFilter<"Clinic"> | string
     antigenStatus?: StringFilter<"Clinic"> | string
     systolic?: IntFilter<"Clinic"> | number
     diastolic?: IntFilter<"Clinic"> | number
-    temperature?: IntFilter<"Clinic"> | number
+    temperature?: FloatFilter<"Clinic"> | number
     smokingType?: StringFilter<"Clinic"> | string
     overAllYearOfSmoking?: IntFilter<"Clinic"> | number
     dailyConsumption?: IntFilter<"Clinic"> | number
     smokingIndex?: IntFilter<"Clinic"> | number
     alcoholFreeDays?: IntFilter<"Clinic"> | number
-    alcoholType?: IntFilter<"Clinic"> | number
+    alcoholType?: StringFilter<"Clinic"> | string
     alcoholConsumption?: IntFilter<"Clinic"> | number
     homoglobin?: IntFilter<"Clinic"> | number
     recentHealthIssue?: StringFilter<"Clinic"> | string
     hereditaryHistory?: StringFilter<"Clinic"> | string
-    height?: IntFilter<"Clinic"> | number
-    weight?: IntFilter<"Clinic"> | number
     observationfhirid?: StringNullableFilter<"Clinic"> | string | null
-    createdAt?: DateTimeFilter<"Clinic"> | Date | string
-    visit?: XOR<VisitScalarRelationFilter, VisitWhereInput>
+    server_createdAt?: DateTimeFilter<"Clinic"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Clinic"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Clinic"> | Date | string | null
+    patient?: XOR<PatientNullableScalarRelationFilter, PatientWhereInput> | null
   }
 
   export type ClinicOrderByWithRelationInput = {
-    cid?: SortOrder
-    vid?: SortOrder
-    pid?: SortOrderInput | SortOrder
+    id?: SortOrder
+    patient_id?: SortOrderInput | SortOrder
     bloodGroup?: SortOrder
     antigenStatus?: SortOrder
     systolic?: SortOrder
@@ -6045,46 +7531,44 @@ export namespace Prisma {
     homoglobin?: SortOrder
     recentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
     observationfhirid?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    visit?: VisitOrderByWithRelationInput
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
+    patient?: PatientOrderByWithRelationInput
   }
 
   export type ClinicWhereUniqueInput = Prisma.AtLeast<{
-    cid?: string
-    vid?: string
+    id?: string
+    patient_id?: string
     AND?: ClinicWhereInput | ClinicWhereInput[]
     OR?: ClinicWhereInput[]
     NOT?: ClinicWhereInput | ClinicWhereInput[]
-    pid?: StringNullableFilter<"Clinic"> | string | null
     bloodGroup?: StringFilter<"Clinic"> | string
     antigenStatus?: StringFilter<"Clinic"> | string
     systolic?: IntFilter<"Clinic"> | number
     diastolic?: IntFilter<"Clinic"> | number
-    temperature?: IntFilter<"Clinic"> | number
+    temperature?: FloatFilter<"Clinic"> | number
     smokingType?: StringFilter<"Clinic"> | string
     overAllYearOfSmoking?: IntFilter<"Clinic"> | number
     dailyConsumption?: IntFilter<"Clinic"> | number
     smokingIndex?: IntFilter<"Clinic"> | number
     alcoholFreeDays?: IntFilter<"Clinic"> | number
-    alcoholType?: IntFilter<"Clinic"> | number
+    alcoholType?: StringFilter<"Clinic"> | string
     alcoholConsumption?: IntFilter<"Clinic"> | number
     homoglobin?: IntFilter<"Clinic"> | number
     recentHealthIssue?: StringFilter<"Clinic"> | string
     hereditaryHistory?: StringFilter<"Clinic"> | string
-    height?: IntFilter<"Clinic"> | number
-    weight?: IntFilter<"Clinic"> | number
     observationfhirid?: StringNullableFilter<"Clinic"> | string | null
-    createdAt?: DateTimeFilter<"Clinic"> | Date | string
-    visit?: XOR<VisitScalarRelationFilter, VisitWhereInput>
-  }, "cid" | "vid">
+    server_createdAt?: DateTimeFilter<"Clinic"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Clinic"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Clinic"> | Date | string | null
+    patient?: XOR<PatientNullableScalarRelationFilter, PatientWhereInput> | null
+  }, "id" | "id" | "patient_id">
 
   export type ClinicOrderByWithAggregationInput = {
-    cid?: SortOrder
-    vid?: SortOrder
-    pid?: SortOrderInput | SortOrder
+    id?: SortOrder
+    patient_id?: SortOrderInput | SortOrder
     bloodGroup?: SortOrder
     antigenStatus?: SortOrder
     systolic?: SortOrder
@@ -6100,10 +7584,10 @@ export namespace Prisma {
     homoglobin?: SortOrder
     recentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
     observationfhirid?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrderInput | SortOrder
     _count?: ClinicCountOrderByAggregateInput
     _avg?: ClinicAvgOrderByAggregateInput
     _max?: ClinicMaxOrderByAggregateInput
@@ -6115,222 +7599,381 @@ export namespace Prisma {
     AND?: ClinicScalarWhereWithAggregatesInput | ClinicScalarWhereWithAggregatesInput[]
     OR?: ClinicScalarWhereWithAggregatesInput[]
     NOT?: ClinicScalarWhereWithAggregatesInput | ClinicScalarWhereWithAggregatesInput[]
-    cid?: StringWithAggregatesFilter<"Clinic"> | string
-    vid?: StringWithAggregatesFilter<"Clinic"> | string
-    pid?: StringNullableWithAggregatesFilter<"Clinic"> | string | null
+    id?: StringWithAggregatesFilter<"Clinic"> | string
+    patient_id?: StringNullableWithAggregatesFilter<"Clinic"> | string | null
     bloodGroup?: StringWithAggregatesFilter<"Clinic"> | string
     antigenStatus?: StringWithAggregatesFilter<"Clinic"> | string
     systolic?: IntWithAggregatesFilter<"Clinic"> | number
     diastolic?: IntWithAggregatesFilter<"Clinic"> | number
-    temperature?: IntWithAggregatesFilter<"Clinic"> | number
+    temperature?: FloatWithAggregatesFilter<"Clinic"> | number
     smokingType?: StringWithAggregatesFilter<"Clinic"> | string
     overAllYearOfSmoking?: IntWithAggregatesFilter<"Clinic"> | number
     dailyConsumption?: IntWithAggregatesFilter<"Clinic"> | number
     smokingIndex?: IntWithAggregatesFilter<"Clinic"> | number
     alcoholFreeDays?: IntWithAggregatesFilter<"Clinic"> | number
-    alcoholType?: IntWithAggregatesFilter<"Clinic"> | number
+    alcoholType?: StringWithAggregatesFilter<"Clinic"> | string
     alcoholConsumption?: IntWithAggregatesFilter<"Clinic"> | number
     homoglobin?: IntWithAggregatesFilter<"Clinic"> | number
     recentHealthIssue?: StringWithAggregatesFilter<"Clinic"> | string
     hereditaryHistory?: StringWithAggregatesFilter<"Clinic"> | string
-    height?: IntWithAggregatesFilter<"Clinic"> | number
-    weight?: IntWithAggregatesFilter<"Clinic"> | number
     observationfhirid?: StringNullableWithAggregatesFilter<"Clinic"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Clinic"> | Date | string
+    server_createdAt?: DateTimeWithAggregatesFilter<"Clinic"> | Date | string
+    server_updatedAt?: DateTimeWithAggregatesFilter<"Clinic"> | Date | string
+    server_deletedAt?: DateTimeNullableWithAggregatesFilter<"Clinic"> | Date | string | null
   }
 
   export type primeUserCreateInput = {
+    id?: string
     email: string
     password: string
   }
 
   export type primeUserUncheckedCreateInput = {
+    id?: string
     email: string
     password: string
   }
 
   export type primeUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type primeUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type primeUserCreateManyInput = {
+    id?: string
     email: string
     password: string
   }
 
   export type primeUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type primeUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type PatientCreateInput = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date | string
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId?: string | null
     abhaId?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
     visits?: VisitCreateNestedManyWithoutPatientInput
+    clinic?: ClinicCreateNestedOneWithoutPatientInput
   }
 
   export type PatientUncheckedCreateInput = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date | string
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId?: string | null
     abhaId?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
     visits?: VisitUncheckedCreateNestedManyWithoutPatientInput
+    clinic?: ClinicUncheckedCreateNestedOneWithoutPatientInput
   }
 
   export type PatientUpdateInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     visits?: VisitUpdateManyWithoutPatientNestedInput
+    clinic?: ClinicUpdateOneWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     visits?: VisitUncheckedUpdateManyWithoutPatientNestedInput
+    clinic?: ClinicUncheckedUpdateOneWithoutPatientNestedInput
   }
 
   export type PatientCreateManyInput = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date | string
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId?: string | null
     abhaId?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type PatientUpdateManyMutationInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PatientUncheckedUpdateManyInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VisitCreateInput = {
-    vid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
-    clinics?: ClinicCreateNestedOneWithoutVisitInput
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
     patient: PatientCreateNestedOneWithoutVisitsInput
   }
 
   export type VisitUncheckedCreateInput = {
-    vid: string
-    pid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    patient_id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
-    clinics?: ClinicUncheckedCreateNestedOneWithoutVisitInput
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type VisitUpdateInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clinics?: ClinicUpdateOneWithoutVisitNestedInput
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     patient?: PatientUpdateOneRequiredWithoutVisitsNestedInput
   }
 
   export type VisitUncheckedUpdateInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    pid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    patient_id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clinics?: ClinicUncheckedUpdateOneWithoutVisitNestedInput
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VisitCreateManyInput = {
-    vid: string
-    pid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    patient_id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type VisitUpdateManyMutationInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VisitUncheckedUpdateManyInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    pid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    patient_id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IntervalCreateInput = {
+    id: string
+    visit_id: string
+    intervalType: string
+    interval_tag: number
+    configuration: string
+    frequencies: string
+    dataPoints: string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+  }
+
+  export type IntervalUncheckedCreateInput = {
+    id: string
+    visit_id: string
+    intervalType: string
+    interval_tag: number
+    configuration: string
+    frequencies: string
+    dataPoints: string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+  }
+
+  export type IntervalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visit_id?: StringFieldUpdateOperationsInput | string
+    intervalType?: StringFieldUpdateOperationsInput | string
+    interval_tag?: IntFieldUpdateOperationsInput | number
+    configuration?: StringFieldUpdateOperationsInput | string
+    frequencies?: StringFieldUpdateOperationsInput | string
+    dataPoints?: StringFieldUpdateOperationsInput | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IntervalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visit_id?: StringFieldUpdateOperationsInput | string
+    intervalType?: StringFieldUpdateOperationsInput | string
+    interval_tag?: IntFieldUpdateOperationsInput | number
+    configuration?: StringFieldUpdateOperationsInput | string
+    frequencies?: StringFieldUpdateOperationsInput | string
+    dataPoints?: StringFieldUpdateOperationsInput | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IntervalCreateManyInput = {
+    id: string
+    visit_id: string
+    intervalType: string
+    interval_tag: number
+    configuration: string
+    frequencies: string
+    dataPoints: string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+  }
+
+  export type IntervalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visit_id?: StringFieldUpdateOperationsInput | string
+    intervalType?: StringFieldUpdateOperationsInput | string
+    interval_tag?: IntFieldUpdateOperationsInput | number
+    configuration?: StringFieldUpdateOperationsInput | string
+    frequencies?: StringFieldUpdateOperationsInput | string
+    dataPoints?: StringFieldUpdateOperationsInput | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IntervalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    visit_id?: StringFieldUpdateOperationsInput | string
+    intervalType?: StringFieldUpdateOperationsInput | string
+    interval_tag?: IntFieldUpdateOperationsInput | number
+    configuration?: StringFieldUpdateOperationsInput | string
+    frequencies?: StringFieldUpdateOperationsInput | string
+    dataPoints?: StringFieldUpdateOperationsInput | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClinicCreateInput = {
-    cid: string
-    pid?: string | null
+    id: string
     bloodGroup: string
     antigenStatus: string
     systolic: number
@@ -6341,22 +7984,21 @@ export namespace Prisma {
     dailyConsumption: number
     smokingIndex: number
     alcoholFreeDays: number
-    alcoholType: number
+    alcoholType: string
     alcoholConsumption: number
     homoglobin: number
     recentHealthIssue: string
     hereditaryHistory: string
-    height: number
-    weight: number
     observationfhirid?: string | null
-    createdAt: Date | string
-    visit: VisitCreateNestedOneWithoutClinicsInput
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+    patient?: PatientCreateNestedOneWithoutClinicInput
   }
 
   export type ClinicUncheckedCreateInput = {
-    cid: string
-    vid: string
-    pid?: string | null
+    id: string
+    patient_id?: string | null
     bloodGroup: string
     antigenStatus: string
     systolic: number
@@ -6367,71 +8009,68 @@ export namespace Prisma {
     dailyConsumption: number
     smokingIndex: number
     alcoholFreeDays: number
-    alcoholType: number
+    alcoholType: string
     alcoholConsumption: number
     homoglobin: number
     recentHealthIssue: string
     hereditaryHistory: string
-    height: number
-    weight: number
     observationfhirid?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type ClinicUpdateInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
     bloodGroup?: StringFieldUpdateOperationsInput | string
     antigenStatus?: StringFieldUpdateOperationsInput | string
     systolic?: IntFieldUpdateOperationsInput | number
     diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
     smokingType?: StringFieldUpdateOperationsInput | string
     overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
     dailyConsumption?: IntFieldUpdateOperationsInput | number
     smokingIndex?: IntFieldUpdateOperationsInput | number
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
     homoglobin?: IntFieldUpdateOperationsInput | number
     recentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    visit?: VisitUpdateOneRequiredWithoutClinicsNestedInput
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    patient?: PatientUpdateOneWithoutClinicNestedInput
   }
 
   export type ClinicUncheckedUpdateInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    vid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    patient_id?: NullableStringFieldUpdateOperationsInput | string | null
     bloodGroup?: StringFieldUpdateOperationsInput | string
     antigenStatus?: StringFieldUpdateOperationsInput | string
     systolic?: IntFieldUpdateOperationsInput | number
     diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
     smokingType?: StringFieldUpdateOperationsInput | string
     overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
     dailyConsumption?: IntFieldUpdateOperationsInput | number
     smokingIndex?: IntFieldUpdateOperationsInput | number
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
     homoglobin?: IntFieldUpdateOperationsInput | number
     recentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClinicCreateManyInput = {
-    cid: string
-    vid: string
-    pid?: string | null
+    id: string
+    patient_id?: string | null
     bloodGroup: string
     antigenStatus: string
     systolic: number
@@ -6442,64 +8081,62 @@ export namespace Prisma {
     dailyConsumption: number
     smokingIndex: number
     alcoholFreeDays: number
-    alcoholType: number
+    alcoholType: string
     alcoholConsumption: number
     homoglobin: number
     recentHealthIssue: string
     hereditaryHistory: string
-    height: number
-    weight: number
     observationfhirid?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type ClinicUpdateManyMutationInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
     bloodGroup?: StringFieldUpdateOperationsInput | string
     antigenStatus?: StringFieldUpdateOperationsInput | string
     systolic?: IntFieldUpdateOperationsInput | number
     diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
     smokingType?: StringFieldUpdateOperationsInput | string
     overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
     dailyConsumption?: IntFieldUpdateOperationsInput | number
     smokingIndex?: IntFieldUpdateOperationsInput | number
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
     homoglobin?: IntFieldUpdateOperationsInput | number
     recentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClinicUncheckedUpdateManyInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    vid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    patient_id?: NullableStringFieldUpdateOperationsInput | string | null
     bloodGroup?: StringFieldUpdateOperationsInput | string
     antigenStatus?: StringFieldUpdateOperationsInput | string
     systolic?: IntFieldUpdateOperationsInput | number
     diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
     smokingType?: StringFieldUpdateOperationsInput | string
     overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
     dailyConsumption?: IntFieldUpdateOperationsInput | number
     smokingIndex?: IntFieldUpdateOperationsInput | number
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
     homoglobin?: IntFieldUpdateOperationsInput | number
     recentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6518,16 +8155,19 @@ export namespace Prisma {
   }
 
   export type primeUserCountOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     password?: SortOrder
   }
 
   export type primeUserMaxOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     password?: SortOrder
   }
 
   export type primeUserMinOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     password?: SortOrder
   }
@@ -6561,6 +8201,28 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6576,10 +8238,26 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type VisitListRelationFilter = {
     every?: VisitWhereInput
     some?: VisitWhereInput
     none?: VisitWhereInput
+  }
+
+  export type ClinicNullableScalarRelationFilter = {
+    is?: ClinicWhereInput | null
+    isNot?: ClinicWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -6592,36 +8270,69 @@ export namespace Prisma {
   }
 
   export type PatientCountOrderByAggregateInput = {
-    pid?: SortOrder
-    name?: SortOrder
-    contactInformation?: SortOrder
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    dateOfBirth?: SortOrder
     BirthDay?: SortOrder
+    contactInformation?: SortOrder
+    age?: SortOrder
     gender?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
     fhirId?: SortOrder
     abhaId?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
+  }
+
+  export type PatientAvgOrderByAggregateInput = {
+    age?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
   }
 
   export type PatientMaxOrderByAggregateInput = {
-    pid?: SortOrder
-    name?: SortOrder
-    contactInformation?: SortOrder
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    dateOfBirth?: SortOrder
     BirthDay?: SortOrder
+    contactInformation?: SortOrder
+    age?: SortOrder
     gender?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
     fhirId?: SortOrder
     abhaId?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type PatientMinOrderByAggregateInput = {
-    pid?: SortOrder
-    name?: SortOrder
-    contactInformation?: SortOrder
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    dateOfBirth?: SortOrder
     BirthDay?: SortOrder
+    contactInformation?: SortOrder
+    age?: SortOrder
     gender?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
     fhirId?: SortOrder
     abhaId?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
+  }
+
+  export type PatientSumOrderByAggregateInput = {
+    age?: SortOrder
+    height?: SortOrder
+    weight?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6636,6 +8347,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6656,14 +8399,18 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type ClinicNullableScalarRelationFilter = {
-    is?: ClinicWhereInput | null
-    isNot?: ClinicWhereInput | null
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type PatientScalarRelationFilter = {
@@ -6672,63 +8419,96 @@ export namespace Prisma {
   }
 
   export type VisitCountOrderByAggregateInput = {
-    vid?: SortOrder
-    pid?: SortOrder
-    isClinicalCollected?: SortOrder
-    isDataCollected?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
+    visitDate?: SortOrder
     visitNotes?: SortOrder
+    visitType?: SortOrder
     encounterfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type VisitMaxOrderByAggregateInput = {
-    vid?: SortOrder
-    pid?: SortOrder
-    isClinicalCollected?: SortOrder
-    isDataCollected?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
+    visitDate?: SortOrder
     visitNotes?: SortOrder
+    visitType?: SortOrder
     encounterfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type VisitMinOrderByAggregateInput = {
-    vid?: SortOrder
-    pid?: SortOrder
-    isClinicalCollected?: SortOrder
-    isDataCollected?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
+    visitDate?: SortOrder
     visitNotes?: SortOrder
+    visitType?: SortOrder
     encounterfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+  export type IntervalCountOrderByAggregateInput = {
+    id?: SortOrder
+    visit_id?: SortOrder
+    intervalType?: SortOrder
+    interval_tag?: SortOrder
+    configuration?: SortOrder
+    frequencies?: SortOrder
+    dataPoints?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type IntervalAvgOrderByAggregateInput = {
+    interval_tag?: SortOrder
   }
 
-  export type VisitScalarRelationFilter = {
-    is?: VisitWhereInput
-    isNot?: VisitWhereInput
+  export type IntervalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    visit_id?: SortOrder
+    intervalType?: SortOrder
+    interval_tag?: SortOrder
+    configuration?: SortOrder
+    frequencies?: SortOrder
+    dataPoints?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
+  }
+
+  export type IntervalMinOrderByAggregateInput = {
+    id?: SortOrder
+    visit_id?: SortOrder
+    intervalType?: SortOrder
+    interval_tag?: SortOrder
+    configuration?: SortOrder
+    frequencies?: SortOrder
+    dataPoints?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
+  }
+
+  export type IntervalSumOrderByAggregateInput = {
+    interval_tag?: SortOrder
+  }
+
+  export type PatientNullableScalarRelationFilter = {
+    is?: PatientWhereInput | null
+    isNot?: PatientWhereInput | null
   }
 
   export type ClinicCountOrderByAggregateInput = {
-    cid?: SortOrder
-    vid?: SortOrder
-    pid?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
     bloodGroup?: SortOrder
     antigenStatus?: SortOrder
     systolic?: SortOrder
@@ -6744,10 +8524,10 @@ export namespace Prisma {
     homoglobin?: SortOrder
     recentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
     observationfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type ClinicAvgOrderByAggregateInput = {
@@ -6758,17 +8538,13 @@ export namespace Prisma {
     dailyConsumption?: SortOrder
     smokingIndex?: SortOrder
     alcoholFreeDays?: SortOrder
-    alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
     homoglobin?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
   }
 
   export type ClinicMaxOrderByAggregateInput = {
-    cid?: SortOrder
-    vid?: SortOrder
-    pid?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
     bloodGroup?: SortOrder
     antigenStatus?: SortOrder
     systolic?: SortOrder
@@ -6784,16 +8560,15 @@ export namespace Prisma {
     homoglobin?: SortOrder
     recentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
     observationfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type ClinicMinOrderByAggregateInput = {
-    cid?: SortOrder
-    vid?: SortOrder
-    pid?: SortOrder
+    id?: SortOrder
+    patient_id?: SortOrder
     bloodGroup?: SortOrder
     antigenStatus?: SortOrder
     systolic?: SortOrder
@@ -6809,10 +8584,10 @@ export namespace Prisma {
     homoglobin?: SortOrder
     recentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
     observationfhirid?: SortOrder
-    createdAt?: SortOrder
+    server_createdAt?: SortOrder
+    server_updatedAt?: SortOrder
+    server_deletedAt?: SortOrder
   }
 
   export type ClinicSumOrderByAggregateInput = {
@@ -6823,27 +8598,8 @@ export namespace Prisma {
     dailyConsumption?: SortOrder
     smokingIndex?: SortOrder
     alcoholFreeDays?: SortOrder
-    alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
     homoglobin?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6857,6 +8613,12 @@ export namespace Prisma {
     connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
   }
 
+  export type ClinicCreateNestedOneWithoutPatientInput = {
+    create?: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
+    connectOrCreate?: ClinicCreateOrConnectWithoutPatientInput
+    connect?: ClinicWhereUniqueInput
+  }
+
   export type VisitUncheckedCreateNestedManyWithoutPatientInput = {
     create?: XOR<VisitCreateWithoutPatientInput, VisitUncheckedCreateWithoutPatientInput> | VisitCreateWithoutPatientInput[] | VisitUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: VisitCreateOrConnectWithoutPatientInput | VisitCreateOrConnectWithoutPatientInput[]
@@ -6864,12 +8626,38 @@ export namespace Prisma {
     connect?: VisitWhereUniqueInput | VisitWhereUniqueInput[]
   }
 
+  export type ClinicUncheckedCreateNestedOneWithoutPatientInput = {
+    create?: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
+    connectOrCreate?: ClinicCreateOrConnectWithoutPatientInput
+    connect?: ClinicWhereUniqueInput
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type VisitUpdateManyWithoutPatientNestedInput = {
@@ -6886,6 +8674,16 @@ export namespace Prisma {
     deleteMany?: VisitScalarWhereInput | VisitScalarWhereInput[]
   }
 
+  export type ClinicUpdateOneWithoutPatientNestedInput = {
+    create?: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
+    connectOrCreate?: ClinicCreateOrConnectWithoutPatientInput
+    upsert?: ClinicUpsertWithoutPatientInput
+    disconnect?: ClinicWhereInput | boolean
+    delete?: ClinicWhereInput | boolean
+    connect?: ClinicWhereUniqueInput
+    update?: XOR<XOR<ClinicUpdateToOneWithWhereWithoutPatientInput, ClinicUpdateWithoutPatientInput>, ClinicUncheckedUpdateWithoutPatientInput>
+  }
+
   export type VisitUncheckedUpdateManyWithoutPatientNestedInput = {
     create?: XOR<VisitCreateWithoutPatientInput, VisitUncheckedCreateWithoutPatientInput> | VisitCreateWithoutPatientInput[] | VisitUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: VisitCreateOrConnectWithoutPatientInput | VisitCreateOrConnectWithoutPatientInput[]
@@ -6900,36 +8698,20 @@ export namespace Prisma {
     deleteMany?: VisitScalarWhereInput | VisitScalarWhereInput[]
   }
 
-  export type ClinicCreateNestedOneWithoutVisitInput = {
-    create?: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
-    connectOrCreate?: ClinicCreateOrConnectWithoutVisitInput
+  export type ClinicUncheckedUpdateOneWithoutPatientNestedInput = {
+    create?: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
+    connectOrCreate?: ClinicCreateOrConnectWithoutPatientInput
+    upsert?: ClinicUpsertWithoutPatientInput
+    disconnect?: ClinicWhereInput | boolean
+    delete?: ClinicWhereInput | boolean
     connect?: ClinicWhereUniqueInput
+    update?: XOR<XOR<ClinicUpdateToOneWithWhereWithoutPatientInput, ClinicUpdateWithoutPatientInput>, ClinicUncheckedUpdateWithoutPatientInput>
   }
 
   export type PatientCreateNestedOneWithoutVisitsInput = {
     create?: XOR<PatientCreateWithoutVisitsInput, PatientUncheckedCreateWithoutVisitsInput>
     connectOrCreate?: PatientCreateOrConnectWithoutVisitsInput
     connect?: PatientWhereUniqueInput
-  }
-
-  export type ClinicUncheckedCreateNestedOneWithoutVisitInput = {
-    create?: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
-    connectOrCreate?: ClinicCreateOrConnectWithoutVisitInput
-    connect?: ClinicWhereUniqueInput
-  }
-
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
-  }
-
-  export type ClinicUpdateOneWithoutVisitNestedInput = {
-    create?: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
-    connectOrCreate?: ClinicCreateOrConnectWithoutVisitInput
-    upsert?: ClinicUpsertWithoutVisitInput
-    disconnect?: ClinicWhereInput | boolean
-    delete?: ClinicWhereInput | boolean
-    connect?: ClinicWhereUniqueInput
-    update?: XOR<XOR<ClinicUpdateToOneWithWhereWithoutVisitInput, ClinicUpdateWithoutVisitInput>, ClinicUncheckedUpdateWithoutVisitInput>
   }
 
   export type PatientUpdateOneRequiredWithoutVisitsNestedInput = {
@@ -6940,36 +8722,20 @@ export namespace Prisma {
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutVisitsInput, PatientUpdateWithoutVisitsInput>, PatientUncheckedUpdateWithoutVisitsInput>
   }
 
-  export type ClinicUncheckedUpdateOneWithoutVisitNestedInput = {
-    create?: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
-    connectOrCreate?: ClinicCreateOrConnectWithoutVisitInput
-    upsert?: ClinicUpsertWithoutVisitInput
-    disconnect?: ClinicWhereInput | boolean
-    delete?: ClinicWhereInput | boolean
-    connect?: ClinicWhereUniqueInput
-    update?: XOR<XOR<ClinicUpdateToOneWithWhereWithoutVisitInput, ClinicUpdateWithoutVisitInput>, ClinicUncheckedUpdateWithoutVisitInput>
+  export type PatientCreateNestedOneWithoutClinicInput = {
+    create?: XOR<PatientCreateWithoutClinicInput, PatientUncheckedCreateWithoutClinicInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutClinicInput
+    connect?: PatientWhereUniqueInput
   }
 
-  export type VisitCreateNestedOneWithoutClinicsInput = {
-    create?: XOR<VisitCreateWithoutClinicsInput, VisitUncheckedCreateWithoutClinicsInput>
-    connectOrCreate?: VisitCreateOrConnectWithoutClinicsInput
-    connect?: VisitWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type VisitUpdateOneRequiredWithoutClinicsNestedInput = {
-    create?: XOR<VisitCreateWithoutClinicsInput, VisitUncheckedCreateWithoutClinicsInput>
-    connectOrCreate?: VisitCreateOrConnectWithoutClinicsInput
-    upsert?: VisitUpsertWithoutClinicsInput
-    connect?: VisitWhereUniqueInput
-    update?: XOR<XOR<VisitUpdateToOneWithWhereWithoutClinicsInput, VisitUpdateWithoutClinicsInput>, VisitUncheckedUpdateWithoutClinicsInput>
+  export type PatientUpdateOneWithoutClinicNestedInput = {
+    create?: XOR<PatientCreateWithoutClinicInput, PatientUncheckedCreateWithoutClinicInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutClinicInput
+    upsert?: PatientUpsertWithoutClinicInput
+    disconnect?: PatientWhereInput | boolean
+    delete?: PatientWhereInput | boolean
+    connect?: PatientWhereUniqueInput
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutClinicInput, PatientUpdateWithoutClinicInput>, PatientUncheckedUpdateWithoutClinicInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7025,6 +8791,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -7039,6 +8816,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7051,6 +8839,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7081,64 +8901,40 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type VisitCreateWithoutPatientInput = {
-    vid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
-    clinics?: ClinicCreateNestedOneWithoutVisitInput
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type VisitUncheckedCreateWithoutPatientInput = {
-    vid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
-    clinics?: ClinicUncheckedCreateNestedOneWithoutVisitInput
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type VisitCreateOrConnectWithoutPatientInput = {
@@ -7149,6 +8945,57 @@ export namespace Prisma {
   export type VisitCreateManyPatientInputEnvelope = {
     data: VisitCreateManyPatientInput | VisitCreateManyPatientInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ClinicCreateWithoutPatientInput = {
+    id: string
+    bloodGroup: string
+    antigenStatus: string
+    systolic: number
+    diastolic: number
+    temperature: number
+    smokingType: string
+    overAllYearOfSmoking: number
+    dailyConsumption: number
+    smokingIndex: number
+    alcoholFreeDays: number
+    alcoholType: string
+    alcoholConsumption: number
+    homoglobin: number
+    recentHealthIssue: string
+    hereditaryHistory: string
+    observationfhirid?: string | null
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+  }
+
+  export type ClinicUncheckedCreateWithoutPatientInput = {
+    id: string
+    bloodGroup: string
+    antigenStatus: string
+    systolic: number
+    diastolic: number
+    temperature: number
+    smokingType: string
+    overAllYearOfSmoking: number
+    dailyConsumption: number
+    smokingIndex: number
+    alcoholFreeDays: number
+    alcoholType: string
+    alcoholConsumption: number
+    homoglobin: number
+    recentHealthIssue: string
+    hereditaryHistory: string
+    observationfhirid?: string | null
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+  }
+
+  export type ClinicCreateOrConnectWithoutPatientInput = {
+    where: ClinicWhereUniqueInput
+    create: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
   }
 
   export type VisitUpsertWithWhereUniqueWithoutPatientInput = {
@@ -7171,152 +9018,115 @@ export namespace Prisma {
     AND?: VisitScalarWhereInput | VisitScalarWhereInput[]
     OR?: VisitScalarWhereInput[]
     NOT?: VisitScalarWhereInput | VisitScalarWhereInput[]
-    vid?: StringFilter<"Visit"> | string
-    pid?: StringFilter<"Visit"> | string
-    isClinicalCollected?: BoolNullableFilter<"Visit"> | boolean | null
-    isDataCollected?: BoolNullableFilter<"Visit"> | boolean | null
+    id?: StringFilter<"Visit"> | string
+    patient_id?: StringFilter<"Visit"> | string
+    visitDate?: StringFilter<"Visit"> | string
     visitNotes?: StringNullableFilter<"Visit"> | string | null
+    visitType?: StringFilter<"Visit"> | string
     encounterfhirid?: StringNullableFilter<"Visit"> | string | null
-    createdAt?: DateTimeFilter<"Visit"> | Date | string
+    server_createdAt?: DateTimeFilter<"Visit"> | Date | string
+    server_updatedAt?: DateTimeFilter<"Visit"> | Date | string
+    server_deletedAt?: DateTimeNullableFilter<"Visit"> | Date | string | null
   }
 
-  export type ClinicCreateWithoutVisitInput = {
-    cid: string
-    pid?: string | null
-    bloodGroup: string
-    antigenStatus: string
-    systolic: number
-    diastolic: number
-    temperature: number
-    smokingType: string
-    overAllYearOfSmoking: number
-    dailyConsumption: number
-    smokingIndex: number
-    alcoholFreeDays: number
-    alcoholType: number
-    alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
-    hereditaryHistory: string
-    height: number
-    weight: number
-    observationfhirid?: string | null
-    createdAt: Date | string
+  export type ClinicUpsertWithoutPatientInput = {
+    update: XOR<ClinicUpdateWithoutPatientInput, ClinicUncheckedUpdateWithoutPatientInput>
+    create: XOR<ClinicCreateWithoutPatientInput, ClinicUncheckedCreateWithoutPatientInput>
+    where?: ClinicWhereInput
   }
 
-  export type ClinicUncheckedCreateWithoutVisitInput = {
-    cid: string
-    pid?: string | null
-    bloodGroup: string
-    antigenStatus: string
-    systolic: number
-    diastolic: number
-    temperature: number
-    smokingType: string
-    overAllYearOfSmoking: number
-    dailyConsumption: number
-    smokingIndex: number
-    alcoholFreeDays: number
-    alcoholType: number
-    alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
-    hereditaryHistory: string
-    height: number
-    weight: number
-    observationfhirid?: string | null
-    createdAt: Date | string
+  export type ClinicUpdateToOneWithWhereWithoutPatientInput = {
+    where?: ClinicWhereInput
+    data: XOR<ClinicUpdateWithoutPatientInput, ClinicUncheckedUpdateWithoutPatientInput>
   }
 
-  export type ClinicCreateOrConnectWithoutVisitInput = {
-    where: ClinicWhereUniqueInput
-    create: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
+  export type ClinicUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bloodGroup?: StringFieldUpdateOperationsInput | string
+    antigenStatus?: StringFieldUpdateOperationsInput | string
+    systolic?: IntFieldUpdateOperationsInput | number
+    diastolic?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
+    smokingType?: StringFieldUpdateOperationsInput | string
+    overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
+    dailyConsumption?: IntFieldUpdateOperationsInput | number
+    smokingIndex?: IntFieldUpdateOperationsInput | number
+    alcoholFreeDays?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
+    alcoholConsumption?: IntFieldUpdateOperationsInput | number
+    homoglobin?: IntFieldUpdateOperationsInput | number
+    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hereditaryHistory?: StringFieldUpdateOperationsInput | string
+    observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ClinicUncheckedUpdateWithoutPatientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bloodGroup?: StringFieldUpdateOperationsInput | string
+    antigenStatus?: StringFieldUpdateOperationsInput | string
+    systolic?: IntFieldUpdateOperationsInput | number
+    diastolic?: IntFieldUpdateOperationsInput | number
+    temperature?: FloatFieldUpdateOperationsInput | number
+    smokingType?: StringFieldUpdateOperationsInput | string
+    overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
+    dailyConsumption?: IntFieldUpdateOperationsInput | number
+    smokingIndex?: IntFieldUpdateOperationsInput | number
+    alcoholFreeDays?: IntFieldUpdateOperationsInput | number
+    alcoholType?: StringFieldUpdateOperationsInput | string
+    alcoholConsumption?: IntFieldUpdateOperationsInput | number
+    homoglobin?: IntFieldUpdateOperationsInput | number
+    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hereditaryHistory?: StringFieldUpdateOperationsInput | string
+    observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PatientCreateWithoutVisitsInput = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date | string
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId?: string | null
     abhaId?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+    clinic?: ClinicCreateNestedOneWithoutPatientInput
   }
 
   export type PatientUncheckedCreateWithoutVisitsInput = {
-    pid: string
-    name: string
-    contactInformation: string
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
     BirthDay: Date | string
+    contactInformation: string
+    age: number
     gender: string
+    height: number
+    weight: number
     fhirId?: string | null
     abhaId?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+    clinic?: ClinicUncheckedCreateNestedOneWithoutPatientInput
   }
 
   export type PatientCreateOrConnectWithoutVisitsInput = {
     where: PatientWhereUniqueInput
     create: XOR<PatientCreateWithoutVisitsInput, PatientUncheckedCreateWithoutVisitsInput>
-  }
-
-  export type ClinicUpsertWithoutVisitInput = {
-    update: XOR<ClinicUpdateWithoutVisitInput, ClinicUncheckedUpdateWithoutVisitInput>
-    create: XOR<ClinicCreateWithoutVisitInput, ClinicUncheckedCreateWithoutVisitInput>
-    where?: ClinicWhereInput
-  }
-
-  export type ClinicUpdateToOneWithWhereWithoutVisitInput = {
-    where?: ClinicWhereInput
-    data: XOR<ClinicUpdateWithoutVisitInput, ClinicUncheckedUpdateWithoutVisitInput>
-  }
-
-  export type ClinicUpdateWithoutVisitInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
-    bloodGroup?: StringFieldUpdateOperationsInput | string
-    antigenStatus?: StringFieldUpdateOperationsInput | string
-    systolic?: IntFieldUpdateOperationsInput | number
-    diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
-    smokingType?: StringFieldUpdateOperationsInput | string
-    overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
-    dailyConsumption?: IntFieldUpdateOperationsInput | number
-    smokingIndex?: IntFieldUpdateOperationsInput | number
-    alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
-    alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
-    hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
-    observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClinicUncheckedUpdateWithoutVisitInput = {
-    cid?: StringFieldUpdateOperationsInput | string
-    pid?: NullableStringFieldUpdateOperationsInput | string | null
-    bloodGroup?: StringFieldUpdateOperationsInput | string
-    antigenStatus?: StringFieldUpdateOperationsInput | string
-    systolic?: IntFieldUpdateOperationsInput | number
-    diastolic?: IntFieldUpdateOperationsInput | number
-    temperature?: IntFieldUpdateOperationsInput | number
-    smokingType?: StringFieldUpdateOperationsInput | string
-    overAllYearOfSmoking?: IntFieldUpdateOperationsInput | number
-    dailyConsumption?: IntFieldUpdateOperationsInput | number
-    smokingIndex?: IntFieldUpdateOperationsInput | number
-    alcoholFreeDays?: IntFieldUpdateOperationsInput | number
-    alcoholType?: IntFieldUpdateOperationsInput | number
-    alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
-    hereditaryHistory?: StringFieldUpdateOperationsInput | string
-    height?: IntFieldUpdateOperationsInput | number
-    weight?: IntFieldUpdateOperationsInput | number
-    observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PatientUpsertWithoutVisitsInput = {
@@ -7331,119 +9141,177 @@ export namespace Prisma {
   }
 
   export type PatientUpdateWithoutVisitsInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clinic?: ClinicUpdateOneWithoutPatientNestedInput
   }
 
   export type PatientUncheckedUpdateWithoutVisitsInput = {
-    pid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactInformation?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
     BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
     fhirId?: NullableStringFieldUpdateOperationsInput | string | null
     abhaId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    clinic?: ClinicUncheckedUpdateOneWithoutPatientNestedInput
   }
 
-  export type VisitCreateWithoutClinicsInput = {
-    vid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
-    visitNotes?: string | null
-    encounterfhirid?: string | null
-    createdAt: Date | string
-    patient: PatientCreateNestedOneWithoutVisitsInput
+  export type PatientCreateWithoutClinicInput = {
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
+    BirthDay: Date | string
+    contactInformation: string
+    age: number
+    gender: string
+    height: number
+    weight: number
+    fhirId?: string | null
+    abhaId?: string | null
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+    visits?: VisitCreateNestedManyWithoutPatientInput
   }
 
-  export type VisitUncheckedCreateWithoutClinicsInput = {
-    vid: string
-    pid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
-    visitNotes?: string | null
-    encounterfhirid?: string | null
-    createdAt: Date | string
+  export type PatientUncheckedCreateWithoutClinicInput = {
+    id: string
+    fullName: string
+    email: string
+    dateOfBirth: string
+    BirthDay: Date | string
+    contactInformation: string
+    age: number
+    gender: string
+    height: number
+    weight: number
+    fhirId?: string | null
+    abhaId?: string | null
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
+    visits?: VisitUncheckedCreateNestedManyWithoutPatientInput
   }
 
-  export type VisitCreateOrConnectWithoutClinicsInput = {
-    where: VisitWhereUniqueInput
-    create: XOR<VisitCreateWithoutClinicsInput, VisitUncheckedCreateWithoutClinicsInput>
+  export type PatientCreateOrConnectWithoutClinicInput = {
+    where: PatientWhereUniqueInput
+    create: XOR<PatientCreateWithoutClinicInput, PatientUncheckedCreateWithoutClinicInput>
   }
 
-  export type VisitUpsertWithoutClinicsInput = {
-    update: XOR<VisitUpdateWithoutClinicsInput, VisitUncheckedUpdateWithoutClinicsInput>
-    create: XOR<VisitCreateWithoutClinicsInput, VisitUncheckedCreateWithoutClinicsInput>
-    where?: VisitWhereInput
+  export type PatientUpsertWithoutClinicInput = {
+    update: XOR<PatientUpdateWithoutClinicInput, PatientUncheckedUpdateWithoutClinicInput>
+    create: XOR<PatientCreateWithoutClinicInput, PatientUncheckedCreateWithoutClinicInput>
+    where?: PatientWhereInput
   }
 
-  export type VisitUpdateToOneWithWhereWithoutClinicsInput = {
-    where?: VisitWhereInput
-    data: XOR<VisitUpdateWithoutClinicsInput, VisitUncheckedUpdateWithoutClinicsInput>
+  export type PatientUpdateToOneWithWhereWithoutClinicInput = {
+    where?: PatientWhereInput
+    data: XOR<PatientUpdateWithoutClinicInput, PatientUncheckedUpdateWithoutClinicInput>
   }
 
-  export type VisitUpdateWithoutClinicsInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    patient?: PatientUpdateOneRequiredWithoutVisitsNestedInput
+  export type PatientUpdateWithoutClinicInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
+    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
+    fhirId?: NullableStringFieldUpdateOperationsInput | string | null
+    abhaId?: NullableStringFieldUpdateOperationsInput | string | null
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    visits?: VisitUpdateManyWithoutPatientNestedInput
   }
 
-  export type VisitUncheckedUpdateWithoutClinicsInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    pid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type PatientUncheckedUpdateWithoutClinicInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: StringFieldUpdateOperationsInput | string
+    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInformation?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    gender?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
+    fhirId?: NullableStringFieldUpdateOperationsInput | string | null
+    abhaId?: NullableStringFieldUpdateOperationsInput | string | null
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    visits?: VisitUncheckedUpdateManyWithoutPatientNestedInput
   }
 
   export type VisitCreateManyPatientInput = {
-    vid: string
-    isClinicalCollected?: boolean | null
-    isDataCollected?: boolean | null
+    id: string
+    visitDate: string
     visitNotes?: string | null
+    visitType: string
     encounterfhirid?: string | null
-    createdAt: Date | string
+    server_createdAt?: Date | string
+    server_updatedAt?: Date | string
+    server_deletedAt?: Date | string | null
   }
 
   export type VisitUpdateWithoutPatientInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clinics?: ClinicUpdateOneWithoutVisitNestedInput
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VisitUncheckedUpdateWithoutPatientInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clinics?: ClinicUncheckedUpdateOneWithoutVisitNestedInput
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VisitUncheckedUpdateManyWithoutPatientInput = {
-    vid?: StringFieldUpdateOperationsInput | string
-    isClinicalCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    isDataCollected?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    id?: StringFieldUpdateOperationsInput | string
+    visitDate?: StringFieldUpdateOperationsInput | string
     visitNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    visitType?: StringFieldUpdateOperationsInput | string
     encounterfhirid?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    server_deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

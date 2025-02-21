@@ -7,60 +7,92 @@ datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_DATABASE_URL")
 }
-model primeUser{
-  email            String @unique
-  password         String
+
+model primeUser {
+  id       String  @id @default(uuid()) @map("id") 
+  email    String  @unique
+  password String
 }
 
 model Patient {
-  pid                String   @id 
-  name               String
-  contactInformation String
+  id                 String   @id 
+  fullName           String
+  email              String   @unique
+  dateOfBirth        String
   BirthDay           DateTime
+  contactInformation String
+  age                Int
   gender             String
-  visits             Visit[]
+  height             Float
+  weight             Float
+  visits             Visit[]      // One-to-Many with Visit
+  clinic             Clinic?      // One-to-One with Clinic
   fhirId             String?
   abhaId             String?
-  createdAt          DateTime
+    server_createdAt DateTime        @default(now())
+  server_updatedAt DateTime        @default(now()) @updatedAt
+  server_deletedAt DateTime?
+
+  @@index([server_updatedAt])
+  @@index([server_deletedAt])
 }
 
 model Visit {
-  vid                 String       @id
-  pid                 String
-  isClinicalCollected Boolean? 
-  isDataCollected     Boolean?
-  visitNotes          String?
-  clinics             Clinic?
-  encounterfhirid     String?
-   patient             Patient      @relation(fields: [pid], references: [pid])
-  createdAt           DateTime
+  id               String  @id
+  patient_id       String
+  visitDate        String
+  visitNotes       String?
+  visitType        String
+  encounterfhirid  String?
+  patient          Patient @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
+    server_createdAt DateTime        @default(now())
+  server_updatedAt DateTime        @default(now()) @updatedAt
+  server_deletedAt DateTime?
 
+  @@index([server_updatedAt])
+  @@index([server_deletedAt])
+}
+
+model Interval {
+  id             String   @id
+  visit_id       String
+  intervalType   String
+  interval_tag   Int
+  configuration  String
+  frequencies    String
+  dataPoints     String
+   server_createdAt DateTime        @default(now())
+  server_updatedAt DateTime        @default(now()) @updatedAt
+  server_deletedAt DateTime?
+
+  @@index([server_updatedAt])
+  @@index([server_deletedAt])
 }
 
 model Clinic {
-  cid                  String   @id
-  vid              String   @unique
-  pid              String?
+  id                   String  @id @unique
+  patient_id           String? @unique // Ensures One-to-One relation
   bloodGroup           String
   antigenStatus        String
   systolic             Int
   diastolic            Int
-  temperature          Int
+  temperature          Float
   smokingType          String
   overAllYearOfSmoking Int
   dailyConsumption     Int
   smokingIndex         Int
   alcoholFreeDays      Int
-  alcoholType          Int
+  alcoholType          String
   alcoholConsumption   Int
   homoglobin           Int
   recentHealthIssue    String
   hereditaryHistory    String
-  height               Int
-  weight               Int
-  visit                Visit    @relation(fields: [vid], references: [vid])
+  patient              Patient? @relation(fields: [patient_id], references: [id]) // One-to-One with Patient
   observationfhirid    String?
-  createdAt            DateTime
+    server_createdAt DateTime        @default(now())
+  server_updatedAt DateTime        @default(now()) @updatedAt
+  server_deletedAt DateTime?
+
+  @@index([server_updatedAt])
+  @@index([server_deletedAt])
 }
-
-

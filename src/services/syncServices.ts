@@ -14,8 +14,9 @@ export class watermelonSync {
   private tables: TableSchema[]
   private readonly tableOrder = [
     'Patient',
-    'Visit',
     'Clinic',
+    'Visit',
+    'Interval',
    
   ]
 

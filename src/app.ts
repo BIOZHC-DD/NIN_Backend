@@ -1,13 +1,24 @@
 import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoute';
+import patientRoutes from './routes/patientRoute';
 import { logger } from '../src/utils/loggerUtils';
+import cookieParser from 'cookie-parser';
 
 const app = express();
+app.use(cookieParser());
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Parse JSON bodies for all routes
+
+// CORS Configuration
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // Allow frontend domain
+    credentials: true, // Allow credentials (cookies, auth headers)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+  })
+);
 
 // Logging Middleware
 app.use((req, res, next) => {
@@ -17,5 +28,5 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/auth', authRoutes);
-
-export default app; // ✅ Export app without starting it
+app.use('/', patientRoutes);
+export default app;

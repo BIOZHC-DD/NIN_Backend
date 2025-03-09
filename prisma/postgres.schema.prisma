@@ -14,39 +14,38 @@ model primeUser {
   password String
 }
 
-
 model Patient {
-  id                 String   @id 
+  id                 String    @id
   fullName           String
-  email              String   @unique
+  email              String    @unique
   dateOfBirth        String
   contactInformation String
   age                Int
   gender             String
   height             Float
   weight             Float
-  visits             Visit[]      // One-to-Many with Visit
-  clinic             Clinic?      // One-to-One with Clinic
+  visits             Visit[] // One-to-Many with Visit
+  clinic             Clinic? // One-to-One with Clinic
   fhirId             String?
   abhaId             String?
-  server_createdAt DateTime        @default(now())
-  server_updatedAt DateTime        @default(now()) @updatedAt
-  server_deletedAt DateTime?
+  server_createdAt   DateTime  @default(now())
+  server_updatedAt   DateTime  @default(now()) @updatedAt
+  server_deletedAt   DateTime?
 
   @@index([server_updatedAt])
   @@index([server_deletedAt])
 }
 
 model Visit {
-  id               String  @id
+  id               String    @id
   patient_id       String
   visitDate        String
   visitNotes       String?
   visitType        String
   encounterfhirid  String?
-  patient          Patient @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
-  server_createdAt DateTime        @default(now())
-  server_updatedAt DateTime        @default(now()) @updatedAt
+  patient          Patient   @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
+  server_createdAt DateTime  @default(now())
+  server_updatedAt DateTime  @default(now()) @updatedAt
   server_deletedAt DateTime?
 
   @@index([server_updatedAt])
@@ -54,15 +53,15 @@ model Visit {
 }
 
 model Interval {
-  id             String   @id
-  visit_id       String
-  intervalType   String
-  interval_tag   Int
-  configuration  String
-  frequencies    String
-  dataPoints     String
-  server_createdAt DateTime        @default(now())
-  server_updatedAt DateTime        @default(now()) @updatedAt
+  id               String    @id
+  visit_id         String
+  intervalType     String
+  interval_tag     Int
+  configuration    String
+  frequencies      String
+  dataPoints       String
+  server_createdAt DateTime  @default(now())
+  server_updatedAt DateTime  @default(now()) @updatedAt
   server_deletedAt DateTime?
 
   @@index([server_updatedAt])
@@ -70,8 +69,8 @@ model Interval {
 }
 
 model Clinic {
-  id                   String  @id @unique
-  patient_id           String? @unique // Ensures One-to-One relation
+  id                   String    @id @unique
+  patient_id           String?   @unique // Ensures One-to-One relation
   bloodGroup           String
   antigenStatus        String
   systolic             Int
@@ -84,14 +83,14 @@ model Clinic {
   alcoholFreeDays      Int
   alcoholType          String
   alcoholConsumption   Int
-  homoglobin           Int
-  recentHealthIssue    String
+  hemoglobin           Int
+  reacentHealthIssue   String
   hereditaryHistory    String
-  patient              Patient? @relation(fields: [patient_id], references: [id]) // One-to-One with Patient
+  patient              Patient?  @relation(fields: [patient_id], references: [id]) // One-to-One with Patient
   observationfhirid    String?
-  server_createdAt DateTime        @default(now())
-  server_updatedAt DateTime        @default(now()) @updatedAt
-  server_deletedAt DateTime?
+  server_createdAt     DateTime  @default(now())
+  server_updatedAt     DateTime  @default(now()) @updatedAt
+  server_deletedAt     DateTime?
 
   @@index([server_updatedAt])
   @@index([server_deletedAt])

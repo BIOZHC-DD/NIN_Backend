@@ -253,7 +253,7 @@ export namespace Prisma {
   export type DecimalJsLike = runtime.DecimalJsLike
 
   /**
-   * Metrics 
+   * Metrics
    */
   export type Metrics = runtime.Metrics
   export type Metric<T> = runtime.Metric<T>
@@ -271,14 +271,14 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.2.1
-   * Query Engine version: 4123509d24aa4dede1e864b46351bf2790323b69
+   * Prisma Client JS version: 6.4.1
+   * Query Engine version: a9055b89e58b4b5bfb59600785423b1db3d0e75d
    */
   export type PrismaVersion = {
     client: string
   }
 
-  export const prismaVersion: PrismaVersion 
+  export const prismaVersion: PrismaVersion
 
   /**
    * Utility Types
@@ -294,15 +294,15 @@ export namespace Prisma {
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   namespace NullTypes {
     /**
     * Type of `Prisma.DbNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class DbNull {
@@ -312,9 +312,9 @@ export namespace Prisma {
 
     /**
     * Type of `Prisma.JsonNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class JsonNull {
@@ -324,9 +324,9 @@ export namespace Prisma {
 
     /**
     * Type of `Prisma.AnyNull`.
-    * 
+    *
     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-    * 
+    *
     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
     */
     class AnyNull {
@@ -337,21 +337,21 @@ export namespace Prisma {
 
   /**
    * Helper for filtering JSON entries that have `null` on the database (empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const DbNull: NullTypes.DbNull
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const JsonNull: NullTypes.JsonNull
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const AnyNull: NullTypes.AnyNull
@@ -2124,6 +2124,10 @@ export namespace Prisma {
      * Filter which primeUsers to update
      */
     where?: primeUserWhereInput
+    /**
+     * Limit how many primeUsers to update.
+     */
+    limit?: number
   }
 
   /**
@@ -2146,6 +2150,10 @@ export namespace Prisma {
      * Filter which primeUsers to update
      */
     where?: primeUserWhereInput
+    /**
+     * Limit how many primeUsers to update.
+     */
+    limit?: number
   }
 
   /**
@@ -2200,6 +2208,10 @@ export namespace Prisma {
      * Filter which primeUsers to delete
      */
     where?: primeUserWhereInput
+    /**
+     * Limit how many primeUsers to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -3309,6 +3321,10 @@ export namespace Prisma {
      * Filter which Patients to update
      */
     where?: PatientWhereInput
+    /**
+     * Limit how many Patients to update.
+     */
+    limit?: number
   }
 
   /**
@@ -3331,6 +3347,10 @@ export namespace Prisma {
      * Filter which Patients to update
      */
     where?: PatientWhereInput
+    /**
+     * Limit how many Patients to update.
+     */
+    limit?: number
   }
 
   /**
@@ -3393,6 +3413,10 @@ export namespace Prisma {
      * Filter which Patients to delete
      */
     where?: PatientWhereInput
+    /**
+     * Limit how many Patients to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -4446,6 +4470,10 @@ export namespace Prisma {
      * Filter which Visits to update
      */
     where?: VisitWhereInput
+    /**
+     * Limit how many Visits to update.
+     */
+    limit?: number
   }
 
   /**
@@ -4468,6 +4496,10 @@ export namespace Prisma {
      * Filter which Visits to update
      */
     where?: VisitWhereInput
+    /**
+     * Limit how many Visits to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -4534,6 +4566,10 @@ export namespace Prisma {
      * Filter which Visits to delete
      */
     where?: VisitWhereInput
+    /**
+     * Limit how many Visits to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -5544,6 +5580,10 @@ export namespace Prisma {
      * Filter which Intervals to update
      */
     where?: IntervalWhereInput
+    /**
+     * Limit how many Intervals to update.
+     */
+    limit?: number
   }
 
   /**
@@ -5566,6 +5606,10 @@ export namespace Prisma {
      * Filter which Intervals to update
      */
     where?: IntervalWhereInput
+    /**
+     * Limit how many Intervals to update.
+     */
+    limit?: number
   }
 
   /**
@@ -5620,6 +5664,10 @@ export namespace Prisma {
      * Filter which Intervals to delete
      */
     where?: IntervalWhereInput
+    /**
+     * Limit how many Intervals to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -5658,7 +5706,7 @@ export namespace Prisma {
     smokingIndex: number | null
     alcoholFreeDays: number | null
     alcoholConsumption: number | null
-    homoglobin: number | null
+    hemoglobin: number | null
   }
 
   export type ClinicSumAggregateOutputType = {
@@ -5670,7 +5718,7 @@ export namespace Prisma {
     smokingIndex: number | null
     alcoholFreeDays: number | null
     alcoholConsumption: number | null
-    homoglobin: number | null
+    hemoglobin: number | null
   }
 
   export type ClinicMinAggregateOutputType = {
@@ -5688,8 +5736,8 @@ export namespace Prisma {
     alcoholFreeDays: number | null
     alcoholType: string | null
     alcoholConsumption: number | null
-    homoglobin: number | null
-    recentHealthIssue: string | null
+    hemoglobin: number | null
+    reacentHealthIssue: string | null
     hereditaryHistory: string | null
     observationfhirid: string | null
     server_createdAt: Date | null
@@ -5712,8 +5760,8 @@ export namespace Prisma {
     alcoholFreeDays: number | null
     alcoholType: string | null
     alcoholConsumption: number | null
-    homoglobin: number | null
-    recentHealthIssue: string | null
+    hemoglobin: number | null
+    reacentHealthIssue: string | null
     hereditaryHistory: string | null
     observationfhirid: string | null
     server_createdAt: Date | null
@@ -5736,8 +5784,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: number
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: number
+    hemoglobin: number
+    reacentHealthIssue: number
     hereditaryHistory: number
     observationfhirid: number
     server_createdAt: number
@@ -5756,7 +5804,7 @@ export namespace Prisma {
     smokingIndex?: true
     alcoholFreeDays?: true
     alcoholConsumption?: true
-    homoglobin?: true
+    hemoglobin?: true
   }
 
   export type ClinicSumAggregateInputType = {
@@ -5768,7 +5816,7 @@ export namespace Prisma {
     smokingIndex?: true
     alcoholFreeDays?: true
     alcoholConsumption?: true
-    homoglobin?: true
+    hemoglobin?: true
   }
 
   export type ClinicMinAggregateInputType = {
@@ -5786,8 +5834,8 @@ export namespace Prisma {
     alcoholFreeDays?: true
     alcoholType?: true
     alcoholConsumption?: true
-    homoglobin?: true
-    recentHealthIssue?: true
+    hemoglobin?: true
+    reacentHealthIssue?: true
     hereditaryHistory?: true
     observationfhirid?: true
     server_createdAt?: true
@@ -5810,8 +5858,8 @@ export namespace Prisma {
     alcoholFreeDays?: true
     alcoholType?: true
     alcoholConsumption?: true
-    homoglobin?: true
-    recentHealthIssue?: true
+    hemoglobin?: true
+    reacentHealthIssue?: true
     hereditaryHistory?: true
     observationfhirid?: true
     server_createdAt?: true
@@ -5834,8 +5882,8 @@ export namespace Prisma {
     alcoholFreeDays?: true
     alcoholType?: true
     alcoholConsumption?: true
-    homoglobin?: true
-    recentHealthIssue?: true
+    hemoglobin?: true
+    reacentHealthIssue?: true
     hereditaryHistory?: true
     observationfhirid?: true
     server_createdAt?: true
@@ -5945,8 +5993,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid: string | null
     server_createdAt: Date
@@ -5988,8 +6036,8 @@ export namespace Prisma {
     alcoholFreeDays?: boolean
     alcoholType?: boolean
     alcoholConsumption?: boolean
-    homoglobin?: boolean
-    recentHealthIssue?: boolean
+    hemoglobin?: boolean
+    reacentHealthIssue?: boolean
     hereditaryHistory?: boolean
     observationfhirid?: boolean
     server_createdAt?: boolean
@@ -6013,8 +6061,8 @@ export namespace Prisma {
     alcoholFreeDays?: boolean
     alcoholType?: boolean
     alcoholConsumption?: boolean
-    homoglobin?: boolean
-    recentHealthIssue?: boolean
+    hemoglobin?: boolean
+    reacentHealthIssue?: boolean
     hereditaryHistory?: boolean
     observationfhirid?: boolean
     server_createdAt?: boolean
@@ -6038,8 +6086,8 @@ export namespace Prisma {
     alcoholFreeDays?: boolean
     alcoholType?: boolean
     alcoholConsumption?: boolean
-    homoglobin?: boolean
-    recentHealthIssue?: boolean
+    hemoglobin?: boolean
+    reacentHealthIssue?: boolean
     hereditaryHistory?: boolean
     observationfhirid?: boolean
     server_createdAt?: boolean
@@ -6063,8 +6111,8 @@ export namespace Prisma {
     alcoholFreeDays?: boolean
     alcoholType?: boolean
     alcoholConsumption?: boolean
-    homoglobin?: boolean
-    recentHealthIssue?: boolean
+    hemoglobin?: boolean
+    reacentHealthIssue?: boolean
     hereditaryHistory?: boolean
     observationfhirid?: boolean
     server_createdAt?: boolean
@@ -6072,7 +6120,7 @@ export namespace Prisma {
     server_deletedAt?: boolean
   }
 
-  export type ClinicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patient_id" | "bloodGroup" | "antigenStatus" | "systolic" | "diastolic" | "temperature" | "smokingType" | "overAllYearOfSmoking" | "dailyConsumption" | "smokingIndex" | "alcoholFreeDays" | "alcoholType" | "alcoholConsumption" | "homoglobin" | "recentHealthIssue" | "hereditaryHistory" | "observationfhirid" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["clinic"]>
+  export type ClinicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "patient_id" | "bloodGroup" | "antigenStatus" | "systolic" | "diastolic" | "temperature" | "smokingType" | "overAllYearOfSmoking" | "dailyConsumption" | "smokingIndex" | "alcoholFreeDays" | "alcoholType" | "alcoholConsumption" | "hemoglobin" | "reacentHealthIssue" | "hereditaryHistory" | "observationfhirid" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["clinic"]>
   export type ClinicInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     patient?: boolean | Clinic$patientArgs<ExtArgs>
   }
@@ -6103,8 +6151,8 @@ export namespace Prisma {
       alcoholFreeDays: number
       alcoholType: string
       alcoholConsumption: number
-      homoglobin: number
-      recentHealthIssue: string
+      hemoglobin: number
+      reacentHealthIssue: string
       hereditaryHistory: string
       observationfhirid: string | null
       server_createdAt: Date
@@ -6548,8 +6596,8 @@ export namespace Prisma {
     readonly alcoholFreeDays: FieldRef<"Clinic", 'Int'>
     readonly alcoholType: FieldRef<"Clinic", 'String'>
     readonly alcoholConsumption: FieldRef<"Clinic", 'Int'>
-    readonly homoglobin: FieldRef<"Clinic", 'Int'>
-    readonly recentHealthIssue: FieldRef<"Clinic", 'String'>
+    readonly hemoglobin: FieldRef<"Clinic", 'Int'>
+    readonly reacentHealthIssue: FieldRef<"Clinic", 'String'>
     readonly hereditaryHistory: FieldRef<"Clinic", 'String'>
     readonly observationfhirid: FieldRef<"Clinic", 'String'>
     readonly server_createdAt: FieldRef<"Clinic", 'DateTime'>
@@ -6848,6 +6896,10 @@ export namespace Prisma {
      * Filter which Clinics to update
      */
     where?: ClinicWhereInput
+    /**
+     * Limit how many Clinics to update.
+     */
+    limit?: number
   }
 
   /**
@@ -6870,6 +6922,10 @@ export namespace Prisma {
      * Filter which Clinics to update
      */
     where?: ClinicWhereInput
+    /**
+     * Limit how many Clinics to update.
+     */
+    limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -6936,6 +6992,10 @@ export namespace Prisma {
      * Filter which Clinics to delete
      */
     where?: ClinicWhereInput
+    /**
+     * Limit how many Clinics to delete.
+     */
+    limit?: number
   }
 
   /**
@@ -7065,8 +7125,8 @@ export namespace Prisma {
     alcoholFreeDays: 'alcoholFreeDays',
     alcoholType: 'alcoholType',
     alcoholConsumption: 'alcoholConsumption',
-    homoglobin: 'homoglobin',
-    recentHealthIssue: 'recentHealthIssue',
+    hemoglobin: 'hemoglobin',
+    reacentHealthIssue: 'reacentHealthIssue',
     hereditaryHistory: 'hereditaryHistory',
     observationfhirid: 'observationfhirid',
     server_createdAt: 'server_createdAt',
@@ -7484,8 +7544,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFilter<"Clinic"> | number
     alcoholType?: StringFilter<"Clinic"> | string
     alcoholConsumption?: IntFilter<"Clinic"> | number
-    homoglobin?: IntFilter<"Clinic"> | number
-    recentHealthIssue?: StringFilter<"Clinic"> | string
+    hemoglobin?: IntFilter<"Clinic"> | number
+    reacentHealthIssue?: StringFilter<"Clinic"> | string
     hereditaryHistory?: StringFilter<"Clinic"> | string
     observationfhirid?: StringNullableFilter<"Clinic"> | string | null
     server_createdAt?: DateTimeFilter<"Clinic"> | Date | string
@@ -7509,8 +7569,8 @@ export namespace Prisma {
     alcoholFreeDays?: SortOrder
     alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
-    recentHealthIssue?: SortOrder
+    hemoglobin?: SortOrder
+    reacentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
     observationfhirid?: SortOrderInput | SortOrder
     server_createdAt?: SortOrder
@@ -7537,8 +7597,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFilter<"Clinic"> | number
     alcoholType?: StringFilter<"Clinic"> | string
     alcoholConsumption?: IntFilter<"Clinic"> | number
-    homoglobin?: IntFilter<"Clinic"> | number
-    recentHealthIssue?: StringFilter<"Clinic"> | string
+    hemoglobin?: IntFilter<"Clinic"> | number
+    reacentHealthIssue?: StringFilter<"Clinic"> | string
     hereditaryHistory?: StringFilter<"Clinic"> | string
     observationfhirid?: StringNullableFilter<"Clinic"> | string | null
     server_createdAt?: DateTimeFilter<"Clinic"> | Date | string
@@ -7562,8 +7622,8 @@ export namespace Prisma {
     alcoholFreeDays?: SortOrder
     alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
-    recentHealthIssue?: SortOrder
+    hemoglobin?: SortOrder
+    reacentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
     observationfhirid?: SortOrderInput | SortOrder
     server_createdAt?: SortOrder
@@ -7594,8 +7654,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntWithAggregatesFilter<"Clinic"> | number
     alcoholType?: StringWithAggregatesFilter<"Clinic"> | string
     alcoholConsumption?: IntWithAggregatesFilter<"Clinic"> | number
-    homoglobin?: IntWithAggregatesFilter<"Clinic"> | number
-    recentHealthIssue?: StringWithAggregatesFilter<"Clinic"> | string
+    hemoglobin?: IntWithAggregatesFilter<"Clinic"> | number
+    reacentHealthIssue?: StringWithAggregatesFilter<"Clinic"> | string
     hereditaryHistory?: StringWithAggregatesFilter<"Clinic"> | string
     observationfhirid?: StringNullableWithAggregatesFilter<"Clinic"> | string | null
     server_createdAt?: DateTimeWithAggregatesFilter<"Clinic"> | Date | string
@@ -7960,8 +8020,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid?: string | null
     server_createdAt?: Date | string
@@ -7985,8 +8045,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid?: string | null
     server_createdAt?: Date | string
@@ -8008,8 +8068,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8033,8 +8093,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8057,8 +8117,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid?: string | null
     server_createdAt?: Date | string
@@ -8080,8 +8140,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8104,8 +8164,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8492,8 +8552,8 @@ export namespace Prisma {
     alcoholFreeDays?: SortOrder
     alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
-    recentHealthIssue?: SortOrder
+    hemoglobin?: SortOrder
+    reacentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
     observationfhirid?: SortOrder
     server_createdAt?: SortOrder
@@ -8510,7 +8570,7 @@ export namespace Prisma {
     smokingIndex?: SortOrder
     alcoholFreeDays?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
+    hemoglobin?: SortOrder
   }
 
   export type ClinicMaxOrderByAggregateInput = {
@@ -8528,8 +8588,8 @@ export namespace Prisma {
     alcoholFreeDays?: SortOrder
     alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
-    recentHealthIssue?: SortOrder
+    hemoglobin?: SortOrder
+    reacentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
     observationfhirid?: SortOrder
     server_createdAt?: SortOrder
@@ -8552,8 +8612,8 @@ export namespace Prisma {
     alcoholFreeDays?: SortOrder
     alcoholType?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
-    recentHealthIssue?: SortOrder
+    hemoglobin?: SortOrder
+    reacentHealthIssue?: SortOrder
     hereditaryHistory?: SortOrder
     observationfhirid?: SortOrder
     server_createdAt?: SortOrder
@@ -8570,7 +8630,7 @@ export namespace Prisma {
     smokingIndex?: SortOrder
     alcoholFreeDays?: SortOrder
     alcoholConsumption?: SortOrder
-    homoglobin?: SortOrder
+    hemoglobin?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8932,8 +8992,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid?: string | null
     server_createdAt?: Date | string
@@ -8955,8 +9015,8 @@ export namespace Prisma {
     alcoholFreeDays: number
     alcoholType: string
     alcoholConsumption: number
-    homoglobin: number
-    recentHealthIssue: string
+    hemoglobin: number
+    reacentHealthIssue: string
     hereditaryHistory: string
     observationfhirid?: string | null
     server_createdAt?: Date | string
@@ -9025,8 +9085,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9048,8 +9108,8 @@ export namespace Prisma {
     alcoholFreeDays?: IntFieldUpdateOperationsInput | number
     alcoholType?: StringFieldUpdateOperationsInput | string
     alcoholConsumption?: IntFieldUpdateOperationsInput | number
-    homoglobin?: IntFieldUpdateOperationsInput | number
-    recentHealthIssue?: StringFieldUpdateOperationsInput | string
+    hemoglobin?: IntFieldUpdateOperationsInput | number
+    reacentHealthIssue?: StringFieldUpdateOperationsInput | string
     hereditaryHistory?: StringFieldUpdateOperationsInput | string
     observationfhirid?: NullableStringFieldUpdateOperationsInput | string | null
     server_createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

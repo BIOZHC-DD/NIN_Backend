@@ -4,6 +4,7 @@ import authRoutes from './routes/authRoute';
 import patientRoutes from './routes/patientRoute';
 import { logger } from '../src/utils/loggerUtils';
 import cookieParser from 'cookie-parser';
+import syncRoutes from './routes/syncRoute';
 
 const app = express();
 app.use(cookieParser());
@@ -29,4 +30,5 @@ app.use((req, res, next) => {
 // Routes
 app.use('/auth', authRoutes);
 app.use('/', patientRoutes);
+app.use('/api', syncRoutes);
 export default app;

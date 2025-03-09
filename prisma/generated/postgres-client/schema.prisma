@@ -19,7 +19,6 @@ model Patient {
   fullName           String
   email              String    @unique
   dateOfBirth        String
-  BirthDay           DateTime
   contactInformation String
   age                Int
   gender             String

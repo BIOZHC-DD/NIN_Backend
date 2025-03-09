@@ -2246,7 +2246,6 @@ export namespace Prisma {
     fullName: string | null
     email: string | null
     dateOfBirth: string | null
-    BirthDay: Date | null
     contactInformation: string | null
     age: number | null
     gender: string | null
@@ -2264,7 +2263,6 @@ export namespace Prisma {
     fullName: string | null
     email: string | null
     dateOfBirth: string | null
-    BirthDay: Date | null
     contactInformation: string | null
     age: number | null
     gender: string | null
@@ -2282,7 +2280,6 @@ export namespace Prisma {
     fullName: number
     email: number
     dateOfBirth: number
-    BirthDay: number
     contactInformation: number
     age: number
     gender: number
@@ -2314,7 +2311,6 @@ export namespace Prisma {
     fullName?: true
     email?: true
     dateOfBirth?: true
-    BirthDay?: true
     contactInformation?: true
     age?: true
     gender?: true
@@ -2332,7 +2328,6 @@ export namespace Prisma {
     fullName?: true
     email?: true
     dateOfBirth?: true
-    BirthDay?: true
     contactInformation?: true
     age?: true
     gender?: true
@@ -2350,7 +2345,6 @@ export namespace Prisma {
     fullName?: true
     email?: true
     dateOfBirth?: true
-    BirthDay?: true
     contactInformation?: true
     age?: true
     gender?: true
@@ -2455,7 +2449,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date
     contactInformation: string
     age: number
     gender: string
@@ -2492,7 +2485,6 @@ export namespace Prisma {
     fullName?: boolean
     email?: boolean
     dateOfBirth?: boolean
-    BirthDay?: boolean
     contactInformation?: boolean
     age?: boolean
     gender?: boolean
@@ -2513,7 +2505,6 @@ export namespace Prisma {
     fullName?: boolean
     email?: boolean
     dateOfBirth?: boolean
-    BirthDay?: boolean
     contactInformation?: boolean
     age?: boolean
     gender?: boolean
@@ -2531,7 +2522,6 @@ export namespace Prisma {
     fullName?: boolean
     email?: boolean
     dateOfBirth?: boolean
-    BirthDay?: boolean
     contactInformation?: boolean
     age?: boolean
     gender?: boolean
@@ -2549,7 +2539,6 @@ export namespace Prisma {
     fullName?: boolean
     email?: boolean
     dateOfBirth?: boolean
-    BirthDay?: boolean
     contactInformation?: boolean
     age?: boolean
     gender?: boolean
@@ -2562,7 +2551,7 @@ export namespace Prisma {
     server_deletedAt?: boolean
   }
 
-  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "dateOfBirth" | "BirthDay" | "contactInformation" | "age" | "gender" | "height" | "weight" | "fhirId" | "abhaId" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["patient"]>
+  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "dateOfBirth" | "contactInformation" | "age" | "gender" | "height" | "weight" | "fhirId" | "abhaId" | "server_createdAt" | "server_updatedAt" | "server_deletedAt", ExtArgs["result"]["patient"]>
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     visits?: boolean | Patient$visitsArgs<ExtArgs>
     clinic?: boolean | Patient$clinicArgs<ExtArgs>
@@ -2582,7 +2571,6 @@ export namespace Prisma {
       fullName: string
       email: string
       dateOfBirth: string
-      BirthDay: Date
       contactInformation: string
       age: number
       gender: string
@@ -3022,7 +3010,6 @@ export namespace Prisma {
     readonly fullName: FieldRef<"Patient", 'String'>
     readonly email: FieldRef<"Patient", 'String'>
     readonly dateOfBirth: FieldRef<"Patient", 'String'>
-    readonly BirthDay: FieldRef<"Patient", 'DateTime'>
     readonly contactInformation: FieldRef<"Patient", 'String'>
     readonly age: FieldRef<"Patient", 'Int'>
     readonly gender: FieldRef<"Patient", 'String'>
@@ -7017,7 +7004,6 @@ export namespace Prisma {
     fullName: 'fullName',
     email: 'email',
     dateOfBirth: 'dateOfBirth',
-    BirthDay: 'BirthDay',
     contactInformation: 'contactInformation',
     age: 'age',
     gender: 'gender',
@@ -7135,20 +7121,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7173,6 +7145,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
   /**
    * Deep Input Types
@@ -7229,7 +7215,6 @@ export namespace Prisma {
     fullName?: StringFilter<"Patient"> | string
     email?: StringFilter<"Patient"> | string
     dateOfBirth?: StringFilter<"Patient"> | string
-    BirthDay?: DateTimeFilter<"Patient"> | Date | string
     contactInformation?: StringFilter<"Patient"> | string
     age?: IntFilter<"Patient"> | number
     gender?: StringFilter<"Patient"> | string
@@ -7249,7 +7234,6 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     dateOfBirth?: SortOrder
-    BirthDay?: SortOrder
     contactInformation?: SortOrder
     age?: SortOrder
     gender?: SortOrder
@@ -7272,7 +7256,6 @@ export namespace Prisma {
     NOT?: PatientWhereInput | PatientWhereInput[]
     fullName?: StringFilter<"Patient"> | string
     dateOfBirth?: StringFilter<"Patient"> | string
-    BirthDay?: DateTimeFilter<"Patient"> | Date | string
     contactInformation?: StringFilter<"Patient"> | string
     age?: IntFilter<"Patient"> | number
     gender?: StringFilter<"Patient"> | string
@@ -7292,7 +7275,6 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     dateOfBirth?: SortOrder
-    BirthDay?: SortOrder
     contactInformation?: SortOrder
     age?: SortOrder
     gender?: SortOrder
@@ -7318,7 +7300,6 @@ export namespace Prisma {
     fullName?: StringWithAggregatesFilter<"Patient"> | string
     email?: StringWithAggregatesFilter<"Patient"> | string
     dateOfBirth?: StringWithAggregatesFilter<"Patient"> | string
-    BirthDay?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
     contactInformation?: StringWithAggregatesFilter<"Patient"> | string
     age?: IntWithAggregatesFilter<"Patient"> | number
     gender?: StringWithAggregatesFilter<"Patient"> | string
@@ -7669,7 +7650,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -7689,7 +7669,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -7709,7 +7688,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -7729,7 +7707,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -7749,7 +7726,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -7767,7 +7743,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -7785,7 +7760,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -8190,17 +8164,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8236,6 +8199,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -8274,7 +8248,6 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     dateOfBirth?: SortOrder
-    BirthDay?: SortOrder
     contactInformation?: SortOrder
     age?: SortOrder
     gender?: SortOrder
@@ -8298,7 +8271,6 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     dateOfBirth?: SortOrder
-    BirthDay?: SortOrder
     contactInformation?: SortOrder
     age?: SortOrder
     gender?: SortOrder
@@ -8316,7 +8288,6 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     dateOfBirth?: SortOrder
-    BirthDay?: SortOrder
     contactInformation?: SortOrder
     age?: SortOrder
     gender?: SortOrder
@@ -8333,20 +8304,6 @@ export namespace Prisma {
     age?: SortOrder
     height?: SortOrder
     weight?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8397,6 +8354,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8632,10 +8603,6 @@ export namespace Prisma {
     connect?: ClinicWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -8654,6 +8621,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -8780,17 +8751,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -8816,6 +8776,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -8825,20 +8796,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8899,6 +8856,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9091,7 +9062,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -9110,7 +9080,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -9145,7 +9114,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -9164,7 +9132,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -9183,7 +9150,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -9202,7 +9168,6 @@ export namespace Prisma {
     fullName: string
     email: string
     dateOfBirth: string
-    BirthDay: Date | string
     contactInformation: string
     age: number
     gender: string
@@ -9237,7 +9202,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string
@@ -9256,7 +9220,6 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     dateOfBirth?: StringFieldUpdateOperationsInput | string
-    BirthDay?: DateTimeFieldUpdateOperationsInput | Date | string
     contactInformation?: StringFieldUpdateOperationsInput | string
     age?: IntFieldUpdateOperationsInput | number
     gender?: StringFieldUpdateOperationsInput | string

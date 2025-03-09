@@ -20,7 +20,6 @@ model Patient {
   fullName           String
   email              String   @unique
   dateOfBirth        String
-  BirthDay           DateTime
   contactInformation String
   age                Int
   gender             String
@@ -30,7 +29,7 @@ model Patient {
   clinic             Clinic?      // One-to-One with Clinic
   fhirId             String?
   abhaId             String?
-    server_createdAt DateTime        @default(now())
+  server_createdAt DateTime        @default(now())
   server_updatedAt DateTime        @default(now()) @updatedAt
   server_deletedAt DateTime?
 
@@ -46,7 +45,7 @@ model Visit {
   visitType        String
   encounterfhirid  String?
   patient          Patient @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
-    server_createdAt DateTime        @default(now())
+  server_createdAt DateTime        @default(now())
   server_updatedAt DateTime        @default(now()) @updatedAt
   server_deletedAt DateTime?
 
@@ -62,7 +61,7 @@ model Interval {
   configuration  String
   frequencies    String
   dataPoints     String
-   server_createdAt DateTime        @default(now())
+  server_createdAt DateTime        @default(now())
   server_updatedAt DateTime        @default(now()) @updatedAt
   server_deletedAt DateTime?
 
@@ -90,7 +89,7 @@ model Clinic {
   hereditaryHistory    String
   patient              Patient? @relation(fields: [patient_id], references: [id]) // One-to-One with Patient
   observationfhirid    String?
-    server_createdAt DateTime        @default(now())
+  server_createdAt DateTime        @default(now())
   server_updatedAt DateTime        @default(now()) @updatedAt
   server_deletedAt DateTime?
 

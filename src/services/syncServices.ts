@@ -17,7 +17,6 @@ export class watermelonSync {
     'Clinic',
     'Visit',
     'Interval',
-   
   ]
 
   constructor(prisma: typeof postgresClient, tables: TableSchema[]) {

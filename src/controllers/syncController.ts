@@ -9,13 +9,13 @@ const prisma = postgresClient
 
 const syncService = new watermelonSync(prisma, [
   { name: 'Patient', model: prisma.patient, prismaName: 'patient' },
-    { name: 'Clinic', model: prisma.clinic, prismaName: 'clinic' },
+  { name: 'Clinic', model: prisma.clinic, prismaName: 'clinic' },
   { name: 'Visit', model: prisma.visit, prismaName: 'visit' },
   {name:'Interval', model: prisma.interval, prismaName: 'interval'},
 
 ])
 
-const pushChanges = async (req: Request, res: Response) => {
+ export const pushChanges = async (req: Request, res: Response) => {
   console.log('Raw query:', req.query)
   console.log('query', req.query.last_pulled_at)
   const lastPulledAt = req.query.last_pulled_at
@@ -42,7 +42,7 @@ const pushChanges = async (req: Request, res: Response) => {
   }
 }
 
-const pullChanges = async (req: Request, res: Response) => {
+ export const pullChanges = async (req: Request, res: Response) => {
   const changes = req.body
   try {
     await syncService.syncPush(changes.changes)
@@ -51,5 +51,3 @@ const pullChanges = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Sync failed' })
   }
 }
-
-export default { pushChanges, pullChanges }

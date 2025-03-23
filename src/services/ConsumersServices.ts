@@ -4,46 +4,47 @@ import { processTemperatureData } from '../models/TemperatureSensor';
 import { processGsrData } from '../models/GsrSensor';
 import { processGlucoseData } from '../models/GlucoseSensor';
 
-         
 export async function startConsumer(sensorType: string) {
   try {
-    const connection = await amqp.connect('amqp://localhost');
+    const connection = await amqp.connect('amqp://myuser:mypassword@localhost');
     const channel = await connection.createChannel();
 
     const exchange = 'sensor_data_exchange';
     const queue = `${sensorType}_queue`;
 
     // Assert exchange and queue
-    await channel.assertExchange(exchange, 'direct', { durable:true });
+    await channel.assertExchange(exchange, 'direct', { durable: true });
     console.log(`Exchange asserted: ${exchange}`);
-    
-    await channel.assertQueue(queue, { durable: true});
+
+    await channel.assertQueue(queue, { durable: true });
     console.log(`Queue asserted: ${queue}`);
-    
+
     // Bind queue to exchange with routing key
     const routingKey = sensorType;
-        await channel.bindQueue(queue, exchange, routingKey);
-    console.log(`Queue ${queue} bound to exchange ${exchange} with routing key ${sensorType}`);
+    await channel.bindQueue(queue, exchange, routingKey);
+    console.log(
+      `Queue ${queue} bound to exchange ${exchange} with routing key ${sensorType}`,
+    );
 
     // Consume messages
     channel.consume(queue, (msg) => {
-    if (msg) {
+      if (msg) {
         const message = JSON.parse(msg.content.toString());
         console.log(`Received message for ${sensorType}:`, message);
 
         // Process data based on sensor type
         switch (sensorType) {
           case 'bioSensor':
-             processBioSensorData(message);
+            processBioSensorData(message);
             break;
           case 'temSensor':
-             processTemperatureData(message);
+            processTemperatureData(message);
             break;
           case 'gsrSensor':
-             processGsrData(message);
+            processGsrData(message);
             break;
           case 'gluSensor':
-             processGlucoseData(message);
+            processGlucoseData(message);
             break;
           default:
             console.error(`Unknown sensor type: ${sensorType}`);
@@ -56,10 +57,10 @@ export async function startConsumer(sensorType: string) {
       }
     });
 
-    console.log(`Consumer is now listening on ${queue} for routing key ${sensorType}`);
+    console.log(
+      `Consumer is now listening on ${queue} for routing key ${sensorType}`,
+    );
   } catch (error: any) {
     console.error('Error starting consumer:', error.message);
   }
 }
-
-

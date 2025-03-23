@@ -1,5 +1,3 @@
-
-
 export interface bioSensor {
   bioImpedance: number;
   phaseAngle: number;
@@ -31,10 +29,11 @@ export interface clientFormat {
   data: bioSensor[] | temSensor[] | gluSensor[] | gsrSensor[];
 }
 
-export interface response {
-  type: string;
+export interface Payload {
+  type: 'sync_data';
   table: string;
+  batchId: string | number;
+  data: any[]; // Array of any type
   offset: number;
-  data: clientFormat[];
+  timestamp: number;
 }
-

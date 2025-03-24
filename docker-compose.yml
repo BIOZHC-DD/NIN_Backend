@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   postgres:
@@ -12,13 +12,6 @@ services:
       - "6015:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
-      interval: 5s
-      timeout: 30s
-      retries: 10
 
   timescaledb:
     image: timescale/timescaledb:latest-pg16
@@ -31,13 +24,6 @@ services:
       - "6016:5432"
     volumes:
       - timescale-data:/var/lib/postgresql/data
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mytimescaledb"]
-      interval: 5s
-      timeout: 30s
-      retries: 10
 
   rabbitmq:
     image: rabbitmq:management
@@ -50,44 +36,8 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
-      interval: 5s
-      timeout: 30s
-      retries: 10
-
-  app:
-    build: .
-    container_name: node-app
-    ports:
-      - "8082:8082"
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
-      timescaledb:
-        condition: service_healthy
-    networks:
-      - app-network
-    # Add application-level health check
-    healthcheck:
-      test: ["CMD", "node", "healthcheck.js"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 volumes:
   postgres-data:
   timescale-data:
   rabbitmq-data:
-
-networks:
-  app-network:

@@ -8,7 +8,7 @@ import authRoutes from './routes/authRoute';
 import patientRoutes from './routes/patientRoute';
 import syncRoutes from './routes/syncRoute';
 import { logger } from './utils/loggerUtils';
-import { startAllConsumers } from './services/startallConsumerServices';
+import { processBioSensorData } from './models/BioSensor';
 import {
   addSensorType,
   handleMessage,
@@ -19,13 +19,11 @@ import { Payload } from './types';
 const app = express();
 const port = 8082;
 
-const SENSOR_TYPES = ['BIO_SENSOR', 'ECG_SENSOR'];
-
 async function initializeSensors() {
   await initializeConnection();
-  for (const type of SENSOR_TYPES) {
-    await addSensorType(type);
-  }
+  await addSensorType('BIO_SENSOR', (data) => {
+    processBioSensorData(data);
+  });
 }
 initializeSensors();
 
@@ -64,7 +62,6 @@ wsServer.on('connection', (ws, request) => {
 
   ws.on('message', (message: string) => {
     const response = JSON.parse(message) as Payload;
-    console.log(response);
     handleMessage(response);
     ws.send(
       JSON.stringify({
@@ -90,11 +87,6 @@ server.on('upgrade', (request, socket, head) => {
     socket.destroy();
   }
 });
-
-// // Start RabbitMQ consumers
-// startAllConsumers()
-//   .then(() => console.log('All consumers started successfully'))
-//   .catch((err) => console.error('Error starting consumers:', err));
 
 // Start the server
 server.listen(port, () => {

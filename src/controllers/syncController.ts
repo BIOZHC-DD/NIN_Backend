@@ -1,9 +1,6 @@
 import { Request, Response } from 'express';
-
-import { postgresClient } from '../config/prisma';
+import prisma from '../config/client';
 import { watermelonSync } from '../services/syncServices';
-
-const prisma = postgresClient;
 
 const syncService = new watermelonSync(prisma, [
   { name: 'patients', model: prisma.patient, prismaName: 'patient' },

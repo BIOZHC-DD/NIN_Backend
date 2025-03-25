@@ -1,11 +1,11 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/postgres-client"
+  output   = "./generated/timescale-client"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_DATABASE_URL")
+  url      = env("TIMESCALE_DATABASE_URL")
 }
 
 model primeUser {
@@ -37,16 +37,21 @@ model Patient {
 }
 
 model Visit {
-  id               String    @id
+  id               String            @id
   patient_id       String
   visitDate        String
   visitNotes       String?
   visitType        String
   encounterfhirid  String?
-  patient          Patient   @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
-  server_createdAt DateTime  @default(now())
-  server_updatedAt DateTime  @default(now()) @updatedAt
+  intervals        Interval[]
+  patient          Patient           @relation(fields: [patient_id], references: [id]) // One-to-Many with Patient
+  server_createdAt DateTime          @default(now())
+  server_updatedAt DateTime          @default(now()) @updatedAt
   server_deletedAt DateTime?
+  TemperatureData  TemperatureData[]
+  BiosensorData    BiosensorData[]
+  GsrData          GsrData[]
+  GlucoseData      GlucoseData[]
 
   @@index([server_updatedAt])
   @@index([server_deletedAt])
@@ -60,6 +65,7 @@ model Interval {
   configuration    String
   frequencies      String
   dataPoints       String
+  visit            Visit     @relation(fields: [visit_id], references: [id])
   server_createdAt DateTime  @default(now())
   server_updatedAt DateTime  @default(now()) @updatedAt
   server_deletedAt DateTime?
@@ -94,4 +100,57 @@ model Clinic {
 
   @@index([server_updatedAt])
   @@index([server_deletedAt])
+}
+
+model BiosensorData {
+  id           String @default(uuid())
+  vid          String
+  config       String
+  frequency    Int
+  bioImpedance Float
+  phaseAngle   Float
+
+  visit        Visit    @relation(fields: [vid], references: [id])
+  collected_at DateTime @default(now())
+
+  @@unique([id, collected_at])
+}
+
+model TemperatureData {
+  id           String   @default(uuid())
+  vid          String
+  config       String
+  frequency    Int
+  temperature  Float
+  visit        Visit    @relation(fields: [vid], references: [id])
+  collected_at DateTime @default(now())
+
+  @@unique([id, collected_at])
+}
+
+model GsrData {
+  id        String @default(uuid())
+  vid       String
+  config    String
+  frequency Int
+  gsr       Float
+
+  visit        Visit    @relation(fields: [vid], references: [id])
+  collected_at DateTime @default(now())
+
+  @@unique([id, collected_at])
+}
+
+model GlucoseData {
+  id        String @default(uuid())
+  vid       String
+  config    String
+  frequency Int
+  glucose   Float
+
+  visit Visit @relation(fields: [vid], references: [id])
+
+  collected_at DateTime @default(now())
+
+  @@unique([id, collected_at])
 }

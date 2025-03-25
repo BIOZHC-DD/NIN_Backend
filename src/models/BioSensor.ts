@@ -1,4 +1,4 @@
-import { timescaleClient } from '../config/prisma';
+import prisma from '../config/client';
 import { Payload, BioSensor } from '../types';
 export async function processBioSensorData(payload: Payload) {
   const { data } = payload;
@@ -15,7 +15,7 @@ export async function processBioSensorData(payload: Payload) {
     }));
 
     // Insert data into Prisma database
-    await timescaleClient.biosensorData.createMany({
+    await prisma.biosensorData.createMany({
       data: bioSensorRecords,
       skipDuplicates: false,
     });

@@ -1,24 +1,4 @@
-/*
-  Warnings:
-
-  - You are about to drop the `BiosensorData` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `GlucoseData` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `GsrData` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `TemperatureData` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "BiosensorData";
-
--- DropTable
-DROP TABLE "GlucoseData";
-
--- DropTable
-DROP TABLE "GsrData";
-
--- DropTable
-DROP TABLE "TemperatureData";
-
+CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
 -- CreateTable
 CREATE TABLE "primeUser" (
     "id" TEXT NOT NULL,
@@ -106,6 +86,47 @@ CREATE TABLE "Clinic" (
     CONSTRAINT "Clinic_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "BiosensorData" (
+    "id" TEXT NOT NULL,
+    "vid" TEXT NOT NULL,
+    "config" TEXT NOT NULL,
+    "frequency" INTEGER NOT NULL,
+    "bioImpedance" DOUBLE PRECISION NOT NULL,
+    "phaseAngle" DOUBLE PRECISION NOT NULL,
+    "collected_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "TemperatureData" (
+    "id" TEXT NOT NULL,
+    "vid" TEXT NOT NULL,
+    "config" TEXT NOT NULL,
+    "frequency" INTEGER NOT NULL,
+    "temperature" DOUBLE PRECISION NOT NULL,
+    "collected_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "GsrData" (
+    "id" TEXT NOT NULL,
+    "vid" TEXT NOT NULL,
+    "config" TEXT NOT NULL,
+    "frequency" INTEGER NOT NULL,
+    "gsr" DOUBLE PRECISION NOT NULL,
+    "collected_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "GlucoseData" (
+    "id" TEXT NOT NULL,
+    "vid" TEXT NOT NULL,
+    "config" TEXT NOT NULL,
+    "frequency" INTEGER NOT NULL,
+    "glucose" DOUBLE PRECISION NOT NULL,
+    "collected_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "primeUser_email_key" ON "primeUser"("email");
 
@@ -142,8 +163,41 @@ CREATE INDEX "Clinic_server_updatedAt_idx" ON "Clinic"("server_updatedAt");
 -- CreateIndex
 CREATE INDEX "Clinic_server_deletedAt_idx" ON "Clinic"("server_deletedAt");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "BiosensorData_id_collected_at_key" ON "BiosensorData"("id", "collected_at");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "TemperatureData_id_collected_at_key" ON "TemperatureData"("id", "collected_at");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "GsrData_id_collected_at_key" ON "GsrData"("id", "collected_at");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "GlucoseData_id_collected_at_key" ON "GlucoseData"("id", "collected_at");
+
 -- AddForeignKey
 ALTER TABLE "Visit" ADD CONSTRAINT "Visit_patient_id_fkey" FOREIGN KEY ("patient_id") REFERENCES "Patient"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Interval" ADD CONSTRAINT "Interval_visit_id_fkey" FOREIGN KEY ("visit_id") REFERENCES "Visit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Clinic" ADD CONSTRAINT "Clinic_patient_id_fkey" FOREIGN KEY ("patient_id") REFERENCES "Patient"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BiosensorData" ADD CONSTRAINT "BiosensorData_vid_fkey" FOREIGN KEY ("vid") REFERENCES "Visit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "TemperatureData" ADD CONSTRAINT "TemperatureData_vid_fkey" FOREIGN KEY ("vid") REFERENCES "Visit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "GsrData" ADD CONSTRAINT "GsrData_vid_fkey" FOREIGN KEY ("vid") REFERENCES "Visit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "GlucoseData" ADD CONSTRAINT "GlucoseData_vid_fkey" FOREIGN KEY ("vid") REFERENCES "Visit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+SELECT create_hypertable('"BiosensorData"', 'collected_at');
+SELECT create_hypertable('"TemperatureData"', 'collected_at');
+SELECT create_hypertable('"GsrData"', 'collected_at');
+SELECT create_hypertable('"GlucoseData"', 'collected_at');

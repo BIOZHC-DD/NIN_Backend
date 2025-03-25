@@ -1,4 +1,4 @@
-import { postgresClient } from '../config/prisma';
+import { PrismaClient, Prisma } from '@prisma/client';
 import {
   TableSchema,
   SyncableRecord,
@@ -9,7 +9,7 @@ import {
 import { hashPassword } from '../utils/hashpassword';
 
 export class watermelonSync {
-  private prisma: typeof postgresClient;
+  private prisma: PrismaClient;
   private tables: TableSchema[];
   private readonly tableOrder = [
     'patients',
@@ -18,7 +18,7 @@ export class watermelonSync {
     'intervals',
   ];
 
-  constructor(prisma: typeof postgresClient, tables: TableSchema[]) {
+  constructor(prisma: PrismaClient, tables: TableSchema[]) {
     this.prisma = prisma;
     this.tables = tables;
   }
@@ -27,7 +27,7 @@ export class watermelonSync {
     console.log('Syncing changes:', clientChange);
     try {
       await this.prisma.$transaction(
-        async (tx) => {
+        async (tx: Prisma.TransactionClient) => {
           // Process tables in specified order
           for (const tableName of this.tableOrder) {
             if (!clientChange[tableName]) continue;

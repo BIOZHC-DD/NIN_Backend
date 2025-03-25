@@ -11,7 +11,7 @@ export async function processBioSensorData(payload: Payload) {
       frequency: sensor.frequency || 0,
       bioImpedance: sensor.bioImpedance,
       phaseAngle: sensor.phaseAngle,
-      time: new Date(sensor.created_at),
+      collected_at: new Date(sensor.created_at),
     }));
 
     // Insert data into Prisma database

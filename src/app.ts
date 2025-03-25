@@ -62,12 +62,16 @@ wsServer.on('connection', (ws, request) => {
 
   ws.on('message', (message: string) => {
     const response = JSON.parse(message) as Payload;
+    const { data } = response;
+    const Ids = data.map((item) => {
+      return item.id;
+    });
     handleMessage(response);
     ws.send(
       JSON.stringify({
         success: true,
         table: response.table,
-        batchId: response.batchId,
+        ids: Ids,
       }),
     );
   });

@@ -1,8 +1,13 @@
-import { timescaleClient } from "../config/prisma";
+import prisma from '../config/client';
 
 export async function processTemperatureData(message: any) {
   try {
-    if (!message || !message.visit_id || !message.data || !Array.isArray(message.data)) {
+    if (
+      !message ||
+      !message.visit_id ||
+      !message.data ||
+      !Array.isArray(message.data)
+    ) {
       console.error('Invalid message format:', message);
       return;
     }
@@ -17,12 +22,14 @@ export async function processTemperatureData(message: any) {
     }));
 
     // Insert data into Prisma database
-    await timescaleClient.temperatureData.createMany({
+    await prisma.temperatureData.createMany({
       data: temperatureRecords,
       skipDuplicates: true,
     });
 
-    console.log(`Successfully processed ${temperatureRecords.length} bioSensor records for visit_id: ${message.visit_id}`);
+    console.log(
+      `Successfully processed ${temperatureRecords.length} bioSensor records for visit_id: ${message.visit_id}`,
+    );
   } catch (error: any) {
     console.error('Error processing bioSensor data:', error.message);
   }

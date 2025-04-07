@@ -10,6 +10,39 @@ export const getPatientById = async (id: string) => {
 
     const patient = await prisma.patient.findUnique({
       where: { id: id },
+      include: {
+        clinic: {
+          select: {
+            bloodGroup:true,
+            antigenStatus:true,
+            systolic:true,
+            diastolic:true,
+            temperature:true,
+            smokingType:true,
+            overAllYearOfSmoking:true,
+            dailyConsumption:true,
+            smokingIndex:true,
+            alcoholType:true,
+            alcoholConsumption:true,
+            hemoglobin:true,
+            reacentHealthIssue:true,
+            hereditaryHistory:true,
+          },
+         
+        },
+        visits: {
+          select: {
+            id: true,
+            visitDate: true,
+            visitNotes: true,
+            visitType: true,
+            encounterfhirid: true,
+            
+          },
+        }
+        
+      
+      }
     });
 
     console.log('📌 Prisma Query Result:', patient);

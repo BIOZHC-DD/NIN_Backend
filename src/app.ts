@@ -6,6 +6,7 @@ import { createServer } from 'http';
 import WebSocket from 'ws';
 import authRoutes from './routes/authRoute';
 import patientRoutes from './routes/patientRoute';
+import sensorRoutes from './routes/bioimpedenceRoute';
 import syncRoutes from './routes/syncRoute';
 import { logger } from './utils/loggerUtils';
 import { processBioSensorData } from './models/BioSensor';
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes);
 app.use('/patient', patientRoutes);
 app.use('/api', syncRoutes);
+app.use('/sensor',sensorRoutes)
 
 // Create an HTTP server using the Express app
 const server = createServer(app);

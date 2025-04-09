@@ -16,12 +16,8 @@ jobs:
     runs-on: self-hosted
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL_LOCAL_SERVER }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      PORT: ${{ secrets.PORT }}
-      NURSE_ACCESS: ${{ secrets.NURSE_ACCESS }}
-      DOCTOR_ACCESS: ${{ secrets.DOCTOR_ACCESS }}
-      PATIENT_ACCESS: ${{ secrets.PATIENT_ACCESS }}
+      TIMESCALE_DATABASE_URL: ${{ secrets.TIMESCALE_DATABASE_URL }}
+      RabbitMQ_URL: ${{ secrets.RabbitMQ_URL }}
 
     strategy:
       matrix:

@@ -1,10 +1,13 @@
 import amqp from 'amqplib';
 import { Payload } from '../types';
-import { processBioSensorData } from '../models/BioSensor';
 
-const RABBITMQ_URL = 'amqp://myuser:mypassword@localhost:5672/';
+const RABBITMQ_URL = process.env.RabbitMQ_URL;
 const EXCHANGE_TYPE = 'topic';
 let connection: any;
+
+if (!RABBITMQ_URL) {
+  throw new Error('RabbitMQ_URL environment variable is not defined');
+}
 
 // Initialize connection with retry logic
 export async function initializeConnection() {
@@ -14,7 +17,7 @@ export async function initializeConnection() {
   while (retries > 0) {
     try {
       if (!connection) {
-        connection = await amqp.connect(RABBITMQ_URL);
+        connection = await amqp.connect(RABBITMQ_URL as string);
         console.log('Connected to RabbitMQ!');
 
         // Handle connection errors

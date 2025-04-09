@@ -1,16 +1,57 @@
-name: Node.js CI
+name: Node.js CI with Prisma Migration
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    if: github.repository_owner == 'BIOZHC-DD' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true))
+    runs-on: self-hosted
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL_LOCAL_SERVER }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      PORT: ${{ secrets.PORT }}
+      NURSE_ACCESS: ${{ secrets.NURSE_ACCESS }}
+      DOCTOR_ACCESS: ${{ secrets.DOCTOR_ACCESS }}
+      PATIENT_ACCESS: ${{ secrets.PATIENT_ACCESS }}
+
+    strategy:
+      matrix:
+        node-version: [20.x] # Choose the appropriate Node.js version
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: volta-cli/action@v4
-      - run: npm ci --no-audit
-      - run: npm run lint --if-present
-      - run: npm run prettier:check --if-present
-      - run: npm test
-      - run: npm run build --if-present
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create .env file
+        run: |
+          echo "TIMESCALE_DATABASE_URL=${{ secrets.TIMESCALE_DATABASE_URL }}" >> .env
+          echo "RabbitMQ_URL=${{ secrets.RabbitMQ_URL }}" >> .env
+
+      - name: Run Prisma migrations
+        run: npx prisma migrate deploy
+
+      - name: Build
+        run: npm run build
+
+      - name: Start application with PM2
+        run: pm2 restart localserver
+
+      - name: Save PM2 process list
+        run: pm2 save
